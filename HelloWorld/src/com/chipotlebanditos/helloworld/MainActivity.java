@@ -1,8 +1,10 @@
 package com.chipotlebanditos.helloworld;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -17,6 +19,11 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	public void changeText(View view){
+		TextView tv = (TextView)findViewById(R.id.text);
+		tv.setText(R.string.goodbye_world);
 	}
 
 }
