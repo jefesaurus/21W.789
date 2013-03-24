@@ -12,7 +12,7 @@ public class WeaponSystem extends ShipSystem {
     
     public ShipSystem target = null;
     
-    public int chargeMillis = 0;
+    public long chargeMillis = 0;
     
     public WeaponSystem(int upgradeLevel, int powerLevel, int damageLevel,
             Weapon weapon) {
@@ -36,14 +36,14 @@ public class WeaponSystem extends ShipSystem {
     
     @Override
     public void update(int delta, Ship ship, GameEvent event) {
-        if (powerLevel == 0) {
+        super.update(delta, ship, event);
+        if (powerLevel == 0 || equipped == null) {
             chargeMillis = 0;
         } else {
-            chargeMillis = Math.min(chargeMillis + delta,
-                    equipped.baseTotalChargeMillis); // TODO: account for power
-                                                     // level
-            if (target != null) {
-                chargeMillis = 0;
+            chargeMillis += delta; // TODO: account for power level
+            while (target != null
+                    && chargeMillis >= equipped.baseTotalChargeMillis) {
+                chargeMillis -= equipped.baseTotalChargeMillis;
                 // TODO: attack target on enemy ship
             }
         }

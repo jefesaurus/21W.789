@@ -24,7 +24,17 @@ public class GameEvent implements Serializable {
         return enemyShip != null && enemyShip.isHostile;
     }
     
-    public void update(int delta, Game game) {
+    public Ship getOpposingShip(Ship ship) {
+        if (ship == playerShip) {
+            return enemyShip;
+        } else if (ship == enemyShip) {
+            return playerShip;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+    
+    public synchronized void update(int delta, Game game) {
         assert playerShip != null;
         playerShip.update(delta, this);
         if (enemyShip != null) {

@@ -5,7 +5,7 @@ public enum Weapon implements Equipment {
     
     private final String name;
     
-    public final int baseTotalChargeMillis;
+    public final long baseTotalChargeMillis;
     
     private Weapon(String name, int baseTotalChargeMillis) {
         this.name = name;

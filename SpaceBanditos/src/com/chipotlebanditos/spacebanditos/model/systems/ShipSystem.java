@@ -13,6 +13,11 @@ public abstract class ShipSystem implements Serializable {
     public int powerLevel;
     public int damageLevel;
     
+    public boolean beingRepaired = false;
+    public long repairMillis = 0;
+    
+    public static final long TOTAL_REPAIR_MILLIS = 1000L;
+    
     public ShipSystem(int upgradeLevel, int powerLevel, int damageLevel) {
         this.upgradeLevel = upgradeLevel;
         this.powerLevel = powerLevel;
@@ -27,7 +32,23 @@ public abstract class ShipSystem implements Serializable {
     
     // TODO: max upgrade level?
     
+    public void takeDamage(int damage, Ship ship) {
+        damageLevel = Math.min(damageLevel + damage, upgradeLevel);
+        while (powerLevel > getMaxPowerLevel()) {
+            ship.removePower(this);
+        }
+    }
+    
     public void update(int delta, Ship ship, GameEvent event) {
-        // do nothing by default;
+        if (beingRepaired) {
+            repairMillis += delta;
+            while (damageLevel > 0 && repairMillis >= TOTAL_REPAIR_MILLIS) {
+                repairMillis -= TOTAL_REPAIR_MILLIS;
+                damageLevel--;
+            }
+        }
+        if (!beingRepaired || damageLevel == 0) {
+            repairMillis = 0;
+        }
     }
 }

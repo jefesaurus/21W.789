@@ -13,6 +13,8 @@ public class Ship implements Serializable {
     
     private static final long serialVersionUID = -4798388937510217139L;
     
+    public static final float ATMOSPHERE_LOSS_PER_MILLI = .001f;
+    
     public final List<ShipSystem> systems; // TODO: use a better class for
                                            // organization (e.g. multimap by
                                            // class)
@@ -28,13 +30,16 @@ public class Ship implements Serializable {
     public final List<Equipment> inventory;
     
     public Ship(int hull, int maxHull, int crew, float atmosphere,
-            int reservePower, int powerUpgradeLevel, Equipment[] inventory,
-            ShipSystem... systems) {
+            int totalPower, Equipment[] inventory, ShipSystem... systems) {
         this.hull = hull;
         this.maxHull = maxHull;
         this.crew = crew;
         this.atmosphere = atmosphere;
-        this.power = new ShipSystem(powerUpgradeLevel, reservePower, 0) {
+        int reservePower = totalPower;
+        for (ShipSystem system : systems) {
+            reservePower -= system.powerLevel;
+        }
+        this.power = new ShipSystem(totalPower, reservePower, 0) {
             
             private static final long serialVersionUID = -5264026005696896366L;
             
@@ -62,10 +67,31 @@ public class Ship implements Serializable {
         }
     }
     
+    public void addPower(ShipSystem system) {
+        assert power.powerLevel > 0
+                && system.powerLevel < system.getMaxPowerLevel();
+        power.powerLevel--;
+        system.powerLevel++;
+    }
+    
+    public void removePower(ShipSystem system) {
+        assert power.powerLevel < power.getMaxPowerLevel()
+                && system.powerLevel > 0;
+        power.powerLevel++;
+        system.powerLevel--;
+    }
+    
+    public void takeDamage(int damage, ShipSystem system) {
+        system.takeDamage(damage, this);
+        hull = Math.max(hull - damage, 0);
+    }
+    
     public void update(int delta, GameEvent event) {
+        atmosphere -= ATMOSPHERE_LOSS_PER_MILLI;
         for (ShipSystem system : systems) {
             system.update(delta, this, event);
         }
+        atmosphere = Math.max(atmosphere, 0f);
         // TODO
     }
 }

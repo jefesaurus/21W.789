@@ -29,7 +29,7 @@ public class Game implements Serializable {
     }
     
     public static Game generateNewGame() {
-        Ship playerShip = new Ship(100, 100, 100, 100, 2, 2, new Equipment[] {});
+        Ship playerShip = new Ship(100, 100, 100, 100, 2, new Equipment[] {});
         GameEvent[] events = new GameEvent[] { new GameEvent(null, null, null) };
         
         return new Game(playerShip, events);

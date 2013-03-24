@@ -1,5 +1,7 @@
 package com.chipotlebanditos.spacebanditos.model.systems;
 
+import com.chipotlebanditos.spacebanditos.model.GameEvent;
+import com.chipotlebanditos.spacebanditos.model.Ship;
 
 public class LifeSupportSystem extends ShipSystem {
     
@@ -15,10 +17,20 @@ public class LifeSupportSystem extends ShipSystem {
     }
     
     public float getAtmosphereProducedPerMilli() {
-        return powerLevel * 0.001f;
+        return powerLevel * 0.001f + powerLevel > 0 ? Ship.ATMOSPHERE_LOSS_PER_MILLI
+                : 0;
     }
     
     public float getMaxAtmosphere() {
         return powerLevel * 100f;
+    }
+    
+    @Override
+    public void update(int delta, Ship ship, GameEvent event) {
+        super.update(delta, ship, event);
+        if (ship.atmosphere < getMaxAtmosphere()) {
+            ship.atmosphere = Math.min(ship.atmosphere
+                    + getAtmosphereProducedPerMilli(), getMaxAtmosphere());
+        }
     }
 }

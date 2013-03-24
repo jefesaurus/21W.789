@@ -29,14 +29,20 @@ public class PlayerShipActivity extends Activity {
         
         @Override
         public void run() {
-            while (!PlayerShipActivity.this.destroyed) {
-                long currentTimeMillis = System.currentTimeMillis();
-                int delta = (int) (currentTimeMillis - previousTimeMillis);
-                Game game = ((SpaceBanditosApplication) getApplication()).game;
-                if (game.paused) {
-                    game.currentEvent.update(delta, game);
+            while (true) {
+                // all in-event UI code should be similarly synchronized
+                synchronized (((SpaceBanditosApplication) getApplication()).game) {
+                    if (PlayerShipActivity.this.destroyed) {
+                        break;
+                    }
+                    long currentTimeMillis = System.currentTimeMillis();
+                    int delta = (int) (currentTimeMillis - previousTimeMillis);
+                    Game game = ((SpaceBanditosApplication) getApplication()).game;
+                    if (game.paused) {
+                        game.currentEvent.update(delta, game);
+                    }
+                    previousTimeMillis = currentTimeMillis;
                 }
-                previousTimeMillis = currentTimeMillis;
             }
         }
     }
