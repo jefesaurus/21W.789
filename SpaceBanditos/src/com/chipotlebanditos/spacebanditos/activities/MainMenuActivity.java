@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 
+import com.chipotlebanditos.spacebanditos.SpaceBanditosApplication;
+import com.chipotlebanditos.spacebanditos.model.Game;
 import com.example.spacebanditos.R;
 
 public class MainMenuActivity extends Activity {
@@ -14,6 +16,8 @@ public class MainMenuActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        ((SpaceBanditosApplication) getApplication()).game = Game
+                .generateNewGame();
     }
     
     @Override

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+import com.chipotlebanditos.spacebanditos.model.systems.ShipSystem;
 import com.google.common.collect.ImmutableList;
 
 public class Ship implements Serializable {
@@ -44,5 +45,12 @@ public class Ship implements Serializable {
         this.inventory = Arrays.asList(inventory);
         this.systems = new ImmutableList.Builder<ShipSystem>().addAll(
                 Arrays.asList(systems)).build();
+    }
+    
+    public void update(int delta, GameEvent event) {
+        for (ShipSystem system : systems) {
+            system.update(delta, this, event);
+        }
+        // TODO
     }
 }

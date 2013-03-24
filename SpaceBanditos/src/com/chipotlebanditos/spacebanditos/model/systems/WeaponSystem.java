@@ -1,6 +1,5 @@
 package com.chipotlebanditos.spacebanditos.model.systems;
 
-import com.chipotlebanditos.spacebanditos.model.ShipSystem;
 import com.chipotlebanditos.spacebanditos.model.Weapon;
 
 public class WeaponSystem extends ShipSystem {

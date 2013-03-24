@@ -14,9 +14,24 @@ public class Game implements Serializable {
     
     public final Set<GameEvent> events;
     
+    public GameEvent currentEvent;
+    
+    public boolean paused = false;
+    
     public Game(Ship playerShip, GameEvent... events) {
         this.playerShip = playerShip;
         this.events = new ImmutableSet.Builder<GameEvent>().addAll(
                 Arrays.asList(events)).build();
+        for (GameEvent event : this.events) {
+            event.playerShip = this.playerShip;
+        }
+        this.currentEvent = events[0];
+    }
+    
+    public static Game generateNewGame() {
+        Ship playerShip = new Ship(100, 100, 100, 100, 2, 2, new Equipment[] {});
+        GameEvent[] events = new GameEvent[] { new GameEvent(null, null, null) };
+        
+        return new Game(playerShip, events);
     }
 }
