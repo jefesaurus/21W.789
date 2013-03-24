@@ -16,6 +16,11 @@ public abstract class ShipWithAI extends Ship {
         this.isHostile = isHostile;
     }
     
-    public abstract void AI(); // TODO: add an argument for wherever combat
-                               // state is stored (e.g. the game event activity)
+    public abstract void AI(GameEvent event);
+    
+    @Override
+    public void update(int delta, GameEvent event) {
+        super.update(delta, event);
+        AI(event);
+    }
 }

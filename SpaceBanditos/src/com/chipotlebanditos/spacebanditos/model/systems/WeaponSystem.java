@@ -1,5 +1,7 @@
 package com.chipotlebanditos.spacebanditos.model.systems;
 
+import com.chipotlebanditos.spacebanditos.model.GameEvent;
+import com.chipotlebanditos.spacebanditos.model.Ship;
 import com.chipotlebanditos.spacebanditos.model.Weapon;
 
 public class WeaponSystem extends ShipSystem {
@@ -7,6 +9,8 @@ public class WeaponSystem extends ShipSystem {
     private static final long serialVersionUID = -6638405764604872553L;
     
     public Weapon equipped;
+    
+    public ShipSystem target = null;
     
     public int chargeMillis = 0;
     
@@ -28,5 +32,20 @@ public class WeaponSystem extends ShipSystem {
     public boolean isCharged() {
         return equipped != null
                 && chargeMillis == equipped.baseTotalChargeMillis;
+    }
+    
+    @Override
+    public void update(int delta, Ship ship, GameEvent event) {
+        if (powerLevel == 0) {
+            chargeMillis = 0;
+        } else {
+            chargeMillis = Math.min(chargeMillis + delta,
+                    equipped.baseTotalChargeMillis); // TODO: account for power
+                                                     // level
+            if (target != null) {
+                chargeMillis = 0;
+                // TODO: attack target on enemy ship
+            }
+        }
     }
 }

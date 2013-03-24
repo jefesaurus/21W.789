@@ -22,8 +22,7 @@ public abstract class DialogTree {
                 Arrays.asList(options)).build();
     }
     
-    public abstract void applyEffect(); // TODO: add arguments for event state
-                                        // (e.g. activity)
+    public abstract void applyEffect(GameEvent event);
     
     public static abstract class Option implements Serializable {
         
