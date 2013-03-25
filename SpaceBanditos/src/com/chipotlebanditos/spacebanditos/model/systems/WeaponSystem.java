@@ -44,7 +44,8 @@ public class WeaponSystem extends ShipSystem {
             while (target != null
                     && chargeMillis >= equipped.baseTotalChargeMillis) {
                 chargeMillis -= equipped.baseTotalChargeMillis;
-                // TODO: attack target on enemy ship
+                ship.attack(equipped.attackDamage, event.getOpposingShip(ship),
+                        target);
             }
         }
     }

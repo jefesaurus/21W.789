@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import com.chipotlebanditos.spacebanditos.model.systems.ShieldsSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.ShipSystem;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -82,8 +83,22 @@ public class Ship implements Serializable {
     }
     
     public void takeDamage(int damage, ShipSystem system) {
+        if (damage == 0) {
+            return;
+        }
+        if (getSystem(ShieldsSystem.class) != null) {
+            damage = getSystem(ShieldsSystem.class).takeShieldDamage(damage);
+            if (damage == 0) {
+                return;
+            }
+        }
         system.takeDamage(damage, this);
         hull = Math.max(hull - damage, 0);
+    }
+    
+    public void attack(int damage, Ship ship, ShipSystem system) {
+        // TODO: account for evasion/accuracy
+        ship.takeDamage(damage, system);
     }
     
     public void update(int delta, GameEvent event) {

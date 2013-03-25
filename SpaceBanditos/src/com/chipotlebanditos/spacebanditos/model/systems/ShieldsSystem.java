@@ -1,0 +1,57 @@
+package com.chipotlebanditos.spacebanditos.model.systems;
+
+import com.chipotlebanditos.spacebanditos.model.GameEvent;
+import com.chipotlebanditos.spacebanditos.model.Ship;
+
+public class ShieldsSystem extends ShipSystem {
+    
+    private static final long serialVersionUID = 7180312143894720628L;
+    
+    public int shields = 0;
+    public long rechargeMillis = 0;
+    
+    public static final long TOTAL_RECHARGE_MILLIS = 1000L;
+    
+    public ShieldsSystem(int upgradeLevel, int powerLevel, int damageLevel) {
+        super(upgradeLevel, powerLevel, damageLevel);
+    }
+    
+    @Override
+    public String getName() {
+        return "SHIELDS";
+    }
+    
+    public int getMaxShields() {
+        return powerLevel;
+    }
+    
+    public int takeShieldDamage(int damage) {
+        if (shields > 0) {
+            rechargeMillis = 0;
+            if (damage > shields) {
+                int excessDamage = damage - shields;
+                shields = 0;
+                return excessDamage;
+            } else {
+                shields -= damage;
+                return 0;
+            }
+        } else {
+            return damage;
+        }
+    }
+    
+    @Override
+    public void update(int delta, Ship ship, GameEvent event) {
+        super.update(delta, ship, event);
+        rechargeMillis += delta;
+        while (shields < getMaxShields()
+                && rechargeMillis >= TOTAL_RECHARGE_MILLIS) {
+            rechargeMillis -= TOTAL_RECHARGE_MILLIS;
+            shields++;
+        }
+        if (shields == getMaxShields()) {
+            rechargeMillis = 0;
+        }
+    }
+}
