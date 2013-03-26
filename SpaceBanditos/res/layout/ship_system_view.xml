@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:spacebanditos="http://schemas.android.com/apk/res/com.chipotlebanditos.spacebanditos"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/system_view_background">
+    <com.chipotlebanditos.spacebanditos.views.LayeredSegmentFillBar
+        android:id="@+id/power_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        spacebanditos:segmentDrawable = "@drawable/power_bar_segment"
+        spacebanditos:baseDirection = "bottom"/>
+    <TextView
+        android:id="@+id/system_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/power_bar"
+        android:layout_alignParentTop="true">
+        
+    </TextView>
+</merge>
