@@ -46,7 +46,12 @@ public class Ship implements Serializable {
             
             @Override
             public String getName() {
-                return null;
+                throw new UnsupportedOperationException();
+            }
+            
+            @Override
+            public int getIconResource() {
+                throw new UnsupportedOperationException();
             }
             
         };

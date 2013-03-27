@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LevelListDrawable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.LinearLayout.LayoutParams;
 
 import com.chipotlebanditos.spacebanditos.R;
 
@@ -19,6 +20,8 @@ public class LayeredSegmentFillBar extends View {
     private LevelListDrawable segmentDrawable;
     
     private int baseDirection;
+    
+    private int spacing;
     
     private Map<Integer, Integer> layerValues = new HashMap<Integer, Integer>();
     
@@ -53,11 +56,10 @@ public class LayeredSegmentFillBar extends View {
         baseDirection = a.getInteger(
                 R.styleable.LayeredSegmentFillBar_baseDirection, TOP);
         
-        a.recycle();
+        spacing = a.getDimensionPixelSize(
+                R.styleable.LayeredSegmentFillBar_spacing, 0);
         
-        setLayerValue(0, 3);
-        setLayerValue(1, 2);
-        setLayerValue(2, 1);
+        a.recycle();
     }
     
     public void setLayerValue(int layer, int value) {
@@ -75,6 +77,22 @@ public class LayeredSegmentFillBar extends View {
         return segmentDrawable;
     }
     
+    public void setBaseDirection(int baseDirection) {
+        this.baseDirection = baseDirection;
+    }
+    
+    public int getBaseDirection() {
+        return baseDirection;
+    }
+    
+    public void setSpacing(int spacing) {
+        this.spacing = spacing;
+    }
+    
+    public int getSpacing() {
+        return spacing;
+    }
+    
     private int getSegmentLevel(int index) {
         int level = -1;
         for (Entry<Integer, Integer> e : layerValues.entrySet()) {
@@ -85,7 +103,7 @@ public class LayeredSegmentFillBar extends View {
         return level;
     }
     
-    private int getSizeInSegments() {
+    private int getDrawSizeInSegments() {
         int size = 0;
         for (int v : layerValues.values()) {
             size = Math.max(size, v);
@@ -93,56 +111,102 @@ public class LayeredSegmentFillBar extends View {
         return size;
     }
     
+    public int getSizeInSegments(int segmentLevel) {
+        segmentDrawable.setLevel(segmentLevel);
+        if (baseDirection == LEFT || baseDirection == RIGHT) {
+            if (getWidth() - getPaddingLeft() - getPaddingRight() < segmentDrawable
+                    .getIntrinsicWidth()) {
+                return 0;
+            } else {
+                return (int) Math
+                        .floor((getWidth() - getPaddingLeft()
+                                - getPaddingRight() - segmentDrawable
+                                    .getIntrinsicWidth())
+                                / (float) (segmentDrawable.getIntrinsicWidth() + spacing)
+                                + 1);
+            }
+        } else {
+            if (getHeight() - getPaddingTop() - getPaddingBottom() < segmentDrawable
+                    .getIntrinsicHeight()) {
+                return 0;
+            } else {
+                return (int) Math
+                        .floor((getHeight() - getPaddingTop()
+                                - getPaddingBottom() - segmentDrawable
+                                    .getIntrinsicHeight())
+                                / (float) (segmentDrawable.getIntrinsicHeight() + spacing)
+                                + 1);
+            }
+        }
+    }
+    
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int totalWidth = 0, totalHeight = 0;
-        for (int i = 0; i < getSizeInSegments(); i++) {
+        for (int i = 0; i < getDrawSizeInSegments(); i++) {
             segmentDrawable.setLevel(getSegmentLevel(i));
             if (baseDirection == LEFT || baseDirection == RIGHT) {
-                totalWidth += segmentDrawable.getIntrinsicWidth();
+                totalWidth += segmentDrawable.getIntrinsicWidth()
+                        + (i > 0 ? spacing : 0);
                 totalHeight = Math.max(totalHeight,
                         segmentDrawable.getIntrinsicHeight());
             } else {
                 totalWidth = Math.max(totalWidth,
                         segmentDrawable.getIntrinsicWidth());
-                totalHeight += segmentDrawable.getIntrinsicHeight();
+                totalHeight += segmentDrawable.getIntrinsicHeight()
+                        + (i > 0 ? spacing : 0);
             }
         }
+        totalWidth += getPaddingLeft() + getPaddingRight();
+        totalHeight += getPaddingTop() + getPaddingBottom();
+        
+        if (this.getLayoutParams().width == LayoutParams.FILL_PARENT
+                || this.getLayoutParams().width == LayoutParams.MATCH_PARENT) {
+            totalWidth = MeasureSpec.getSize(widthMeasureSpec);
+        }
+        
+        if (this.getLayoutParams().height == LayoutParams.FILL_PARENT
+                || this.getLayoutParams().height == LayoutParams.MATCH_PARENT) {
+            totalHeight = MeasureSpec.getSize(heightMeasureSpec);
+        }
+        
         setMeasuredDimension(totalWidth, totalHeight);
     }
     
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        int x = 0, y = 0;
-        for (int i = 0; i < getSizeInSegments(); i++) {
+        int x = (baseDirection == RIGHT ? getWidth() - getPaddingRight()
+                : getPaddingLeft()), y = (baseDirection == BOTTOM ? getHeight()
+                - getPaddingBottom() : getPaddingTop());
+        for (int i = 0; i < getDrawSizeInSegments(); i++) {
             segmentDrawable.setLevel(getSegmentLevel(i));
             switch (baseDirection) {
             case LEFT:
                 segmentDrawable.setBounds(x, y,
                         x += segmentDrawable.getIntrinsicWidth(), y
                                 + segmentDrawable.getIntrinsicHeight());
+                x += i > 0 ? spacing : 0;
                 break;
             case TOP:
                 segmentDrawable.setBounds(x, y,
                         x + segmentDrawable.getIntrinsicWidth(),
                         y += segmentDrawable.getIntrinsicHeight());
+                y += i > 0 ? spacing : 0;
                 break;
             case RIGHT:
-                segmentDrawable
-                        .setBounds((x -= segmentDrawable.getIntrinsicWidth())
-                                + getWidth(), y,
-                                x + segmentDrawable.getIntrinsicWidth()
-                                        + getWidth(),
-                                y + segmentDrawable.getIntrinsicHeight());
+                segmentDrawable.setBounds(
+                        x -= segmentDrawable.getIntrinsicWidth()
+                                + (i > 0 ? spacing : 0), y,
+                        x + segmentDrawable.getIntrinsicWidth(), y
+                                + segmentDrawable.getIntrinsicHeight());
                 break;
             case BOTTOM:
                 segmentDrawable.setBounds(x,
-                        (y -= segmentDrawable.getIntrinsicHeight())
-                                + getHeight(),
+                        y -= segmentDrawable.getIntrinsicHeight()
+                                + (i > 0 ? spacing : 0),
                         x + segmentDrawable.getIntrinsicWidth(), y
-                                + segmentDrawable.getIntrinsicHeight()
-                                + getHeight());
+                                + segmentDrawable.getIntrinsicHeight());
                 break;
             }
             segmentDrawable.draw(canvas);

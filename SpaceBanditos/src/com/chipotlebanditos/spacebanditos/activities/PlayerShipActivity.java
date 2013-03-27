@@ -45,7 +45,7 @@ public class PlayerShipActivity extends Activity {
                     long currentTimeMillis = System.currentTimeMillis();
                     int delta = (int) (currentTimeMillis - previousTimeMillis);
                     Game game = ((SpaceBanditosApplication) getApplication()).game;
-                    if (game.paused) {
+                    if (!game.paused) {
                         game.currentEvent.update(delta, game);
                     }
                     previousTimeMillis = currentTimeMillis;

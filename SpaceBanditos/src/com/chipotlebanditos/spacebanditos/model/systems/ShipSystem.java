@@ -26,6 +26,8 @@ public abstract class ShipSystem implements Serializable {
     
     public abstract String getName();
     
+    public abstract int getIconResource();
+    
     public int getMaxPowerLevel() {
         return upgradeLevel - damageLevel;
     }

@@ -1,5 +1,6 @@
 package com.chipotlebanditos.spacebanditos.model.systems;
 
+import com.chipotlebanditos.spacebanditos.R;
 import com.chipotlebanditos.spacebanditos.model.GameEvent;
 import com.chipotlebanditos.spacebanditos.model.Ship;
 
@@ -19,6 +20,11 @@ public class ShieldsSystem extends ShipSystem {
     @Override
     public String getName() {
         return "SHIELDS";
+    }
+    
+    @Override
+    public int getIconResource() {
+        return R.drawable.life_support_icon;
     }
     
     public int getMaxShields() {

@@ -1,23 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:spacebanditos="http://schemas.android.com/apk/res/com.chipotlebanditos.spacebanditos"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/system_view_background">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
     <com.chipotlebanditos.spacebanditos.views.LayeredSegmentFillBar
         android:id="@+id/power_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        spacebanditos:segmentDrawable = "@drawable/power_bar_segment"
-        spacebanditos:baseDirection = "bottom"/>
-    <TextView
-        android:id="@+id/system_name"
+        android:layout_marginLeft="@dimen/ship_system_view_line_half_thickness"
+        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
+        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
+        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
+        spacebanditos:segmentDrawable="@drawable/power_bar_segment"
+        spacebanditos:baseDirection="bottom"
+        spacebanditos:spacing="@dimen/ship_system_view_line_half_thickness"
+        android:background="@drawable/ship_system_view_background"/>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/power_bar"
-        android:layout_alignParentTop="true">
-        
-    </TextView>
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+	    <TextView
+	        android:id="@+id/system_name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
+	        android:textSize="8sp"
+	        android:textColor="@android:color/black"
+	        android:singleLine="true"
+	        android:textIsSelectable="false"/>
+	    <ImageView
+	        android:id="@+id/system_icon"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"/>
+    </LinearLayout>
+    <com.chipotlebanditos.spacebanditos.views.LayeredSegmentFillBar
+        android:id="@+id/weapon_charge_bar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/ship_system_view_line_half_thickness"
+        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
+        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
+        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
+        spacebanditos:segmentDrawable="@drawable/weapon_charge_bar_segment"
+        spacebanditos:baseDirection="bottom"
+        spacebanditos:spacing="1dip"
+        android:background="@drawable/ship_system_view_background"/>
 </merge>

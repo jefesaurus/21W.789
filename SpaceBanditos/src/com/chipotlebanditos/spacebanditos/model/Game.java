@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Set;
 
 import com.chipotlebanditos.spacebanditos.model.systems.LifeSupportSystem;
+import com.chipotlebanditos.spacebanditos.model.systems.WeaponSystem;
 import com.google.common.collect.ImmutableSet;
 
 public class Game implements Serializable {
@@ -30,8 +31,9 @@ public class Game implements Serializable {
     }
     
     public static Game generateNewGame() {
-        Ship playerShip = new Ship(100, 100, 100, 100, 2, new Equipment[] {},
-                new LifeSupportSystem(2, 1, 0));
+        Ship playerShip = new Ship(100, 100, 100, 100, 5, new Equipment[] {},
+                new LifeSupportSystem(2, 1, 0), new WeaponSystem(4, 2, 0,
+                        Weapon.TEST_WEAPON));
         GameEvent[] events = new GameEvent[] { new GameEvent(null, null, null) };
         
         return new Game(playerShip, events);
