@@ -40,7 +40,8 @@ public class Ship implements Serializable {
         for (ShipSystem system : systems) {
             reservePower -= system.powerLevel;
         }
-        this.power = new ShipSystem(totalPower, reservePower, 0) {
+        this.power = new ShipSystem(totalPower, reservePower, 0, 0, 0) {
+            // TODO figure out how to make the Point req above optional
             
             private static final long serialVersionUID = -5264026005696896366L;
             

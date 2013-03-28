@@ -13,8 +13,9 @@ public class ShieldsSystem extends ShipSystem {
     
     public static final long TOTAL_RECHARGE_MILLIS = 1000L;
     
-    public ShieldsSystem(int upgradeLevel, int powerLevel, int damageLevel) {
-        super(upgradeLevel, powerLevel, damageLevel);
+    public ShieldsSystem(int upgradeLevel, int powerLevel, int damageLevel,
+            double x, double y) {
+        super(upgradeLevel, powerLevel, damageLevel, x, y);
     }
     
     @Override

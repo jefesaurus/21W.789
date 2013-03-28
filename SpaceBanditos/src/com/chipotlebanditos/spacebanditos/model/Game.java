@@ -32,8 +32,10 @@ public class Game implements Serializable {
     
     public static Game generateNewGame() {
         Ship playerShip = new Ship(100, 100, 100, 100, 5, new Equipment[] {},
-                new LifeSupportSystem(2, 1, 0), new WeaponSystem(4, 2, 0,
-                        Weapon.TEST_WEAPON));
+                new LifeSupportSystem(2, 1, 0, 0, 0), new WeaponSystem(4, 2, 0,
+                        Weapon.TEST_WEAPON, .5, .5), new WeaponSystem(4, 2, 0,
+                        Weapon.TEST_WEAPON, .3, .2), new WeaponSystem(4, 2, 0,
+                        Weapon.TEST_WEAPON, .7, .3));
         GameEvent[] events = new GameEvent[] { new GameEvent(null, null, null) };
         
         return new Game(playerShip, events);

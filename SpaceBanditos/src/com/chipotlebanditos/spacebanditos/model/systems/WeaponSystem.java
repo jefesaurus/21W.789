@@ -16,8 +16,8 @@ public class WeaponSystem extends ShipSystem {
     public long chargeMillis = 0;
     
     public WeaponSystem(int upgradeLevel, int powerLevel, int damageLevel,
-            Weapon weapon) {
-        super(upgradeLevel, powerLevel, damageLevel);
+            Weapon weapon, double x, double y) {
+        super(upgradeLevel, powerLevel, damageLevel, x, y);
         this.equipped = weapon;
     }
     

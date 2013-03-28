@@ -18,10 +18,16 @@ public abstract class ShipSystem implements Serializable {
     
     public static final long TOTAL_REPAIR_MILLIS = 1000L;
     
-    public ShipSystem(int upgradeLevel, int powerLevel, int damageLevel) {
+    public double x;
+    public double y;
+    
+    public ShipSystem(int upgradeLevel, int powerLevel, int damageLevel,
+            double x, double y) {
         this.upgradeLevel = upgradeLevel;
         this.powerLevel = powerLevel;
         this.damageLevel = damageLevel;
+        this.x = x;
+        this.y = y;
     }
     
     public abstract String getName();

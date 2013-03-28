@@ -8,8 +8,9 @@ public class LifeSupportSystem extends ShipSystem {
     
     private static final long serialVersionUID = 109496607657578658L;
     
-    public LifeSupportSystem(int upgradeLevel, int powerLevel, int damageLevel) {
-        super(upgradeLevel, powerLevel, damageLevel);
+    public LifeSupportSystem(int upgradeLevel, int powerLevel, int damageLevel,
+            double x, double y) {
+        super(upgradeLevel, powerLevel, damageLevel, x, y);
     }
     
     @Override
