@@ -29,7 +29,7 @@
 	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
 	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
 	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
-	        android:textSize="8sp"
+	        android:textSize="12sp"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:textIsSelectable="false"/>
@@ -54,5 +54,5 @@
         spacebanditos:segmentDrawable="@drawable/weapon_charge_bar_segment"
         spacebanditos:baseDirection="bottom"
         spacebanditos:spacing="1dip"
-        android:background="@drawable/ship_system_view_background"/>
+        android:background="@drawable/weapon_charge_bar_background"/>
 </merge>

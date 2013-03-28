@@ -8,10 +8,11 @@ public abstract class ShipWithAI extends Ship {
     
     public boolean isHostile;
     
-    public ShipWithAI(boolean isHostile, int hull, int maxHull, int crew,
-            float atmosphere, int totalPower, Equipment[] inventory,
-            ShipSystem... systems) {
-        super(hull, maxHull, crew, atmosphere, totalPower, inventory, systems);
+    public ShipWithAI(boolean isHostile, ShipLayout layout, int hull,
+            int maxHull, int crew, float atmosphere, int totalPower,
+            Equipment[] inventory, ShipSystem... systems) {
+        super(layout, hull, maxHull, crew, atmosphere, totalPower, inventory,
+                systems);
         this.isHostile = isHostile;
     }
     

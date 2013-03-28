@@ -18,6 +18,7 @@ public class ShipSystemView extends LinearLayout {
     private final TextView systemName;
     private final ImageView systemIcon;
     private final LayeredSegmentFillBar powerBar;
+    private final int maxPowerBarSegments;
     private final LayeredSegmentFillBar weaponChargeBar;
     
     public ShipSystemView(ShipSystem system, Context context) {
@@ -28,6 +29,8 @@ public class ShipSystemView extends LinearLayout {
         systemName = (TextView) findViewById(R.id.system_name);
         systemIcon = (ImageView) findViewById(R.id.system_icon);
         powerBar = (LayeredSegmentFillBar) findViewById(R.id.power_bar);
+        maxPowerBarSegments = getResources().getInteger(
+                R.integer.max_ship_system_upgrade_level);
         weaponChargeBar = (LayeredSegmentFillBar) findViewById(R.id.weapon_charge_bar);
         this.setBackgroundDrawable(getResources().getDrawable(
                 R.drawable.ship_system_view_background));
@@ -40,9 +43,10 @@ public class ShipSystemView extends LinearLayout {
     protected void onDraw(Canvas canvas) {
         systemName.setText(system.getName());
         systemIcon.setImageResource(system.getIconResource());
-        powerBar.setLayerValue(0, 5);
+        powerBar.setLayerValue(0, maxPowerBarSegments);
         powerBar.setLayerValue(1, system.upgradeLevel);
-        powerBar.setLayerValue(2, system.powerLevel);
+        powerBar.setLayerValue(2, system.upgradeLevel - system.damageLevel);
+        powerBar.setLayerValue(3, system.powerLevel);
         if (system instanceof WeaponSystem) {
             weaponChargeBar.setLayerValue(0,
                     weaponChargeBar.getSizeInSegments(0));

@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="power">#FF00FF00</color>
+    <color name="damaged">#FFFF0000</color>
+    <color name="base_light">#FF707070</color>
+    <color name="base_dark">#FF303030</color>
+    <color name="energy_light">#FF0077FF</color>
+    <color name="energy_dark">#FF0050A0</color>
+
+</resources>

@@ -36,12 +36,15 @@ public class WeaponSystem extends ShipSystem {
     }
     
     public boolean isCharged() {
-        return equipped != null
-                && chargeMillis == equipped.baseTotalChargeMillis;
+        return equipped != null && chargeMillis == getTotalChargeMillis();
     }
     
     public long getTotalChargeMillis() {
-        return equipped.baseTotalChargeMillis; // TODO: account for power level
+        if (powerLevel == 0) {
+            throw new IllegalStateException();
+        }
+        return (long) Math.floor(equipped.baseTotalChargeMillis
+                / (1f + .05 * (powerLevel - 1)));
     }
     
     public float getChargeFraction() {

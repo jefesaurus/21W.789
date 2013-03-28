@@ -6,8 +6,8 @@
    <size android:width="@dimen/ship_system_view_power_bar_segment_width"
         android:height="@dimen/ship_system_view_power_bar_segment_height" />
    <solid 
-       android:color="#FF00FF00" />
+       android:color="@color/white" />
    <stroke
        android:width="@dimen/ship_system_view_line_thickness"
-       android:color="@android:color/black" />
+       android:color="@color/black" />
 </shape>

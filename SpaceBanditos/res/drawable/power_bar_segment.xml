@@ -10,4 +10,7 @@
     <item
         android:drawable="@drawable/power_bar_segment_2"
         android:maxLevel="2"/>
+    <item
+        android:drawable="@drawable/power_bar_segment_3"
+        android:maxLevel="3"/>
 </level-list>

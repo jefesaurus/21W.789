@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import android.graphics.PointF;
+
+import com.chipotlebanditos.spacebanditos.model.systems.LifeSupportSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.ShieldsSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.ShipSystem;
 import com.google.common.collect.ImmutableList;
@@ -15,10 +18,11 @@ public class Ship implements Serializable {
     private static final long serialVersionUID = -4798388937510217139L;
     
     public static final float ATMOSPHERE_LOSS_PER_MILLI = .001f;
+    public static final float ATMOSPHERE_REQUIRED_PER_CREW = 1f;
     
-    public final List<ShipSystem> systems; // TODO: use a better class for
-                                           // organization (e.g. multimap by
-                                           // class)
+    public final ShipLayout layout;
+    
+    public final List<ShipSystem> systems;
     
     public int hull, maxHull;
     
@@ -30,8 +34,10 @@ public class Ship implements Serializable {
     
     public final List<Equipment> inventory;
     
-    public Ship(int hull, int maxHull, int crew, float atmosphere,
-            int totalPower, Equipment[] inventory, ShipSystem... systems) {
+    public Ship(ShipLayout layout, int hull, int maxHull, int crew,
+            float atmosphere, int totalPower, Equipment[] inventory,
+            ShipSystem... systems) {
+        this.layout = layout;
         this.hull = hull;
         this.maxHull = maxHull;
         this.crew = crew;
@@ -73,6 +79,17 @@ public class Ship implements Serializable {
         }
     }
     
+    public PointF getLayoutPosition(ShipSystem system) {
+        Iterator<? extends ShipSystem> iter = getSystems(system.getClass())
+                .iterator();
+        for (int i = 0; iter.hasNext(); i++) {
+            if (iter.next() == system) {
+                return layout.systemPositions.get(system.getClass()).get(i);
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+    
     public void addPower(ShipSystem system) {
         assert power.powerLevel > 0
                 && system.powerLevel < system.getMaxPowerLevel();
@@ -106,12 +123,24 @@ public class Ship implements Serializable {
         ship.takeDamage(damage, system);
     }
     
+    public int getMaxSustainableCrew() {
+        LifeSupportSystem system = getSystem(LifeSupportSystem.class);
+        if (system == null) {
+            return 0;
+        } else {
+            return (int) Math.floor(system.getMaxAtmosphere()
+                    / ATMOSPHERE_REQUIRED_PER_CREW);
+        }
+    }
+    
     public void update(int delta, GameEvent event) {
         atmosphere -= ATMOSPHERE_LOSS_PER_MILLI;
         for (ShipSystem system : systems) {
             system.update(delta, this, event);
         }
         atmosphere = Math.max(atmosphere, 0f);
-        // TODO
+        crew = Math.min(crew,
+                (int) Math.floor(atmosphere * ATMOSPHERE_REQUIRED_PER_CREW));
+        // TODO: update other stats
     }
 }

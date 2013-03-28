@@ -2,6 +2,7 @@ package com.chipotlebanditos.spacebanditos.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.chipotlebanditos.spacebanditos.R;
@@ -20,7 +21,14 @@ public class PlayerShipActivity extends Activity {
         setContentView(R.layout.activity_player_ship);
         LinearLayout ll = (LinearLayout) findViewById(R.id.systems);
         for (ShipSystem system : ((SpaceBanditosApplication) getApplication()).game.playerShip.systems) {
-            ll.addView(new ShipSystemView(system, ll.getContext()));
+            ShipSystemView view = new ShipSystemView(system, ll.getContext());
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TODO: start system management overlay
+                }
+            });
+            ll.addView(view);
         }
         new RunGameThread().start();
     }
