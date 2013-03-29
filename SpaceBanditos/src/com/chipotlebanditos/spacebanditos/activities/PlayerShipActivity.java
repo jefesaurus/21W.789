@@ -1,6 +1,7 @@
 package com.chipotlebanditos.spacebanditos.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -25,7 +26,13 @@ public class PlayerShipActivity extends Activity {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO: start system management overlay
+                    Intent intent = new Intent(PlayerShipActivity.this,
+                            SystemManagementActivity.class);
+                    intent.putExtra(
+                            SystemManagementActivity.INTENT_EXTRA_SYSTEM_INDEX,
+                            ((SpaceBanditosApplication) getApplication()).game.playerShip.systems
+                                    .indexOf(((ShipSystemView) v).system));
+                    startActivity(intent);
                 }
             });
             ll.addView(view);

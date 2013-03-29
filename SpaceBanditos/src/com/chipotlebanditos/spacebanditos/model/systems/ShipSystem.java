@@ -43,10 +43,14 @@ public abstract class ShipSystem implements Serializable {
     
     public void update(int delta, Ship ship, GameEvent event) {
         if (beingRepaired) {
-            repairMillis += delta;
-            while (damageLevel > 0 && repairMillis >= TOTAL_REPAIR_MILLIS) {
-                repairMillis -= TOTAL_REPAIR_MILLIS;
-                damageLevel--;
+            if (ship == event.playerShip && !event.isDangerous()) {
+                damageLevel = 0;
+            } else {
+                repairMillis += delta;
+                while (damageLevel > 0 && repairMillis >= TOTAL_REPAIR_MILLIS) {
+                    repairMillis -= TOTAL_REPAIR_MILLIS;
+                    damageLevel--;
+                }
             }
         }
         if (!beingRepaired || damageLevel == 0) {

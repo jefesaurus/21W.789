@@ -29,7 +29,7 @@
 	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
 	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
 	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
-	        android:textSize="12sp"
+	        android:textSize="@dimen/ship_system_view_system_name_font_size"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:textIsSelectable="false"/>
@@ -53,6 +53,6 @@
         android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
         spacebanditos:segmentDrawable="@drawable/weapon_charge_bar_segment"
         spacebanditos:baseDirection="bottom"
-        spacebanditos:spacing="1dip"
-        android:background="@drawable/weapon_charge_bar_background"/>
+        spacebanditos:spacing="@dimen/ship_system_view_weapon_charge_bar_segment_spacing"
+        android:background="@drawable/ship_system_view_weapon_charge_bar_background"/>
 </merge>
