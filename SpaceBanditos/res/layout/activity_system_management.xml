@@ -12,7 +12,7 @@
         android:layout_marginTop="@dimen/system_management_line_half_thickness"
         android:layout_marginRight="@dimen/system_management_line_half_thickness"
         android:layout_marginBottom="@dimen/system_management_line_half_thickness"
-        spacebanditos:segmentDrawable="@drawable/large_power_bar_segment"
+        spacebanditos:segmentDrawable="@drawable/system_management_power_bar_segment"
         spacebanditos:baseDirection="bottom"
         spacebanditos:spacing="@dimen/system_management_line_half_thickness"
         android:background="@drawable/system_management_background"/>
@@ -41,18 +41,63 @@
 	        android:layout_marginTop="@dimen/system_management_line_half_thickness"
 	        android:layout_marginRight="@dimen/system_management_line_half_thickness"
 	        android:layout_marginBottom="@dimen/system_management_line_half_thickness"/>
+	    <ToggleButton
+	        android:id="@+id/repair_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+	        android:layout_marginLeft="@dimen/system_management_line_half_thickness"
+	        android:layout_marginTop="@dimen/system_management_line_half_thickness"
+	        android:layout_marginRight="@dimen/system_management_line_half_thickness"
+	        android:layout_marginBottom="@dimen/system_management_line_half_thickness"
+            android:textOn="REPAIR"
+            android:textOff="REPAIR"
+	        android:textSize="@dimen/system_management_system_name_font_size"
+	        android:textColor="@android:color/black"
+	        android:singleLine="true"
+	        android:onClick="onRepairButtonClick"/>
+	    <Button
+	        android:id="@+id/target_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+	        android:layout_marginLeft="@dimen/system_management_line_half_thickness"
+	        android:layout_marginTop="@dimen/system_management_line_half_thickness"
+	        android:layout_marginRight="@dimen/system_management_line_half_thickness"
+	        android:layout_marginBottom="@dimen/system_management_line_half_thickness"
+            android:text="TARGET"
+	        android:textSize="@dimen/system_management_system_name_font_size"
+	        android:textColor="@android:color/black"
+	        android:singleLine="true"
+	        android:onClick="onTargetButtonClick"/>
     </LinearLayout>
-    <com.chipotlebanditos.spacebanditos.views.LayeredSegmentFillBar
-        android:id="@+id/weapon_charge_bar"
-        android:visibility="gone"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/system_management_line_half_thickness"
-        android:layout_marginTop="@dimen/system_management_line_half_thickness"
-        android:layout_marginRight="@dimen/system_management_line_half_thickness"
-        android:layout_marginBottom="@dimen/system_management_line_half_thickness"
-        spacebanditos:segmentDrawable="@drawable/weapon_charge_bar_segment"
-        spacebanditos:baseDirection="bottom"
-        spacebanditos:spacing="1dip"
-        android:background="@drawable/system_management_weapon_charge_bar_background"/>
+        android:orientation="vertical"
+        android:gravity="right">
+	    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+	        android:layout_marginLeft="@dimen/system_management_line_half_thickness"
+	        android:layout_marginTop="@dimen/system_management_line_half_thickness"
+	        android:layout_marginRight="@dimen/system_management_line_half_thickness"
+	        android:layout_marginBottom="@dimen/system_management_line_half_thickness"
+            android:text="BACK"
+	        android:textSize="@dimen/system_management_system_name_font_size"
+	        android:textColor="@android:color/black"
+	        android:singleLine="true"
+	        android:onClick="onBackButtonClick"/>
+	    <com.chipotlebanditos.spacebanditos.views.LayeredSegmentFillBar
+	        android:id="@+id/weapon_charge_bar"
+	        android:visibility="gone"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:layout_marginLeft="@dimen/system_management_line_half_thickness"
+	        android:layout_marginTop="@dimen/system_management_line_half_thickness"
+	        android:layout_marginRight="@dimen/system_management_line_half_thickness"
+	        android:layout_marginBottom="@dimen/system_management_line_half_thickness"
+	        spacebanditos:segmentDrawable="@drawable/system_management_weapon_charge_bar_segment"
+	        spacebanditos:baseDirection="bottom"
+	        spacebanditos:spacing="@dimen/system_management_weapon_charge_bar_segment_spacing"
+	        android:background="@drawable/system_management_weapon_charge_bar_background"/>
+    </LinearLayout>
 </merge>

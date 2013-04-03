@@ -16,7 +16,7 @@ public abstract class ShipSystem implements Serializable {
     public boolean beingRepaired = false;
     public long repairMillis = 0;
     
-    public static final long TOTAL_REPAIR_MILLIS = 1000L;
+    public static final long TOTAL_REPAIR_MILLIS = 5000L;
     
     public ShipSystem(int upgradeLevel, int powerLevel, int damageLevel) {
         this.upgradeLevel = upgradeLevel;
@@ -52,9 +52,12 @@ public abstract class ShipSystem implements Serializable {
                     damageLevel--;
                 }
             }
-        }
-        if (!beingRepaired || damageLevel == 0) {
+        } else {
             repairMillis = 0;
+        }
+        if (damageLevel == 0) {
+            repairMillis = 0;
+            beingRepaired = false;
         }
     }
 }

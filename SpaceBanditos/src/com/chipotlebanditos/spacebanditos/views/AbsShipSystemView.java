@@ -51,10 +51,10 @@ public abstract class AbsShipSystemView extends LinearLayout {
         if (system instanceof WeaponSystem) {
             getWeaponChargeBar().setVisibility(VISIBLE);
             getWeaponChargeBar().setLayerValue(0,
-                    getWeaponChargeBar().getSizeInSegments(0));
+                    getWeaponChargeBar().getSizeInSegments());
             getWeaponChargeBar().setLayerValue(
                     1,
-                    (int) Math.floor(getWeaponChargeBar().getSizeInSegments(0)
+                    (int) Math.floor(getWeaponChargeBar().getSizeInSegments()
                             * ((WeaponSystem) system).getChargeFraction()));
         } else {
             getWeaponChargeBar().setVisibility(GONE);

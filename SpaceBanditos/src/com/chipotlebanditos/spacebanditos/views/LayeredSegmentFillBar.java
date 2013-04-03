@@ -111,66 +111,137 @@ public class LayeredSegmentFillBar extends View {
         return size;
     }
     
-    public int getSizeInSegments(int segmentLevel) {
-        segmentDrawable.setLevel(segmentLevel);
+    private int getSizeInSegments(int width, int height) {
         if (baseDirection == LEFT || baseDirection == RIGHT) {
-            if (getWidth() - getPaddingLeft() - getPaddingRight() < segmentDrawable
+            if (width - getPaddingLeft() - getPaddingRight() < segmentDrawable
                     .getIntrinsicWidth()) {
                 return 0;
             } else {
                 return (int) Math
-                        .floor((getWidth() - getPaddingLeft()
-                                - getPaddingRight() - segmentDrawable
-                                    .getIntrinsicWidth())
+                        .floor((width - getPaddingLeft() - getPaddingRight() - segmentDrawable
+                                .getIntrinsicWidth())
                                 / (float) (segmentDrawable.getIntrinsicWidth() + spacing)
                                 + 1);
             }
         } else {
-            if (getHeight() - getPaddingTop() - getPaddingBottom() < segmentDrawable
+            if (height - getPaddingTop() - getPaddingBottom() < segmentDrawable
                     .getIntrinsicHeight()) {
                 return 0;
             } else {
                 return (int) Math
-                        .floor((getHeight() - getPaddingTop()
-                                - getPaddingBottom() - segmentDrawable
-                                    .getIntrinsicHeight())
+                        .floor((height - getPaddingTop() - getPaddingBottom() - segmentDrawable
+                                .getIntrinsicHeight())
                                 / (float) (segmentDrawable.getIntrinsicHeight() + spacing)
                                 + 1);
             }
         }
     }
     
+    public int getSizeInSegments() {
+        return getSizeInSegments(getWidth(), getHeight());
+    }
+    
+    private int getFillWidthOfSegments(int segments) {
+        return (segments == 0 ? 0 : segments
+                * segmentDrawable.getIntrinsicWidth() + (segments - 1)
+                * spacing)
+                + getPaddingLeft() + getPaddingRight();
+    }
+    
+    private int getFillHeightOfSegments(int segments) {
+        return (segments == 0 ? 0 : segments
+                * segmentDrawable.getIntrinsicHeight() + (segments - 1)
+                * spacing)
+                + getPaddingTop() + getPaddingBottom();
+    }
+    
+    private int getFillSizeInWidthSegments(int width) {
+        if (width - getPaddingLeft() - getPaddingRight() < segmentDrawable
+                .getIntrinsicWidth()) {
+            return 0;
+        } else {
+            return (int) Math.floor((width - getPaddingLeft()
+                    - getPaddingRight() - segmentDrawable.getIntrinsicWidth())
+                    / (float) (segmentDrawable.getIntrinsicWidth() + spacing)
+                    + 1);
+        }
+    }
+    
+    private int getFillSizeInHeightSegments(int height) {
+        if (height - getPaddingTop() - getPaddingBottom() < segmentDrawable
+                .getIntrinsicHeight()) {
+            return 0;
+        } else {
+            return (int) Math
+                    .floor((height - getPaddingTop() - getPaddingBottom() - segmentDrawable
+                            .getIntrinsicHeight())
+                            / (float) (segmentDrawable.getIntrinsicHeight() + spacing)
+                            + 1);
+        }
+    }
+    
+    private int getDrawWidth(int widthMeasureSpec) {
+        if (baseDirection == LEFT || baseDirection == RIGHT) {
+            if (this.getLayoutParams().width == LayoutParams.FILL_PARENT
+                    || this.getLayoutParams().width == LayoutParams.MATCH_PARENT) {
+                return getFillWidthOfSegments(getFillSizeInWidthSegments(MeasureSpec
+                        .getSize(widthMeasureSpec)));
+            } else {
+                return getFillWidthOfSegments(getDrawSizeInSegments());
+            }
+        } else {
+            return segmentDrawable.getIntrinsicWidth() + getPaddingLeft()
+                    + getPaddingRight();
+        }
+    }
+    
+    private int getDrawHeight(int heightMeasureSpec) {
+        if (baseDirection == TOP || baseDirection == BOTTOM) {
+            if (this.getLayoutParams().height == LayoutParams.FILL_PARENT
+                    || this.getLayoutParams().height == LayoutParams.MATCH_PARENT) {
+                return getFillHeightOfSegments(getFillSizeInHeightSegments(MeasureSpec
+                        .getSize(heightMeasureSpec)));
+            } else {
+                return getFillHeightOfSegments(getDrawSizeInSegments());
+            }
+        } else {
+            return segmentDrawable.getIntrinsicHeight() + getPaddingTop()
+                    + getPaddingBottom();
+        }
+    }
+    
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int totalWidth = 0, totalHeight = 0;
-        for (int i = 0; i < getDrawSizeInSegments(); i++) {
-            segmentDrawable.setLevel(getSegmentLevel(i));
-            if (baseDirection == LEFT || baseDirection == RIGHT) {
-                totalWidth += segmentDrawable.getIntrinsicWidth()
-                        + (i > 0 ? spacing : 0);
-                totalHeight = Math.max(totalHeight,
-                        segmentDrawable.getIntrinsicHeight());
-            } else {
-                totalWidth = Math.max(totalWidth,
-                        segmentDrawable.getIntrinsicWidth());
-                totalHeight += segmentDrawable.getIntrinsicHeight()
-                        + (i > 0 ? spacing : 0);
-            }
-        }
-        totalWidth += getPaddingLeft() + getPaddingRight();
-        totalHeight += getPaddingTop() + getPaddingBottom();
-        
-        if (this.getLayoutParams().width == LayoutParams.FILL_PARENT
-                || this.getLayoutParams().width == LayoutParams.MATCH_PARENT) {
-            totalWidth = MeasureSpec.getSize(widthMeasureSpec);
-        }
-        
-        if (this.getLayoutParams().height == LayoutParams.FILL_PARENT
-                || this.getLayoutParams().height == LayoutParams.MATCH_PARENT) {
-            totalHeight = MeasureSpec.getSize(heightMeasureSpec);
-        }
-        
-        setMeasuredDimension(totalWidth, totalHeight);
+        setMeasuredDimension(getDrawWidth(widthMeasureSpec),
+                getDrawHeight(heightMeasureSpec));
+        // int totalWidth = 0, totalHeight = 0;
+        // for (int i = 0; i < getDrawSizeInSegments(); i++) {
+        // if (baseDirection == LEFT || baseDirection == RIGHT) {
+        // totalWidth += segmentDrawable.getIntrinsicWidth()
+        // + (i > 0 ? spacing : 0);
+        // totalHeight = Math.max(totalHeight,
+        // segmentDrawable.getIntrinsicHeight());
+        // } else {
+        // totalWidth = Math.max(totalWidth,
+        // segmentDrawable.getIntrinsicWidth());
+        // totalHeight += segmentDrawable.getIntrinsicHeight()
+        // + (i > 0 ? spacing : 0);
+        // }
+        // }
+        // totalWidth += getPaddingLeft() + getPaddingRight();
+        // totalHeight += getPaddingTop() + getPaddingBottom();
+        //
+        // if (this.getLayoutParams().width == LayoutParams.FILL_PARENT
+        // || this.getLayoutParams().width == LayoutParams.MATCH_PARENT) {
+        // totalWidth = MeasureSpec.getSize(widthMeasureSpec);
+        // }
+        //
+        // if (this.getLayoutParams().height == LayoutParams.FILL_PARENT
+        // || this.getLayoutParams().height == LayoutParams.MATCH_PARENT) {
+        // totalHeight = MeasureSpec.getSize(heightMeasureSpec);
+        // }
+        //
+        // setMeasuredDimension(totalWidth, totalHeight);
     }
     
     @Override
