@@ -30,8 +30,8 @@ public class PlayerShipActivity extends Activity {
                             SystemManagementActivity.class);
                     intent.putExtra(
                             SystemManagementActivity.INTENT_EXTRA_SYSTEM_INDEX,
-                            ((SpaceBanditosApplication) getApplication()).game.playerShip.systems
-                                    .indexOf(((ShipSystemView) v).system));
+                            ((SpaceBanditosApplication) getApplication()).game.playerShip
+                                    .getSystemIndex(((ShipSystemView) v).system));
                     startActivity(intent);
                 }
             });

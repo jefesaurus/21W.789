@@ -2,6 +2,7 @@ package com.chipotlebanditos.spacebanditos.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.chipotlebanditos.spacebanditos.views.AbsShipSystemView;
 public class SystemManagementActivity extends Activity {
     
     public static final String INTENT_EXTRA_SYSTEM_INDEX = "android.intent.extra.SYSTEM_INDEX";
+    public static final int TARGET_REQUEST_CODE = 1;
     
     private SystemManagementView view;
     
@@ -29,7 +31,7 @@ public class SystemManagementActivity extends Activity {
         
         Ship ship = ((SpaceBanditosApplication) getApplication()).game.playerShip;
         
-        view = new SystemManagementView(ship, ship.systems.get(getIntent()
+        view = new SystemManagementView(ship, ship.getSystemByIndex(getIntent()
                 .getIntExtra(INTENT_EXTRA_SYSTEM_INDEX, -1)), getBaseContext());
         setContentView(view);
     }
@@ -77,6 +79,21 @@ public class SystemManagementActivity extends Activity {
     }
     
     public void onTargetButtonClick(View v) {
-        // TODO
+        // TODO: start enemy ship activity for result
+    }
+    
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+        case TARGET_REQUEST_CODE:
+            if (resultCode == RESULT_OK) {
+                ((WeaponSystem) view.system).target = ((SpaceBanditosApplication) getApplication()).game.currentEvent
+                        .getOpposingShip(view.ship)
+                        .getSystemByIndex(
+                                data.getIntExtra(INTENT_EXTRA_SYSTEM_INDEX, -1));
+            }
+            break;
+        default:
+            throw new IllegalArgumentException();
+        }
     }
 }

@@ -79,6 +79,14 @@ public class Ship implements Serializable {
         }
     }
     
+    public int getSystemIndex(ShipSystem system) {
+        return systems.indexOf(system);
+    }
+    
+    public ShipSystem getSystemByIndex(int index) {
+        return systems.get(index);
+    }
+    
     public PointF getLayoutPosition(ShipSystem system) {
         Iterator<? extends ShipSystem> iter = getSystems(system.getClass())
                 .iterator();
