@@ -214,34 +214,6 @@ public class LayeredSegmentFillBar extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         setMeasuredDimension(getDrawWidth(widthMeasureSpec),
                 getDrawHeight(heightMeasureSpec));
-        // int totalWidth = 0, totalHeight = 0;
-        // for (int i = 0; i < getDrawSizeInSegments(); i++) {
-        // if (baseDirection == LEFT || baseDirection == RIGHT) {
-        // totalWidth += segmentDrawable.getIntrinsicWidth()
-        // + (i > 0 ? spacing : 0);
-        // totalHeight = Math.max(totalHeight,
-        // segmentDrawable.getIntrinsicHeight());
-        // } else {
-        // totalWidth = Math.max(totalWidth,
-        // segmentDrawable.getIntrinsicWidth());
-        // totalHeight += segmentDrawable.getIntrinsicHeight()
-        // + (i > 0 ? spacing : 0);
-        // }
-        // }
-        // totalWidth += getPaddingLeft() + getPaddingRight();
-        // totalHeight += getPaddingTop() + getPaddingBottom();
-        //
-        // if (this.getLayoutParams().width == LayoutParams.FILL_PARENT
-        // || this.getLayoutParams().width == LayoutParams.MATCH_PARENT) {
-        // totalWidth = MeasureSpec.getSize(widthMeasureSpec);
-        // }
-        //
-        // if (this.getLayoutParams().height == LayoutParams.FILL_PARENT
-        // || this.getLayoutParams().height == LayoutParams.MATCH_PARENT) {
-        // totalHeight = MeasureSpec.getSize(heightMeasureSpec);
-        // }
-        //
-        // setMeasuredDimension(totalWidth, totalHeight);
     }
     
     @Override
