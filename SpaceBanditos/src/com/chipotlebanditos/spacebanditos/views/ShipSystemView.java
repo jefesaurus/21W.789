@@ -11,7 +11,6 @@ public class ShipSystemView extends AbsShipSystemView {
     public ShipSystemView(ShipSystem system, Context context) {
         super(system, context);
         View.inflate(context, R.layout.ship_system_view, this);
-        this.setBackgroundDrawable(getResources().getDrawable(
-                R.drawable.ship_system_view_background));
+        this.setBackgroundResource(R.drawable.ship_system_view_background);
     }
 }

@@ -2,6 +2,7 @@ package com.chipotlebanditos.spacebanditos.model;
 
 import android.graphics.PointF;
 
+import com.chipotlebanditos.spacebanditos.R;
 import com.chipotlebanditos.spacebanditos.model.systems.LifeSupportSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.ShipSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.WeaponSystem;
@@ -10,11 +11,11 @@ import com.google.common.collect.ListMultimap;
 
 public enum ShipLayout {
     TEST_LAYOUT(
-            -1,
+            R.drawable.muhbote,
             new ImmutableListMultimap.Builder<Class<? extends ShipSystem>, PointF>()
-                    .put(LifeSupportSystem.class, new PointF(0f, 0f))
-                    .put(WeaponSystem.class, new PointF(1f, 0f))
-                    .put(WeaponSystem.class, new PointF(1f, 1f)).build());
+                    .put(LifeSupportSystem.class, new PointF(.4f, .3f))
+                    .put(WeaponSystem.class, new PointF(.7f, .2f))
+                    .put(WeaponSystem.class, new PointF(.7f, .8f)).build());
     
     public final int imageResource;
     public final ListMultimap<Class<? extends ShipSystem>, PointF> systemPositions;

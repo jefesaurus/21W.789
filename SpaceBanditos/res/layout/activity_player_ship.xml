@@ -8,13 +8,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainMenuActivity" >
     
-    <LinearLayout
-        android:id="@+id/systems"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.chipotlebanditos.spacebanditos.views.ShipView
+        android:id="@+id/ship"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:orientation="horizontal">
-        
-    </LinearLayout>
+        android:layout_alignParentLeft="true" />
 </RelativeLayout>
