@@ -112,7 +112,7 @@ public class Ship implements Serializable {
         system.powerLevel--;
     }
     
-    public void takeDamage(int damage, ShipSystem system) {
+    public void takeDamage(int damage, ShipSystem system, GameEvent event) {
         if (damage == 0) {
             return;
         }
@@ -124,6 +124,9 @@ public class Ship implements Serializable {
         }
         system.takeDamage(damage, this);
         hull = Math.max(hull - damage, 0);
+        if (hasBeenDestroyed() && this == event.enemyShip) {
+            event.enemyShip = null;
+        }
     }
     
     public int getShields() {
@@ -142,9 +145,9 @@ public class Ship implements Serializable {
         }
     }
     
-    public void attack(int damage, Ship ship, ShipSystem system) {
+    public void attack(int damage, Ship ship, ShipSystem system, GameEvent event) {
         // TODO: account for evasion/accuracy
-        ship.takeDamage(damage, system);
+        ship.takeDamage(damage, system, event);
     }
     
     public int getMaxSustainableCrew() {
@@ -155,6 +158,10 @@ public class Ship implements Serializable {
             return (int) Math.floor(system.getMaxAtmosphere()
                     / ATMOSPHERE_REQUIRED_PER_CREW);
         }
+    }
+    
+    public boolean hasBeenDestroyed() {
+        return hull == 0;
     }
     
     public void update(int delta, GameEvent event) {

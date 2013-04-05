@@ -5,4 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     
+    <Button 
+        android:id="@+id/pause_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:text="PAUSE"
+	    android:textSize="@dimen/system_management_system_name_font_size"
+	    android:textColor="@android:color/black"
+	    android:onClick="onPauseButtonClick" />
+    
 </com.chipotlebanditos.spacebanditos.views.ShipView>

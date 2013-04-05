@@ -4,7 +4,6 @@
     tools:context=".PlayerShipActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    <include layout="@layout/activity_ship" />
     <Button 
         android:id="@+id/enemy_ship_screen_button"
         android:layout_width="wrap_content"

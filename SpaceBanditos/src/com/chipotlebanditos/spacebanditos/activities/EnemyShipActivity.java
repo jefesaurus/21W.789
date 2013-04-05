@@ -1,9 +1,9 @@
 package com.chipotlebanditos.spacebanditos.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.chipotlebanditos.spacebanditos.R;
 import com.chipotlebanditos.spacebanditos.SpaceBanditosApplication;
@@ -11,17 +11,19 @@ import com.chipotlebanditos.spacebanditos.model.Ship;
 import com.chipotlebanditos.spacebanditos.views.ShipSystemView;
 import com.chipotlebanditos.spacebanditos.views.ShipView;
 
-public class EnemyShipActivity extends Activity {
+public class EnemyShipActivity extends ShipActivity {
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        setContentView(R.layout.activity_enemy_ship);
+        ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
+        View.inflate(root.getContext(), R.layout.activity_enemy_ship, root);
         
         final Ship ship = ((SpaceBanditosApplication) getApplication()).game.currentEvent.enemyShip;
         
         ShipView shipView = (ShipView) findViewById(R.id.ship);
+        
         shipView.setShip(ship);
         ShipView.SystemsView systemsView = (ShipView.SystemsView) shipView
                 .findViewById(R.id.systems);
@@ -37,9 +39,10 @@ public class EnemyShipActivity extends Activity {
                         intent.putExtra(
                                 SystemManagementActivity.INTENT_EXTRA_SYSTEM_INDEX,
                                 ship.getSystemIndex(((ShipSystemView) v).system));
-                        EnemyShipActivity.this.setResult(RESULT_OK, intent);
-                        EnemyShipActivity.this.finish();
-                        // TODO: return enemy ship activity result
+                        setResult(RESULT_OK, intent);
+                        finish();
+                        overridePendingTransition(R.anim.left_to_right_enter,
+                                R.anim.left_to_right_exit);
                     }
                 });
             }
@@ -51,8 +54,16 @@ public class EnemyShipActivity extends Activity {
             setResult(RESULT_CANCELED, null);
         }
         finish();
-        // Intent intent = new Intent(this, PlayerShipActivity.class);
-        // startActivity(intent);
+        overridePendingTransition(R.anim.left_to_right_enter,
+                R.anim.left_to_right_exit);
     }
     
+    @Override
+    public void onShipDestroyed() {
+        if (getCallingActivity() != null) {
+            setResult(RESULT_CANCELED, null);
+        }
+        finish();
+        overridePendingTransition(0, 0);
+    }
 }

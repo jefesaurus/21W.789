@@ -13,6 +13,7 @@ import android.widget.ToggleButton;
 import com.chipotlebanditos.spacebanditos.R;
 import com.chipotlebanditos.spacebanditos.SpaceBanditosApplication;
 import com.chipotlebanditos.spacebanditos.model.Ship;
+import com.chipotlebanditos.spacebanditos.model.ShipWithAI;
 import com.chipotlebanditos.spacebanditos.model.systems.ShipSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.WeaponSystem;
 import com.chipotlebanditos.spacebanditos.views.AbsShipSystemView;
@@ -73,6 +74,9 @@ public class SystemManagementActivity extends Activity {
             getRepairButton().setEnabled(system.damageLevel > 0);
             getTargetButton().setVisibility(
                     system instanceof WeaponSystem ? VISIBLE : GONE);
+            ShipWithAI enemyShip = ((SpaceBanditosApplication) getApplication()).game.currentEvent.enemyShip;
+            getTargetButton().setEnabled(
+                    enemyShip != null && enemyShip.isHostile);
             
             getAddPowerButton().setEnabled(
                     view.ship.power.powerLevel > 0
@@ -96,6 +100,8 @@ public class SystemManagementActivity extends Activity {
     public void onTargetButtonClick(View v) {
         Intent intent = new Intent(this, EnemyShipActivity.class);
         this.startActivityForResult(intent, TARGET_REQUEST_CODE);
+        overridePendingTransition(R.anim.right_to_left_enter,
+                R.anim.right_to_left_exit);
     }
     
     public void onAddPowerButtonClick(View v) {

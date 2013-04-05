@@ -1,9 +1,9 @@
 package com.chipotlebanditos.spacebanditos.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.chipotlebanditos.spacebanditos.R;
 import com.chipotlebanditos.spacebanditos.SpaceBanditosApplication;
@@ -12,7 +12,7 @@ import com.chipotlebanditos.spacebanditos.model.Ship;
 import com.chipotlebanditos.spacebanditos.views.ShipSystemView;
 import com.chipotlebanditos.spacebanditos.views.ShipView;
 
-public class PlayerShipActivity extends Activity {
+public class PlayerShipActivity extends ShipActivity {
     
     private boolean destroyed = false;
     
@@ -20,14 +20,15 @@ public class PlayerShipActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        setContentView(R.layout.activity_player_ship);
+        ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
+        View.inflate(root.getContext(), R.layout.activity_player_ship, root);
         
         final Ship ship = ((SpaceBanditosApplication) getApplication()).game.playerShip;
         
         ShipView shipView = (ShipView) findViewById(R.id.ship);
+        
         shipView.setShip(ship);
-        shipView.findViewById(R.id.reserve_power_bar).setVisibility(
-                View.VISIBLE);
+        shipView.findViewById(R.id.reserve_power).setVisibility(View.VISIBLE);
         ShipView.SystemsView systemsView = (ShipView.SystemsView) shipView
                 .findViewById(R.id.systems);
         
@@ -50,12 +51,20 @@ public class PlayerShipActivity extends Activity {
     
     @Override
     protected void onDestroy() {
+        super.onDestroy();
         destroyed = true;
     }
     
     public void onEnemyShipScreenButtonClick(View v) {
         Intent intent = new Intent(this, EnemyShipActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.right_to_left_enter,
+                R.anim.right_to_left_exit);
+    }
+    
+    @Override
+    public void onShipDestroyed() {
+        // TODO: game over
     }
     
     private class RunGameThread extends Thread {
@@ -65,7 +74,7 @@ public class PlayerShipActivity extends Activity {
         @Override
         public void run() {
             while (true) {
-                // all in-event UI code should be similarly synchronized
+                // TODO: all in-event UI code should be similarly synchronized
                 synchronized (((SpaceBanditosApplication) getApplication()).game) {
                     if (PlayerShipActivity.this.destroyed) {
                         break;

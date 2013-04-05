@@ -45,7 +45,7 @@ public class Game implements Serializable {
             
             @Override
             public void AI(GameEvent event) {
-                // TODO
+                // TODO: execute test AI
             }
         }, null, null) };
         

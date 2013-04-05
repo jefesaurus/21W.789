@@ -7,6 +7,7 @@ import android.widget.AbsoluteLayout;
 import android.widget.RelativeLayout;
 
 import com.chipotlebanditos.spacebanditos.R;
+import com.chipotlebanditos.spacebanditos.activities.ShipActivity;
 import com.chipotlebanditos.spacebanditos.model.Ship;
 import com.chipotlebanditos.spacebanditos.model.systems.ShipSystem;
 
@@ -52,6 +53,9 @@ public class ShipView extends RelativeLayout {
     
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        if (ship.hasBeenDestroyed() && getContext() instanceof ShipActivity) {
+            ((ShipActivity) getContext()).onShipDestroyed();
+        }
         getHullAndShieldsBar().setLayerValue(0,
                 ship.maxHull + ship.getMaxShields());
         getHullAndShieldsBar().setLayerValue(1,

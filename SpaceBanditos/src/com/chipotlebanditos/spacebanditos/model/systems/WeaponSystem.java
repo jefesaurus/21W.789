@@ -58,6 +58,9 @@ public class WeaponSystem extends ShipSystem {
     @Override
     public void update(int delta, Ship ship, GameEvent event) {
         super.update(delta, ship, event);
+        if (event.getOpposingShip(ship) == null) {
+            target = null;
+        }
         if (powerLevel == 0 || equipped == null) {
             chargeMillis = 0;
         } else {
@@ -65,7 +68,7 @@ public class WeaponSystem extends ShipSystem {
             while (target != null && chargeMillis >= getTotalChargeMillis()) {
                 chargeMillis -= getTotalChargeMillis();
                 ship.attack(equipped.attackDamage, event.getOpposingShip(ship),
-                        target);
+                        target, event);
             }
             chargeMillis = Math.min(chargeMillis, getTotalChargeMillis());
         }
