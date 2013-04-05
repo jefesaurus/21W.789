@@ -1,0 +1,8 @@
+<com.chipotlebanditos.spacebanditos.views.ShipView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ship"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+</com.chipotlebanditos.spacebanditos.views.ShipView>

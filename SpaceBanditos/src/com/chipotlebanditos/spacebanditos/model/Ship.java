@@ -126,6 +126,22 @@ public class Ship implements Serializable {
         hull = Math.max(hull - damage, 0);
     }
     
+    public int getShields() {
+        if (getSystem(ShieldsSystem.class) == null) {
+            return 0;
+        } else {
+            return getSystem(ShieldsSystem.class).shields;
+        }
+    }
+    
+    public int getMaxShields() {
+        if (getSystem(ShieldsSystem.class) == null) {
+            return 0;
+        } else {
+            return getSystem(ShieldsSystem.class).getMaxShields();
+        }
+    }
+    
     public void attack(int damage, Ship ship, ShipSystem system) {
         // TODO: account for evasion/accuracy
         ship.takeDamage(damage, system);

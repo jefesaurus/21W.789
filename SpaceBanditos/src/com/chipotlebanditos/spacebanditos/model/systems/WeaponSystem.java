@@ -24,7 +24,7 @@ public class WeaponSystem extends ShipSystem {
     @Override
     public String getName() {
         if (equipped == null) {
-            return "WEAPON";
+            return "NO WEAPON";
         } else {
             return equipped.getName();
         }
@@ -48,7 +48,7 @@ public class WeaponSystem extends ShipSystem {
     }
     
     public float getChargeFraction() {
-        if (equipped == null) {
+        if (equipped == null || powerLevel == 0) {
             return 0;
         } else {
             return chargeMillis / (float) getTotalChargeMillis();

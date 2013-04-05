@@ -12,10 +12,12 @@
         android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
         android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
         android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
-        spacebanditos:segmentDrawable="@drawable/ship_system_view_power_bar_segment"
+        spacebanditos:segmentDrawable="@drawable/power_bar_segment_small"
         spacebanditos:baseDirection="bottom"
-        spacebanditos:spacing="@dimen/ship_system_view_line_half_thickness"
-        android:background="@drawable/ship_system_view_background"/>
+        spacebanditos:segmentWidth="@dimen/ship_system_view_power_bar_segment_width"
+        spacebanditos:segmentHeight="@dimen/ship_system_view_power_bar_segment_height"
+        spacebanditos:segmentSpacing="@dimen/ship_system_view_line_half_thickness"
+        android:background="@drawable/base_background_small"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,8 +53,10 @@
         android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
         android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
         android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
-        spacebanditos:segmentDrawable="@drawable/ship_system_view_weapon_charge_bar_segment"
+        spacebanditos:segmentDrawable="@drawable/weapon_charge_bar_segment_small"
         spacebanditos:baseDirection="bottom"
-        spacebanditos:spacing="@dimen/ship_system_view_weapon_charge_bar_segment_spacing"
+        spacebanditos:segmentWidth="@dimen/ship_system_view_weapon_charge_bar_segment_width"
+        spacebanditos:segmentHeight="@dimen/ship_system_view_weapon_charge_bar_segment_height"
+        spacebanditos:segmentSpacing="@dimen/ship_system_view_weapon_charge_bar_segment_spacing"
         android:background="@drawable/ship_system_view_weapon_charge_bar_background"/>
 </merge>

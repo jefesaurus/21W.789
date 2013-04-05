@@ -48,7 +48,7 @@ public class SystemManagementActivity extends Activity {
             View.inflate(getContext(), R.layout.activity_system_management,
                     this);
             
-            this.setBackgroundResource(R.drawable.system_management_background);
+            this.setBackgroundResource(R.drawable.base_background_large);
         }
         
         protected ToggleButton getRepairButton() {
@@ -59,12 +59,28 @@ public class SystemManagementActivity extends Activity {
             return (Button) findViewById(R.id.target_button);
         }
         
+        protected Button getAddPowerButton() {
+            return (Button) findViewById(R.id.add_power_button);
+        }
+        
+        protected Button getRemovePowerButton() {
+            return (Button) findViewById(R.id.remove_power_button);
+        }
+        
         @Override
         protected void onDraw(Canvas canvas) {
             getRepairButton().setChecked(system.beingRepaired);
             getRepairButton().setEnabled(system.damageLevel > 0);
             getTargetButton().setVisibility(
                     system instanceof WeaponSystem ? VISIBLE : GONE);
+            
+            getAddPowerButton().setEnabled(
+                    view.ship.power.powerLevel > 0
+                            && view.system.getMaxPowerLevel()
+                                    - view.system.powerLevel > 0);
+            
+            getRemovePowerButton().setEnabled(view.system.powerLevel > 0);
+            
             super.onDraw(canvas);
         }
     }
@@ -78,7 +94,16 @@ public class SystemManagementActivity extends Activity {
     }
     
     public void onTargetButtonClick(View v) {
-        // TODO: start enemy ship activity for result
+        Intent intent = new Intent(this, EnemyShipActivity.class);
+        this.startActivityForResult(intent, TARGET_REQUEST_CODE);
+    }
+    
+    public void onAddPowerButtonClick(View v) {
+        view.ship.addPower(view.system);
+    }
+    
+    public void onRemovePowerButtonClick(View v) {
+        view.ship.removePower(view.system);
     }
     
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

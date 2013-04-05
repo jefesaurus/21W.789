@@ -21,7 +21,9 @@ public class LayeredSegmentFillBar extends View {
     
     private int baseDirection;
     
-    private int spacing;
+    private int segmentWidth, segmentHeight;
+    
+    private int segmentSpacing;
     
     private Map<Integer, Integer> layerValues = new HashMap<Integer, Integer>();
     
@@ -56,8 +58,13 @@ public class LayeredSegmentFillBar extends View {
         baseDirection = a.getInteger(
                 R.styleable.LayeredSegmentFillBar_baseDirection, TOP);
         
-        spacing = a.getDimensionPixelSize(
-                R.styleable.LayeredSegmentFillBar_spacing, 0);
+        segmentWidth = a.getDimensionPixelSize(
+                R.styleable.LayeredSegmentFillBar_segmentWidth, segmentWidth);
+        segmentHeight = a.getDimensionPixelSize(
+                R.styleable.LayeredSegmentFillBar_segmentHeight, segmentHeight);
+        
+        segmentSpacing = a.getDimensionPixelSize(
+                R.styleable.LayeredSegmentFillBar_segmentSpacing, 0);
         
         a.recycle();
     }
@@ -85,12 +92,28 @@ public class LayeredSegmentFillBar extends View {
         return baseDirection;
     }
     
-    public void setSpacing(int spacing) {
-        this.spacing = spacing;
+    public int getSegmentWidth() {
+        return segmentWidth;
     }
     
-    public int getSpacing() {
-        return spacing;
+    public void setSegmentWidth(int segmentWidth) {
+        this.segmentWidth = segmentWidth;
+    }
+    
+    public int getSegmentHeight() {
+        return segmentHeight;
+    }
+    
+    public void setSegmentHeight(int segmentHeight) {
+        this.segmentHeight = segmentHeight;
+    }
+    
+    public void setSegmentSpacing(int spacing) {
+        this.segmentSpacing = spacing;
+    }
+    
+    public int getSegmentSpacing() {
+        return segmentSpacing;
     }
     
     private int getSegmentLevel(int index) {
@@ -113,26 +136,23 @@ public class LayeredSegmentFillBar extends View {
     
     private int getSizeInSegments(int width, int height) {
         if (baseDirection == LEFT || baseDirection == RIGHT) {
-            if (width - getPaddingLeft() - getPaddingRight() < segmentDrawable
-                    .getIntrinsicWidth()) {
+            if (width - getPaddingLeft() - getPaddingRight() < segmentWidth) {
                 return 0;
             } else {
-                return (int) Math
-                        .floor((width - getPaddingLeft() - getPaddingRight() - segmentDrawable
-                                .getIntrinsicWidth())
-                                / (float) (segmentDrawable.getIntrinsicWidth() + spacing)
-                                + 1);
+                return (int) Math.floor((width - getPaddingLeft()
+                        - getPaddingRight() - segmentDrawable
+                            .getIntrinsicWidth())
+                        / (float) (segmentWidth + segmentSpacing) + 1);
             }
         } else {
             if (height - getPaddingTop() - getPaddingBottom() < segmentDrawable
                     .getIntrinsicHeight()) {
                 return 0;
             } else {
-                return (int) Math
-                        .floor((height - getPaddingTop() - getPaddingBottom() - segmentDrawable
-                                .getIntrinsicHeight())
-                                / (float) (segmentDrawable.getIntrinsicHeight() + spacing)
-                                + 1);
+                return (int) Math.floor((height - getPaddingTop()
+                        - getPaddingBottom() - segmentDrawable
+                            .getIntrinsicHeight())
+                        / (float) (segmentHeight + segmentSpacing) + 1);
             }
         }
     }
@@ -142,16 +162,14 @@ public class LayeredSegmentFillBar extends View {
     }
     
     private int getFillWidthOfSegments(int segments) {
-        return (segments == 0 ? 0 : segments
-                * segmentDrawable.getIntrinsicWidth() + (segments - 1)
-                * spacing)
+        return (segments == 0 ? 0 : segments * segmentWidth + (segments - 1)
+                * segmentSpacing)
                 + getPaddingLeft() + getPaddingRight();
     }
     
     private int getFillHeightOfSegments(int segments) {
-        return (segments == 0 ? 0 : segments
-                * segmentDrawable.getIntrinsicHeight() + (segments - 1)
-                * spacing)
+        return (segments == 0 ? 0 : segments * segmentHeight + (segments - 1)
+                * segmentSpacing)
                 + getPaddingTop() + getPaddingBottom();
     }
     
@@ -162,8 +180,7 @@ public class LayeredSegmentFillBar extends View {
         } else {
             return (int) Math.floor((width - getPaddingLeft()
                     - getPaddingRight() - segmentDrawable.getIntrinsicWidth())
-                    / (float) (segmentDrawable.getIntrinsicWidth() + spacing)
-                    + 1);
+                    / (float) (segmentWidth + segmentSpacing) + 1);
         }
     }
     
@@ -175,8 +192,7 @@ public class LayeredSegmentFillBar extends View {
             return (int) Math
                     .floor((height - getPaddingTop() - getPaddingBottom() - segmentDrawable
                             .getIntrinsicHeight())
-                            / (float) (segmentDrawable.getIntrinsicHeight() + spacing)
-                            + 1);
+                            / (float) (segmentHeight + segmentSpacing) + 1);
         }
     }
     
@@ -190,8 +206,7 @@ public class LayeredSegmentFillBar extends View {
                 return getFillWidthOfSegments(getDrawSizeInSegments());
             }
         } else {
-            return segmentDrawable.getIntrinsicWidth() + getPaddingLeft()
-                    + getPaddingRight();
+            return segmentWidth + getPaddingLeft() + getPaddingRight();
         }
     }
     
@@ -205,8 +220,7 @@ public class LayeredSegmentFillBar extends View {
                 return getFillHeightOfSegments(getDrawSizeInSegments());
             }
         } else {
-            return segmentDrawable.getIntrinsicHeight() + getPaddingTop()
-                    + getPaddingBottom();
+            return segmentHeight + getPaddingTop() + getPaddingBottom();
         }
     }
     
@@ -226,30 +240,24 @@ public class LayeredSegmentFillBar extends View {
             segmentDrawable.setLevel(getSegmentLevel(i));
             switch (baseDirection) {
             case LEFT:
-                segmentDrawable.setBounds(x, y,
-                        x += segmentDrawable.getIntrinsicWidth(), y
-                                + segmentDrawable.getIntrinsicHeight());
-                x += i > 0 ? spacing : 0;
+                segmentDrawable.setBounds(x, y, x += segmentWidth, y
+                        + segmentHeight);
+                x += segmentSpacing;
                 break;
             case TOP:
-                segmentDrawable.setBounds(x, y,
-                        x + segmentDrawable.getIntrinsicWidth(),
-                        y += segmentDrawable.getIntrinsicHeight());
-                y += i > 0 ? spacing : 0;
+                segmentDrawable.setBounds(x, y, x + segmentWidth,
+                        y += segmentHeight);
+                y += segmentSpacing;
                 break;
             case RIGHT:
-                segmentDrawable.setBounds(
-                        x -= segmentDrawable.getIntrinsicWidth()
-                                + (i > 0 ? spacing : 0), y,
-                        x + segmentDrawable.getIntrinsicWidth(), y
-                                + segmentDrawable.getIntrinsicHeight());
+                segmentDrawable.setBounds(x -= segmentWidth
+                        + (i > 0 ? segmentSpacing : 0), y, x + segmentWidth, y
+                        + segmentHeight);
                 break;
             case BOTTOM:
-                segmentDrawable.setBounds(x,
-                        y -= segmentDrawable.getIntrinsicHeight()
-                                + (i > 0 ? spacing : 0),
-                        x + segmentDrawable.getIntrinsicWidth(), y
-                                + segmentDrawable.getIntrinsicHeight());
+                segmentDrawable.setBounds(x, y -= segmentHeight
+                        + (i > 0 ? segmentSpacing : 0), x + segmentWidth, y
+                        + segmentHeight);
                 break;
             }
             segmentDrawable.draw(canvas);

@@ -2,9 +2,9 @@
 <level-list
     xmlns:android="http://schemas.android.com/apk/res/android" >
     <item
-        android:drawable="@drawable/system_management_weapon_charge_bar_segment_0"
+        android:drawable="@drawable/weapon_charge_bar_segment_large_0"
         android:maxLevel="0"/>
     <item
-        android:drawable="@drawable/system_management_weapon_charge_bar_segment_1"
+        android:drawable="@drawable/weapon_charge_bar_segment_large_1"
         android:maxLevel="1"/>
 </level-list>

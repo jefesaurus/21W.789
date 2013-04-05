@@ -8,6 +8,8 @@
             <enum name="right" value="2"/>
             <enum name="bottom" value="3"/>
         </attr>
-        <attr name="spacing" format="dimension"/>
+        <attr name="segmentWidth" format="dimension"/>
+        <attr name="segmentHeight" format="dimension"/>
+        <attr name="segmentSpacing" format="dimension"/>s
     </declare-styleable>
 </resources>

@@ -9,7 +9,5 @@
     <color name="base_dark">#FF303030</color>
     <color name="energy_light">#FF0077FF</color>
     <color name="energy_dark">#FF0050A0</color>
-   <color name="opaque_red">#f00</color>
-   <color name="translucent_red">#80ff0000</color>
 
 </resources>

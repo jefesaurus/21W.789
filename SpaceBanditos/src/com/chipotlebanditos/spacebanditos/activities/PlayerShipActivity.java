@@ -26,9 +26,13 @@ public class PlayerShipActivity extends Activity {
         
         ShipView shipView = (ShipView) findViewById(R.id.ship);
         shipView.setShip(ship);
+        shipView.findViewById(R.id.reserve_power_bar).setVisibility(
+                View.VISIBLE);
+        ShipView.SystemsView systemsView = (ShipView.SystemsView) shipView
+                .findViewById(R.id.systems);
         
-        for (int i = 0; i < shipView.getChildCount(); i++) {
-            ShipSystemView view = (ShipSystemView) shipView.getChildAt(i);
+        for (int i = 0; i < systemsView.getChildCount(); i++) {
+            ShipSystemView view = (ShipSystemView) systemsView.getChildAt(i);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -47,6 +51,11 @@ public class PlayerShipActivity extends Activity {
     @Override
     protected void onDestroy() {
         destroyed = true;
+    }
+    
+    public void onEnemyShipScreenButtonClick(View v) {
+        Intent intent = new Intent(this, EnemyShipActivity.class);
+        startActivity(intent);
     }
     
     private class RunGameThread extends Thread {

@@ -3,10 +3,8 @@
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
        android:shape="rectangle">
-   <size android:width="@dimen/ship_system_view_power_bar_segment_width"
-        android:height="@dimen/ship_system_view_power_bar_segment_height" />
    <solid 
-       android:color="@color/damaged" />
+       android:color="@color/energy_dark" />
    <stroke
        android:width="@dimen/ship_system_view_line_thickness"
        android:color="@color/black" />

@@ -12,18 +12,51 @@
         android:layout_marginTop="@dimen/system_management_line_half_thickness"
         android:layout_marginRight="@dimen/system_management_line_half_thickness"
         android:layout_marginBottom="@dimen/system_management_line_half_thickness"
-        spacebanditos:segmentDrawable="@drawable/system_management_power_bar_segment"
+        spacebanditos:segmentDrawable="@drawable/power_bar_segment_large"
         spacebanditos:baseDirection="bottom"
-        spacebanditos:spacing="@dimen/system_management_line_half_thickness"
-        android:background="@drawable/system_management_background"/>
+        spacebanditos:segmentWidth="@dimen/system_management_power_bar_segment_width"
+        spacebanditos:segmentHeight="@dimen/system_management_power_bar_segment_height"
+        spacebanditos:segmentSpacing="@dimen/system_management_line_half_thickness"
+        android:background="@drawable/base_background_large"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <FrameLayout 
+            android:id="@+id/center_marker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+        <Button
+            android:id="@+id/add_power_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_above="@id/center_marker"
+            android:text="+"
+	        android:textSize="@dimen/system_management_system_name_font_size"
+	        android:textColor="@android:color/black"
+	        android:singleLine="true"
+	        android:onClick="onAddPowerButtonClick" />
+        <Button
+            android:id="@+id/remove_power_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/center_marker"
+            android:text="-"
+	        android:textSize="@dimen/system_management_system_name_font_size"
+	        android:textColor="@android:color/black"
+	        android:singleLine="true"
+	        android:onClick="onRemovePowerButtonClick" />
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal">
 	    <TextView
 	        android:id="@+id/system_name"
-	        android:layout_width="wrap_content"
+	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_marginLeft="@dimen/system_management_line_half_thickness"
 	        android:layout_marginTop="@dimen/system_management_line_half_thickness"
@@ -32,10 +65,11 @@
 	        android:textSize="@dimen/system_management_system_name_font_size"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
-	        android:textIsSelectable="false"/>
+	        android:textIsSelectable="false"
+	        android:gravity="center_horizontal"/>
 	    <ImageView
 	        android:id="@+id/system_icon"
-	        android:layout_width="wrap_content"
+	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_marginLeft="@dimen/system_management_line_half_thickness"
 	        android:layout_marginTop="@dimen/system_management_line_half_thickness"
@@ -75,7 +109,7 @@
         android:orientation="vertical"
         android:gravity="right">
 	    <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
 	        android:layout_marginLeft="@dimen/system_management_line_half_thickness"
 	        android:layout_marginTop="@dimen/system_management_line_half_thickness"
@@ -86,18 +120,26 @@
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:onClick="onBackButtonClick"/>
+	    <RelativeLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent" >
 	    <com.chipotlebanditos.spacebanditos.views.LayeredSegmentFillBar
 	        android:id="@+id/weapon_charge_bar"
 	        android:visibility="gone"
 	        android:layout_width="wrap_content"
 	        android:layout_height="match_parent"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentBottom="true"
 	        android:layout_marginLeft="@dimen/system_management_line_half_thickness"
 	        android:layout_marginTop="@dimen/system_management_line_half_thickness"
 	        android:layout_marginRight="@dimen/system_management_line_half_thickness"
 	        android:layout_marginBottom="@dimen/system_management_line_half_thickness"
-	        spacebanditos:segmentDrawable="@drawable/system_management_weapon_charge_bar_segment"
+	        spacebanditos:segmentDrawable="@drawable/weapon_charge_bar_segment_large"
 	        spacebanditos:baseDirection="bottom"
-	        spacebanditos:spacing="@dimen/system_management_weapon_charge_bar_segment_spacing"
+            spacebanditos:segmentWidth="@dimen/system_management_weapon_charge_bar_segment_width"
+            spacebanditos:segmentHeight="@dimen/system_management_weapon_charge_bar_segment_height"
+	        spacebanditos:segmentSpacing="@dimen/system_management_weapon_charge_bar_segment_spacing"
 	        android:background="@drawable/system_management_weapon_charge_bar_background"/>
+	    </RelativeLayout>
     </LinearLayout>
 </merge>

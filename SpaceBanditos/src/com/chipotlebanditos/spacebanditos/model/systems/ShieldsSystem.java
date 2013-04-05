@@ -50,11 +50,15 @@ public class ShieldsSystem extends ShipSystem {
     @Override
     public void update(int delta, Ship ship, GameEvent event) {
         super.update(delta, ship, event);
-        rechargeMillis += delta;
-        while (shields < getMaxShields()
-                && rechargeMillis >= TOTAL_RECHARGE_MILLIS) {
-            rechargeMillis -= TOTAL_RECHARGE_MILLIS;
-            shields++;
+        if (ship == event.playerShip && !event.isDangerous()) {
+            shields = getMaxShields();
+        } else {
+            rechargeMillis += delta;
+            while (shields < getMaxShields()
+                    && rechargeMillis >= TOTAL_RECHARGE_MILLIS) {
+                rechargeMillis -= TOTAL_RECHARGE_MILLIS;
+                shields++;
+            }
         }
         if (shields == getMaxShields()) {
             rechargeMillis = 0;
