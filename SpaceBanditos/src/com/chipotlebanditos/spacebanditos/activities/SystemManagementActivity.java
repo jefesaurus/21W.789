@@ -108,11 +108,16 @@ public class SystemManagementActivity extends Activity {
     }
     
     public void onAddPowerButtonClick(View v) {
-        view.ship.addPower(view.system);
+        if (view.ship.power.powerLevel > 0
+                && view.system.getMaxPowerLevel() - view.system.powerLevel > 0) {
+            view.ship.addPower(view.system);
+        }
     }
     
     public void onRemovePowerButtonClick(View v) {
-        view.ship.removePower(view.system);
+        if (view.system.powerLevel > 0) {
+            view.ship.removePower(view.system);
+        }
     }
     
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
