@@ -32,6 +32,7 @@ public class EnemyShipActivity extends ShipActivity {
             
             setShip(ship);
             SystemsView systemsView = (ShipView.SystemsView) findViewById(R.id.systems);
+            systemsView.setReversed(true);
             
             if (getCallingActivity() == null) {
                 getPlayerShipScreenButton().setText("S\nH\nI\nP");

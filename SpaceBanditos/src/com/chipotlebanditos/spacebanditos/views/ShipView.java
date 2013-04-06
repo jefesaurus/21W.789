@@ -73,6 +73,8 @@ public class ShipView extends RelativeLayout {
         
         private Ship ship = null;
         
+        private boolean reversed = false;
+        
         public SystemsView(Context context) {
             super(context);
         }
@@ -100,6 +102,14 @@ public class ShipView extends RelativeLayout {
             return ship;
         }
         
+        public void setReversed(boolean reversed) {
+            this.reversed = reversed;
+        }
+        
+        public boolean getReversed() {
+            return reversed;
+        }
+        
         private void createShipSystemViews() {
             removeAllViews();
             for (ShipSystem system : ship.systems) {
@@ -111,16 +121,22 @@ public class ShipView extends RelativeLayout {
         private void updateSystemViewPositions() {
             for (int i = 0; i < getChildCount(); i++) {
                 ShipSystemView view = (ShipSystemView) getChildAt(i);
-                view.setX(ship.getLayoutPosition(view.system).x * getWidth()
-                        - view.getWidth() / 2);
-                view.setY(ship.getLayoutPosition(view.system).y * getHeight()
-                        - view.getHeight() / 2);
+                float xF = ship.getLayoutPosition(view.system).x, yF = ship
+                        .getLayoutPosition(view.system).y;
+                if (reversed) {
+                    xF = 1 - xF;
+                    yF = 1 - yF;
+                }
+                view.setX(xF * getWidth() - view.getWidth() / 2);
+                view.setY(yF * getHeight() - view.getHeight() / 2);
             }
         }
         
         @Override
         protected void onLayout(boolean changed, int l, int t, int r, int b) {
-            this.setBackgroundResource(ship.layout.imageResource);
+            this.setBackgroundDrawable(reversed ? ship.layout
+                    .getImageDrawableReverse(getResources()) : ship.layout
+                    .getImageDrawable(getResources()));
             updateSystemViewPositions();
             super.onLayout(changed, l, t, r, b);
         }

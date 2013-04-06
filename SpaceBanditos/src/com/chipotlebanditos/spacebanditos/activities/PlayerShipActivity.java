@@ -39,6 +39,7 @@ public class PlayerShipActivity extends ShipActivity {
             setShip(ship);
             findViewById(R.id.reserve_power).setVisibility(View.VISIBLE);
             SystemsView systemsView = (ShipView.SystemsView) findViewById(R.id.systems);
+            systemsView.setReversed(false);
             
             for (int i = 0; i < systemsView.getChildCount(); i++) {
                 ShipSystemView view = (ShipSystemView) systemsView

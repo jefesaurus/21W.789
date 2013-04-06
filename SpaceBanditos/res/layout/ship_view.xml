@@ -2,6 +2,13 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:spacebanditos="http://schemas.android.com/apk/res/com.chipotlebanditos.spacebanditos">
     
+    <view class="com.chipotlebanditos.spacebanditos.views.ShipView$SystemsView"
+        android:id="@+id/systems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+    
     <LinearLayout
         android:id="@+id/hull_and_shields"
         android:layout_width="wrap_content"
@@ -70,12 +77,5 @@
 		    android:textSize="@dimen/ship_system_view_system_name_font_size"
 		    android:textColor="@android:color/black" />
     </LinearLayout>
-    
-    <view class="com.chipotlebanditos.spacebanditos.views.ShipView$SystemsView"
-        android:id="@+id/systems"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/hull_and_shields" />
     
 </merge>
