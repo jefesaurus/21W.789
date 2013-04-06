@@ -16,8 +16,6 @@ public class MainMenuActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        ((SpaceBanditosApplication) getApplication()).game = Game
-                .generateNewGame();
     }
     
     @Override
@@ -28,6 +26,10 @@ public class MainMenuActivity extends Activity {
     }
     
     public void onPlayGameButtonClick(View view) {
+        if (((SpaceBanditosApplication) getApplication()).game == null) {
+            ((SpaceBanditosApplication) getApplication()).game = Game
+                    .generateNewGame();
+        }
         Intent intent = new Intent(this, PlayerShipActivity.class);
         startActivity(intent);
     }

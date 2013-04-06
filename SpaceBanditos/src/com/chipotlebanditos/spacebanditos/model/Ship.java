@@ -84,7 +84,7 @@ public class Ship implements Serializable {
     }
     
     public ShipSystem getSystemByIndex(int index) {
-        return systems.get(index);
+        return index == -1 ? null : systems.get(index);
     }
     
     public PointF getLayoutPosition(ShipSystem system) {

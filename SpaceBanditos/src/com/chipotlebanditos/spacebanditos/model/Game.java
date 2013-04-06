@@ -32,12 +32,12 @@ public class Game implements Serializable {
     }
     
     public static Game generateNewGame() {
-        Ship playerShip = new Ship(ShipLayout.TEST_LAYOUT, 18, 20, 100, 100, 8,
+        Ship playerShip = new Ship(ShipLayout.TEST_LAYOUT, 12, 20, 100, 100, 6,
                 new Equipment[] {}, new LifeSupportSystem(2, 1, 0),
                 new WeaponSystem(4, 2, 0, Weapon.TEST_WEAPON),
-                new WeaponSystem(1, 0, 0, null), new ShieldsSystem(3, 3, 0));
+                new WeaponSystem(1, 0, 0, null), new ShieldsSystem(2, 1, 0));
         GameEvent[] events = new GameEvent[] { new GameEvent(new ShipWithAI(
-                true, ShipLayout.TEST_LAYOUT, 14, 20, 100, 100, 6,
+                true, ShipLayout.TEST_LAYOUT, 4, 10, 100, 100, 6,
                 new Equipment[] {}, new LifeSupportSystem(2, 1, 0),
                 new WeaponSystem(2, 2, 0, Weapon.TEST_WEAPON),
                 new ShieldsSystem(1, 1, 0)) {
@@ -45,7 +45,12 @@ public class Game implements Serializable {
             
             @Override
             public void AI(GameEvent event) {
-                // TODO: execute test AI
+                for (WeaponSystem system : getSystems(WeaponSystem.class)) {
+                    if (system.target == null
+                            && event.getOpposingShip(this) != null) {
+                        system.target = event.getOpposingShip(this).systems.get(0);
+                    }
+                }
             }
         }, null, null) };
         

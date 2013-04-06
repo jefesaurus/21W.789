@@ -1,9 +1,11 @@
 package com.chipotlebanditos.spacebanditos.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.chipotlebanditos.spacebanditos.R;
 import com.chipotlebanditos.spacebanditos.SpaceBanditosApplication;
@@ -20,42 +22,70 @@ public class PlayerShipActivity extends ShipActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
-        View.inflate(root.getContext(), R.layout.activity_player_ship, root);
+        setContentView(new PlayerShipActivityView(this));
         
-        final Ship ship = ((SpaceBanditosApplication) getApplication()).game.playerShip;
-        
-        ShipView shipView = (ShipView) findViewById(R.id.ship);
-        
-        shipView.setShip(ship);
-        shipView.findViewById(R.id.reserve_power).setVisibility(View.VISIBLE);
-        ShipView.SystemsView systemsView = (ShipView.SystemsView) shipView
-                .findViewById(R.id.systems);
-        
-        for (int i = 0; i < systemsView.getChildCount(); i++) {
-            ShipSystemView view = (ShipSystemView) systemsView.getChildAt(i);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(PlayerShipActivity.this,
-                            SystemManagementActivity.class);
-                    intent.putExtra(
-                            SystemManagementActivity.INTENT_EXTRA_SYSTEM_INDEX,
-                            ship.getSystemIndex(((ShipSystemView) v).system));
-                    startActivity(intent);
-                }
-            });
-        }
         new RunGameThread().start();
+    }
+    
+    private class PlayerShipActivityView extends ShipActivity.ShipActivityView {
+        
+        public PlayerShipActivityView(Context context) {
+            super(context);
+            
+            View.inflate(context, R.layout.activity_player_ship, this);
+            
+            final Ship ship = ((SpaceBanditosApplication) getApplication()).game.playerShip;
+            
+            setShip(ship);
+            findViewById(R.id.reserve_power).setVisibility(View.VISIBLE);
+            SystemsView systemsView = (ShipView.SystemsView) findViewById(R.id.systems);
+            
+            for (int i = 0; i < systemsView.getChildCount(); i++) {
+                ShipSystemView view = (ShipSystemView) systemsView
+                        .getChildAt(i);
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(PlayerShipActivity.this,
+                                SystemManagementActivity.class);
+                        intent.putExtra(
+                                SystemManagementActivity.INTENT_EXTRA_SYSTEM_INDEX,
+                                ship.getSystemIndex(((ShipSystemView) v).system));
+                        startActivity(intent);
+                    }
+                });
+            }
+        }
+        
+        private Button getEnemyShipScreenButton() {
+            return (Button) findViewById(R.id.enemy_ship_screen_button);
+        }
+        
+        @Override
+        public void onLayout(boolean changed, int l, int t, int r, int b) {
+            if (((SpaceBanditosApplication) getApplication()).game.currentEvent.enemyShip == null) {
+                getEnemyShipScreenButton().setVisibility(GONE);
+            } else {
+                getEnemyShipScreenButton().setVisibility(VISIBLE);
+            }
+            super.onLayout(changed, l, t, r, b);
+        }
     }
     
     @Override
     protected void onDestroy() {
         super.onDestroy();
         destroyed = true;
+        if (((SpaceBanditosApplication) getApplication()).game.playerShip
+                .hasBeenDestroyed()) {
+            ((SpaceBanditosApplication) getApplication()).game = null;
+        }
     }
     
     public void onEnemyShipScreenButtonClick(View v) {
+        if (((SpaceBanditosApplication) getApplication()).game.currentEvent.enemyShip == null) {
+            return;
+        }
         Intent intent = new Intent(this, EnemyShipActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.right_to_left_enter,
@@ -64,7 +94,10 @@ public class PlayerShipActivity extends ShipActivity {
     
     @Override
     public void onShipDestroyed() {
-        // TODO: game over
+        Toast.makeText(this, "Game over!", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, MainMenuActivity.class);
+        startActivity(intent);
+        // TODO: test game over
     }
     
     private class RunGameThread extends Thread {
@@ -75,7 +108,7 @@ public class PlayerShipActivity extends ShipActivity {
         public void run() {
             while (true) {
                 // TODO: all in-event UI code should be similarly synchronized
-                synchronized (((SpaceBanditosApplication) getApplication()).game) {
+                synchronized (getApplication()) {
                     if (PlayerShipActivity.this.destroyed) {
                         break;
                     }

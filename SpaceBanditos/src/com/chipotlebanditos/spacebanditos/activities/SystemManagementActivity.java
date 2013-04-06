@@ -98,6 +98,9 @@ public class SystemManagementActivity extends Activity {
     }
     
     public void onTargetButtonClick(View v) {
+        if (((SpaceBanditosApplication) getApplication()).game.currentEvent.enemyShip == null) {
+            return;
+        }
         Intent intent = new Intent(this, EnemyShipActivity.class);
         this.startActivityForResult(intent, TARGET_REQUEST_CODE);
         overridePendingTransition(R.anim.right_to_left_enter,

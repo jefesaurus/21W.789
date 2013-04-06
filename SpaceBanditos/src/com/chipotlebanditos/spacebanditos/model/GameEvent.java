@@ -34,7 +34,7 @@ public class GameEvent implements Serializable {
         }
     }
     
-    public synchronized void update(int delta, Game game) {
+    public void update(int delta, Game game) {
         assert playerShip != null;
         playerShip.update(delta, this);
         if (enemyShip != null) {

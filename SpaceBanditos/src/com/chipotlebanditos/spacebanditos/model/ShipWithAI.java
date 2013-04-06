@@ -19,7 +19,7 @@ public abstract class ShipWithAI extends Ship {
     public abstract void AI(GameEvent event);
     
     @Override
-    public synchronized void update(int delta, GameEvent event) {
+    public void update(int delta, GameEvent event) {
         super.update(delta, event);
         AI(event);
     }

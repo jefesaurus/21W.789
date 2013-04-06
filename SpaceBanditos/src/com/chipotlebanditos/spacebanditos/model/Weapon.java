@@ -1,7 +1,7 @@
 package com.chipotlebanditos.spacebanditos.model;
 
 public enum Weapon implements Equipment {
-    TEST_WEAPON("TEST WEAPON", 10000L, 2);
+    TEST_WEAPON("TEST WEAPON", 5000L, 2);
     
     private final String name;
     

@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:visibility="gone"
         android:text="E\nN\nE\nM\nY"
 	    android:textSize="@dimen/system_management_system_name_font_size"
 	    android:textColor="@android:color/black"
