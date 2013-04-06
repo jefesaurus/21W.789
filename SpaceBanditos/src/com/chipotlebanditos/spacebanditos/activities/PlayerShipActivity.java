@@ -76,10 +76,6 @@ public class PlayerShipActivity extends ShipActivity {
     protected void onDestroy() {
         super.onDestroy();
         destroyed = true;
-        if (((SpaceBanditosApplication) getApplication()).game.playerShip
-                .hasBeenDestroyed()) {
-            ((SpaceBanditosApplication) getApplication()).game = null;
-        }
     }
     
     public void onEnemyShipScreenButtonClick(View v) {

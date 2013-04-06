@@ -26,7 +26,8 @@ public class MainMenuActivity extends Activity {
     }
     
     public void onPlayGameButtonClick(View view) {
-        if (((SpaceBanditosApplication) getApplication()).game == null) {
+        Game game = ((SpaceBanditosApplication) getApplication()).game;
+        if (game == null || game.playerShip.hasBeenDestroyed()) {
             ((SpaceBanditosApplication) getApplication()).game = Game
                     .generateNewGame();
         }
