@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Set;
 
+import com.chipotlebanditos.spacebanditos.model.systems.EngineSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.LifeSupportSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.ShieldsSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.WeaponSystem;
@@ -32,10 +33,11 @@ public class Game implements Serializable {
     }
     
     public static Game generateNewGame() {
-        Ship playerShip = new Ship(ShipLayout.TEST_LAYOUT, 12, 20, 100, 100, 6,
-                new Equipment[] {}, new LifeSupportSystem(2, 1, 0),
+        Ship playerShip = new Ship(ShipLayout.TEST_LAYOUT, 12, 20, 100, 100,
+                10, new Equipment[] {}, new LifeSupportSystem(2, 1, 0),
                 new WeaponSystem(4, 2, 0, Weapon.TEST_WEAPON),
-                new WeaponSystem(1, 0, 0, null), new ShieldsSystem(2, 1, 0));
+                new WeaponSystem(1, 0, 0, null), new ShieldsSystem(2, 1, 0),
+                new EngineSystem(5, 5, 0));
         GameEvent[] events = new GameEvent[] { new GameEvent(new ShipWithAI(
                 true, ShipLayout.TEST_LAYOUT, 4, 10, 100, 100, 6,
                 new Equipment[] {}, new LifeSupportSystem(2, 1, 0),

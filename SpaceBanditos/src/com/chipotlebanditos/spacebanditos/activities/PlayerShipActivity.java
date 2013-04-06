@@ -94,7 +94,6 @@ public class PlayerShipActivity extends ShipActivity {
         Toast.makeText(this, "Game over!", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);
-        // TODO: test game over
     }
     
     private class RunGameThread extends Thread {

@@ -67,8 +67,8 @@ public class WeaponSystem extends ShipSystem {
             chargeMillis += delta;
             while (target != null && chargeMillis >= getTotalChargeMillis()) {
                 chargeMillis -= getTotalChargeMillis();
-                ship.attack(equipped.attackDamage, event.getOpposingShip(ship),
-                        target, event);
+                ship.attack(equipped.shotDamage, equipped.numShots,
+                        event.getOpposingShip(ship), target, event);
             }
             chargeMillis = Math.min(chargeMillis, getTotalChargeMillis());
         }

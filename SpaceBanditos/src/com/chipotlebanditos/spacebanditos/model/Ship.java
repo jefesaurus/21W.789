@@ -7,6 +7,7 @@ import java.util.List;
 
 import android.graphics.PointF;
 
+import com.chipotlebanditos.spacebanditos.model.systems.EngineSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.LifeSupportSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.ShieldsSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.ShipSystem;
@@ -145,9 +146,21 @@ public class Ship implements Serializable {
         }
     }
     
-    public void attack(int damage, Ship ship, ShipSystem system, GameEvent event) {
-        // TODO: account for evasion/accuracy
-        ship.takeDamage(damage, system, event);
+    public float getEvasion() {
+        if (getSystem(EngineSystem.class) == null) {
+            return 0f;
+        } else {
+            return getSystem(EngineSystem.class).getEvasion();
+        }
+    }
+    
+    public void attack(int damage, int shots, Ship ship, ShipSystem system,
+            GameEvent event) {
+        for (int i = 0; i < shots; i++) {
+            if (Math.random() >= ship.getEvasion()) {
+                ship.takeDamage(damage, system, event);
+            }
+        }
     }
     
     public int getMaxSustainableCrew() {
