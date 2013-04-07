@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     
+    <include layout="@layout/activity_any_ship" />
+    
     <LinearLayout
         android:id="@+id/stats"
         android:layout_width="wrap_content"
@@ -22,7 +24,7 @@
 	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
 	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
 	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
-	        android:textSize="@dimen/ship_system_view_system_name_font_size"
+	        android:textSize="@dimen/small_font_size"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:textIsSelectable="false" />
@@ -34,7 +36,7 @@
 	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
 	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
 	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
-	        android:textSize="@dimen/ship_system_view_system_name_font_size"
+	        android:textSize="@dimen/small_font_size"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:textIsSelectable="false" />
@@ -46,7 +48,7 @@
 	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
 	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
 	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
-	        android:textSize="@dimen/ship_system_view_system_name_font_size"
+	        android:textSize="@dimen/small_font_size"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:textIsSelectable="false" />
@@ -82,7 +84,7 @@
 	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
 	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
 	        android:text="P\nO\nW\nE\nR"
-		    android:textSize="@dimen/ship_system_view_system_name_font_size"
+		    android:textSize="@dimen/small_font_size"
 		    android:textColor="@android:color/black" />
     </LinearLayout>
     
@@ -94,7 +96,7 @@
         android:layout_centerVertical="true"
         android:visibility="gone"
         android:text="E\nN\nE\nM\nY"
-	    android:textSize="@dimen/system_management_system_name_font_size"
+	    android:textSize="@dimen/large_font_size"
 	    android:textColor="@android:color/black"
 	    android:onClick="onEnemyShipScreenButtonClick" />
 </merge>

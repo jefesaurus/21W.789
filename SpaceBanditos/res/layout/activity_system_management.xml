@@ -34,7 +34,7 @@
             android:layout_height="match_parent"
             android:layout_above="@id/center_marker"
             android:text="+"
-	        android:textSize="@dimen/system_management_system_name_font_size"
+	        android:textSize="@dimen/large_font_size"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:onClick="onAddPowerButtonClick" />
@@ -44,7 +44,7 @@
             android:layout_height="match_parent"
             android:layout_below="@id/center_marker"
             android:text="-"
-	        android:textSize="@dimen/system_management_system_name_font_size"
+	        android:textSize="@dimen/large_font_size"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:onClick="onRemovePowerButtonClick" />
@@ -62,7 +62,7 @@
 	        android:layout_marginTop="@dimen/system_management_line_half_thickness"
 	        android:layout_marginRight="@dimen/system_management_line_half_thickness"
 	        android:layout_marginBottom="@dimen/system_management_line_half_thickness"
-	        android:textSize="@dimen/system_management_system_name_font_size"
+	        android:textSize="@dimen/large_font_size"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:textIsSelectable="false"
@@ -85,7 +85,7 @@
 	        android:layout_marginBottom="@dimen/system_management_line_half_thickness"
             android:textOn="REPAIR"
             android:textOff="REPAIR"
-	        android:textSize="@dimen/system_management_system_name_font_size"
+	        android:textSize="@dimen/large_font_size"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:onClick="onRepairButtonClick"/>
@@ -98,7 +98,7 @@
 	        android:layout_marginRight="@dimen/system_management_line_half_thickness"
 	        android:layout_marginBottom="@dimen/system_management_line_half_thickness"
             android:text="TARGET"
-	        android:textSize="@dimen/system_management_system_name_font_size"
+	        android:textSize="@dimen/large_font_size"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:onClick="onTargetButtonClick"/>
@@ -116,7 +116,7 @@
 	        android:layout_marginRight="@dimen/system_management_line_half_thickness"
 	        android:layout_marginBottom="@dimen/system_management_line_half_thickness"
             android:text="BACK"
-	        android:textSize="@dimen/system_management_system_name_font_size"
+	        android:textSize="@dimen/large_font_size"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:onClick="onBackButtonClick"/>

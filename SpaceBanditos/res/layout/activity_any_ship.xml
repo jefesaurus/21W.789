@@ -28,7 +28,7 @@
 	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
 	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
 	        android:text="HULL+SHIELDS"
-		    android:textSize="@dimen/ship_system_view_system_name_font_size"
+		    android:textSize="@dimen/small_font_size"
 		    android:textColor="@android:color/black"
 	        android:singleLine="true" />
 	    <com.chipotlebanditos.spacebanditos.views.LayeredSegmentFillBar
@@ -46,6 +46,45 @@
 	        spacebanditos:segmentSpacing="@dimen/ship_system_view_line_thickness" />
     </LinearLayout>
     
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/hull_and_shields"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="UPGRADES"
+	        android:textSize="@dimen/small_font_size"
+	        android:textColor="@android:color/black"
+	        android:singleLine="true"
+	        android:onClick="onUpgradesButtonClick" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="EQUIPMENT"
+	        android:textSize="@dimen/small_font_size"
+	        android:textColor="@android:color/black"
+	        android:singleLine="true"
+	        android:onClick="onEquipmentButtonClick" />
+    </LinearLayout>
+    
+    <Button 
+        android:id="@+id/jump_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:text="JUMP"
+	    android:textSize="@dimen/large_font_size"
+	    android:textColor="@android:color/black"
+	    android:singleLine="true"
+	    android:onClick="onJumpButtonClick"
+	    android:enabled="false" />
+    
     <Button 
         android:id="@+id/pause_button"
         android:layout_width="wrap_content"
@@ -53,8 +92,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:text="PAUSE"
-	    android:textSize="@dimen/system_management_system_name_font_size"
+	    android:textSize="@dimen/large_font_size"
 	    android:textColor="@android:color/black"
+	    android:singleLine="true"
 	    android:onClick="onPauseButtonClick" />
     
 </merge>

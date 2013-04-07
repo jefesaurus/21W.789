@@ -1,9 +1,12 @@
-<RelativeLayout 
+<merge
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".PlayerShipActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+    
+    <include layout="@layout/activity_any_ship" />
+    
     <Button 
         android:id="@+id/player_ship_screen_button"
         android:layout_width="wrap_content"
@@ -11,7 +14,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:text="S\nH\nI\nP"
-	    android:textSize="@dimen/system_management_system_name_font_size"
+	    android:textSize="@dimen/large_font_size"
 	    android:textColor="@android:color/black"
 	    android:onClick="onPlayerShipScreenButtonClick" />
-</RelativeLayout>
+</merge>

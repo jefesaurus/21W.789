@@ -18,12 +18,12 @@ public class EnemyShipActivity extends ShipActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        setContentView(new EnemyShipActivityView(this));
+        setContentView(new EnemyShipView(this));
     }
     
-    private class EnemyShipActivityView extends ShipActivity.ShipActivityView {
+    private class EnemyShipView extends ShipActivity.ShipView {
         
-        public EnemyShipActivityView(Context context) {
+        public EnemyShipView(Context context) {
             super(context);
             
             View.inflate(context, R.layout.activity_enemy_ship, this);

@@ -154,6 +154,14 @@ public class Ship implements Serializable {
         }
     }
     
+    public boolean isReadyForJump() {
+        if (getSystem(EngineSystem.class) == null) {
+            return false;
+        } else {
+            return getSystem(EngineSystem.class).isReadyForJump();
+        }
+    }
+    
     public void attack(int damage, int shots, Ship ship, ShipSystem system,
             GameEvent event) {
         for (int i = 0; i < shots; i++) {

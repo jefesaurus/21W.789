@@ -26,14 +26,14 @@ public class PlayerShipActivity extends ShipActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        setContentView(new PlayerShipActivityView(this));
+        setContentView(new PlayerShipView(this));
         
         new RunGameThread().start();
     }
     
-    private class PlayerShipActivityView extends ShipActivity.ShipActivityView {
+    private class PlayerShipView extends ShipActivity.ShipView {
         
-        public PlayerShipActivityView(Context context) {
+        public PlayerShipView(Context context) {
             super(context);
             
             View.inflate(context, R.layout.activity_player_ship, this);

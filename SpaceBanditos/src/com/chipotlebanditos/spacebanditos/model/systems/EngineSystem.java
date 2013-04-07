@@ -50,6 +50,7 @@ public class EngineSystem extends ShipSystem {
                 jumpMillisFraction = 1f;
             } else {
                 jumpMillisFraction += (float) delta / getTotalJumpMillis();
+                jumpMillisFraction = Math.min(jumpMillisFraction, 1f);
             }
         }
     }
