@@ -18,14 +18,21 @@ import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ListMultimap;
 
 public enum ShipLayout {
-    TEST_LAYOUT(
+    PLAYER(
             R.drawable.player_ship,
             new ImmutableListMultimap.Builder<Class<? extends ShipSystem>, PointF>()
                     .put(LifeSupportSystem.class, new PointF(.4f, .2f))
                     .put(WeaponSystem.class, new PointF(.7f, .3f))
                     .put(WeaponSystem.class, new PointF(.7f, .7f))
                     .put(ShieldsSystem.class, new PointF(.4f, .8f))
-                    .put(EngineSystem.class, new PointF(.2f, .5f)).build());
+                    .put(EngineSystem.class, new PointF(.2f, .5f)).build()),
+    
+    ENEMY(
+            R.drawable.enemy_ship,
+            new ImmutableListMultimap.Builder<Class<? extends ShipSystem>, PointF>()
+                    .put(LifeSupportSystem.class, new PointF(.4f, .2f))
+                    .put(WeaponSystem.class, new PointF(.6f, .7f))
+                    .put(EngineSystem.class, new PointF(.1f, .5f)).build());
     
     private final int imageResource;
     private Drawable imageDrawable = null, imageDrawableReverse = null;
