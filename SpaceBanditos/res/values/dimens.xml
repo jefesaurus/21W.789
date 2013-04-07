@@ -4,6 +4,10 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     
+    <!-- Menu/List type dimensions -->
+    <dimen name="list_top_spacing">25dp</dimen>
+    <dimen name="list_elt_spacing">10dp</dimen>
+    
     <dimen name="ship_system_view_line_thickness">2dip</dimen>
     <dimen name="ship_system_view_line_half_thickness">1dip</dimen>
     <dimen name="ship_system_view_line_one_and_half_thickness">3dip</dimen>
