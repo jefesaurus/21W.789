@@ -24,7 +24,7 @@ public class ShieldsSystem extends ShipSystem {
     
     @Override
     public int getIconResource() {
-        return R.drawable.life_support_icon;
+        return R.drawable.shields_icon;
     }
     
     public int getMaxShields() {
@@ -59,6 +59,7 @@ public class ShieldsSystem extends ShipSystem {
                 rechargeMillis -= TOTAL_RECHARGE_MILLIS;
                 shields++;
             }
+            shields = Math.min(shields, getMaxShields());
         }
         if (shields == getMaxShields()) {
             rechargeMillis = 0;

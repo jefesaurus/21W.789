@@ -10,7 +10,7 @@ public class EngineSystem extends ShipSystem {
     
     public float jumpMillisFraction = 0;
     
-    public static final long BASE_TOTAL_JUMP_MILLIS = 1000L;
+    public static final long BASE_TOTAL_JUMP_MILLIS = 20000L;
     
     public EngineSystem(int upgradeLevel, int powerLevel, int damageLevel) {
         super(upgradeLevel, powerLevel, damageLevel);
@@ -23,7 +23,7 @@ public class EngineSystem extends ShipSystem {
     
     @Override
     public int getIconResource() {
-        return R.drawable.life_support_icon;
+        return R.drawable.engine_icon;
     }
     
     public long getTotalJumpMillis() {
@@ -35,7 +35,7 @@ public class EngineSystem extends ShipSystem {
     }
     
     public boolean isReadyForJump() {
-        return jumpMillisFraction == 1f;
+        return jumpMillisFraction == 1f && powerLevel > 0;
     }
     
     public float getEvasion() {

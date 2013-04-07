@@ -32,7 +32,7 @@ public class WeaponSystem extends ShipSystem {
     
     @Override
     public int getIconResource() {
-        return R.drawable.life_support_icon;
+        return R.drawable.weapon_icon;
     }
     
     public boolean isCharged() {

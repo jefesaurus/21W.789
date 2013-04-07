@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.chipotlebanditos.spacebanditos.R;
 import com.chipotlebanditos.spacebanditos.SpaceBanditosApplication;
@@ -48,6 +49,10 @@ public abstract class ShipActivity extends Activity {
             return (Button) findViewById(R.id.jump_button);
         }
         
+        private TextView getPausedMessage() {
+            return (TextView) findViewById(R.id.paused_message);
+        }
+        
         @Override
         protected void onLayout(boolean changed, int l, int t, int r, int b) {
             if (ship.hasBeenDestroyed() && getContext() instanceof ShipActivity) {
@@ -63,7 +68,8 @@ public abstract class ShipActivity extends Activity {
             
             Game game = ((SpaceBanditosApplication) getApplication()).game;
             getPauseButton().setText(game.paused ? "UNPAUSE" : "PAUSE");
-            getJumpButton().setEnabled(ship.isReadyForJump());
+            getJumpButton().setEnabled(game.playerShip.isReadyForJump());
+            getPausedMessage().setVisibility(game.paused ? VISIBLE : GONE);
             
             super.onLayout(changed, l, t, r, b);
         }
@@ -83,7 +89,8 @@ public abstract class ShipActivity extends Activity {
             startActivity(intent);
             return true;
         case R.id.action_settings:
-            // TODO: go to settings
+            intent = new Intent(this, SettingsMenuActivity.class);
+            startActivity(intent);
             return true;
         default:
             return super.onOptionsItemSelected(item);
