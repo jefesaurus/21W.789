@@ -3,6 +3,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="invisible">#00000000</color>
     <color name="power">#FF00FF00</color>
     <color name="damaged">#FFFF0000</color>
     <color name="base_light">#FF707070</color>
