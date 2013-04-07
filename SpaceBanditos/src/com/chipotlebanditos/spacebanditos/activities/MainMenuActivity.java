@@ -17,13 +17,22 @@ public class MainMenuActivity extends Activity {
         setContentView(R.layout.activity_main_menu);
     }
     
-    public void onPlayGameButtonClick(View view) {
+    public void onNewGameButtonClick(View view) {
         Game game = ((SpaceBanditosApplication) getApplication()).game;
         if (game == null || game.playerShip.hasBeenDestroyed()) {
             ((SpaceBanditosApplication) getApplication()).game = Game
                     .generateNewGame();
         }
         Intent intent = new Intent(this, PlayerShipActivity.class);
+        startActivity(intent);
+    }
+    
+    public void onContinueGameButtonClick(View view) {
+        // TODO figure out how to continue games
+    }
+    
+    public void onSettingsButtonClick(View view) {
+        Intent intent = new Intent(this, SettingsMenuActivity.class);
         startActivity(intent);
     }
     
