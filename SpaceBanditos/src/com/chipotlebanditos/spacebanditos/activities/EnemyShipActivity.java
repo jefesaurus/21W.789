@@ -10,7 +10,7 @@ import com.chipotlebanditos.spacebanditos.R;
 import com.chipotlebanditos.spacebanditos.SpaceBanditosApplication;
 import com.chipotlebanditos.spacebanditos.model.Ship;
 import com.chipotlebanditos.spacebanditos.views.ShipSystemView;
-import com.chipotlebanditos.spacebanditos.views.ShipView;
+import com.chipotlebanditos.spacebanditos.views.SystemsView;
 
 public class EnemyShipActivity extends ShipActivity {
     
@@ -31,7 +31,7 @@ public class EnemyShipActivity extends ShipActivity {
             final Ship ship = ((SpaceBanditosApplication) getApplication()).game.currentEvent.enemyShip;
             
             setShip(ship);
-            SystemsView systemsView = (ShipView.SystemsView) findViewById(R.id.systems);
+            SystemsView systemsView = (SystemsView) findViewById(R.id.systems);
             systemsView.setReversed(true);
             
             if (getCallingActivity() == null) {

@@ -1,9 +1,91 @@
-<RelativeLayout 
+<merge
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:spacebanditos="http://schemas.android.com/apk/res/com.chipotlebanditos.spacebanditos"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".PlayerShipActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+    
+    <LinearLayout
+        android:id="@+id/stats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/hull_and_shields"
+        android:background="@drawable/base_background_small" >
+        <TextView 
+            android:id="@+id/atmosphere"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+	        android:layout_marginLeft="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
+	        android:textSize="@dimen/ship_system_view_system_name_font_size"
+	        android:textColor="@android:color/black"
+	        android:singleLine="true"
+	        android:textIsSelectable="false" />
+        <TextView 
+            android:id="@+id/crew"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+	        android:layout_marginLeft="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
+	        android:textSize="@dimen/ship_system_view_system_name_font_size"
+	        android:textColor="@android:color/black"
+	        android:singleLine="true"
+	        android:textIsSelectable="false" />
+        <TextView 
+            android:id="@+id/evasion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+	        android:layout_marginLeft="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
+	        android:textSize="@dimen/ship_system_view_system_name_font_size"
+	        android:textColor="@android:color/black"
+	        android:singleLine="true"
+	        android:textIsSelectable="false" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/reserve_power"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/stats"
+        android:background="@drawable/base_background_small" >
+    
+	    <com.chipotlebanditos.spacebanditos.views.LayeredSegmentFillBar
+	        android:id="@+id/reserve_power_bar"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
+	        spacebanditos:segmentDrawable="@drawable/power_bar_segment_small"
+	        spacebanditos:baseDirection="top"
+	        spacebanditos:segmentWidth="18dip"
+	        spacebanditos:segmentHeight="12dip"
+	        spacebanditos:segmentSpacing="@dimen/ship_system_view_line_thickness" />
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
+	        android:text="P\nO\nW\nE\nR"
+		    android:textSize="@dimen/ship_system_view_system_name_font_size"
+		    android:textColor="@android:color/black" />
+    </LinearLayout>
+    
     <Button 
         android:id="@+id/enemy_ship_screen_button"
         android:layout_width="wrap_content"
@@ -15,4 +97,4 @@
 	    android:textSize="@dimen/system_management_system_name_font_size"
 	    android:textColor="@android:color/black"
 	    android:onClick="onEnemyShipScreenButtonClick" />
-</RelativeLayout>
+</merge>
