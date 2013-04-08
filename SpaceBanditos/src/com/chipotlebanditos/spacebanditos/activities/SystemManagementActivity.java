@@ -86,6 +86,7 @@ public class SystemManagementActivity extends Activity {
             getRemovePowerButton().setEnabled(view.system.powerLevel > 0);
             
             super.onDraw(canvas);
+            view.invalidate();
         }
     }
     
