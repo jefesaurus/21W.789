@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chipotlebanditos.spacebanditos.R;
 import com.chipotlebanditos.spacebanditos.SpaceBanditosApplication;
@@ -98,10 +99,14 @@ public abstract class ShipActivity extends Activity {
     }
     
     public void onUpgradesButtonClick(View v) {
+        Toast.makeText(this, "Not yet implemented, coming soon!",
+                Toast.LENGTH_SHORT).show();
         // TODO: go to upgrades
     }
     
     public void onEquipmentButtonClick(View v) {
+        Toast.makeText(this, "Not yet implemented, coming soon!",
+                Toast.LENGTH_SHORT).show();
         // TODO: go to equipment
     }
     
@@ -111,6 +116,8 @@ public abstract class ShipActivity extends Activity {
     }
     
     public void onJumpButtonClick(View v) {
+        Toast.makeText(this, "Not yet implemented, coming soon!",
+                Toast.LENGTH_SHORT).show();
         // TODO: go to jump
     }
     
