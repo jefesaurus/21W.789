@@ -131,6 +131,7 @@ public abstract class ShipActivity extends Activity {
             startActivity(intent);
             return true;
         case R.id.action_settings:
+            ((SpaceBanditosApplication) getApplication()).game.paused = true;
             intent = new Intent(this, SettingsMenuActivity.class);
             startActivity(intent);
             return true;
