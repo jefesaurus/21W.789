@@ -2,15 +2,15 @@ package com.chipotlebanditos.spacebanditos.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chipotlebanditos.spacebanditos.R;
 import com.chipotlebanditos.spacebanditos.model.systems.ShipSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.WeaponSystem;
 
-public abstract class AbsShipSystemView extends LinearLayout {
+public abstract class AbsShipSystemView extends FrameLayout {
     
     public final ShipSystem system;
     public final int maxPowerBarSegments;

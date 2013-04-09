@@ -49,7 +49,6 @@ public class SystemManagementActivity extends Activity {
             View.inflate(getContext(), R.layout.activity_system_management,
                     this);
             
-            this.setBackgroundResource(R.drawable.base_background_large);
         }
         
         protected ToggleButton getRepairButton() {
