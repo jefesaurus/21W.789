@@ -8,10 +8,10 @@
     <dimen name="list_top_spacing">25dp</dimen>
     <dimen name="list_elt_spacing">10dp</dimen>
     
-    <dimen name="ship_system_view_line_thickness">2dip</dimen>
-    <dimen name="ship_system_view_line_half_thickness">1dip</dimen>
-    <dimen name="ship_system_view_line_one_and_half_thickness">3dip</dimen>
-    <dimen name="small_font_size">12sp</dimen>
+    <dimen name="line_small_thickness">2dip</dimen>
+    <dimen name="line_small_half_thickness">1dip</dimen>
+    <dimen name="line_small_one_and_half_thickness">3dip</dimen>
+    <dimen name="font_size_small">12sp</dimen>
     <dimen name="ship_system_view_power_bar_segment_width">12dip</dimen>
     <dimen name="ship_system_view_power_bar_segment_height">8dip</dimen>
     <dimen name="ship_system_view_weapon_charge_bar_segment_width">8dip</dimen>
@@ -19,10 +19,10 @@
     <dimen name="ship_system_view_weapon_charge_bar_segment_spacing">1dip</dimen>
     
     
-    <dimen name="system_management_line_thickness">4dip</dimen>
-    <dimen name="system_management_line_half_thickness">2dip</dimen>
-    <dimen name="system_management_line_one_and_half_thickness">6dip</dimen>
-    <dimen name="large_font_size">20sp</dimen>
+    <dimen name="line_large_thickness">4dip</dimen>
+    <dimen name="line_large_half_thickness">2dip</dimen>
+    <dimen name="line_large_one_and_half_thickness">6dip</dimen>
+    <dimen name="font_size_large">20sp</dimen>
     <dimen name="system_management_power_bar_segment_width">48dip</dimen>
     <dimen name="system_management_power_bar_segment_height">32dip</dimen>
     <dimen name="system_management_weapon_charge_bar_segment_width">32dip</dimen>

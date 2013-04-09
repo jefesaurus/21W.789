@@ -53,6 +53,7 @@ public class SystemsView extends AbsoluteLayout {
         removeAllViews();
         for (ShipSystem system : ship.systems) {
             ShipSystemView view = new ShipSystemView(system, getContext());
+            view.setEnabled(false);
             addView(view);
         }
     }

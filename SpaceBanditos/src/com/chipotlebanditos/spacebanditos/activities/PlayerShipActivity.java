@@ -37,6 +37,7 @@ public class PlayerShipActivity extends ShipActivity {
             super(context);
             
             View.inflate(context, R.layout.activity_player_ship, this);
+            // this.setPadding(20, 20, 20, 20);
             
             final Ship ship = ((SpaceBanditosApplication) getApplication()).game.playerShip;
             
@@ -47,6 +48,7 @@ public class PlayerShipActivity extends ShipActivity {
             for (int i = 0; i < systemsView.getChildCount(); i++) {
                 ShipSystemView view = (ShipSystemView) systemsView
                         .getChildAt(i);
+                view.setEnabled(true);
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -83,24 +85,31 @@ public class PlayerShipActivity extends ShipActivity {
         
         @Override
         public void onLayout(boolean changed, int l, int t, int r, int b) {
-            getAtmosphere().setText(
-                    "ATMO: " + (int) Math.floor(getShip().atmosphere) + "/"
-                            + (int) Math.floor(getShip().getMaxAtmosphere()));
-            getCrew().setText(
-                    "CREW: " + getShip().crew + "/"
-                            + getShip().getSustainableCrew() + "/"
-                            + getShip().getMaxSustainableCrew());
-            getEvasion().setText(
-                    "EVADE: " + (int) Math.round(getShip().getEvasion() * 100f)
-                            + "%");
-            
-            getPowerBar().setLayerValue(2, getShip().power.upgradeLevel);
-            getPowerBar().setLayerValue(3, getShip().power.powerLevel);
-            
-            if (((SpaceBanditosApplication) getApplication()).game.currentEvent.enemyShip == null) {
-                getEnemyShipScreenButton().setVisibility(GONE);
-            } else {
-                getEnemyShipScreenButton().setVisibility(VISIBLE);
+            synchronized (((SpaceBanditosApplication) getApplication()).game) {
+                getAtmosphere().setText(
+                        "ATMO: "
+                                + (int) Math.floor(getShip().atmosphere)
+                                + "/"
+                                + (int) Math
+                                        .floor(getShip().getMaxAtmosphere()));
+                getCrew().setText(
+                        "CREW: " + getShip().crew + "/"
+                                + getShip().getSustainableCrew() + "/"
+                                + getShip().getMaxSustainableCrew());
+                getEvasion().setText(
+                        "EVADE: "
+                                + (int) Math
+                                        .round(getShip().getEvasion() * 100f)
+                                + "%");
+                
+                getPowerBar().setLayerValue(2, getShip().power.upgradeLevel);
+                getPowerBar().setLayerValue(3, getShip().power.powerLevel);
+                
+                if (((SpaceBanditosApplication) getApplication()).game.currentEvent.enemyShip == null) {
+                    getEnemyShipScreenButton().setVisibility(GONE);
+                } else {
+                    getEnemyShipScreenButton().setVisibility(VISIBLE);
+                }
             }
             super.onLayout(changed, l, t, r, b);
         }
@@ -135,9 +144,10 @@ public class PlayerShipActivity extends ShipActivity {
         
         @Override
         public void run() {
+            ((SpaceBanditosApplication) getApplication()).game.paused = true;
             while (true) {
                 // TODO: all in-event UI code should be similarly synchronized
-                synchronized (getApplication()) {
+                synchronized (((SpaceBanditosApplication) getApplication()).game) {
                     if (PlayerShipActivity.this.destroyed) {
                         break;
                     }

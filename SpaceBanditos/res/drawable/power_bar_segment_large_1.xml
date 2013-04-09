@@ -6,6 +6,6 @@
    <solid 
        android:color="@color/damaged" />
    <stroke
-       android:width="@dimen/system_management_line_thickness"
+       android:width="@dimen/line_large_thickness"
        android:color="@color/black" />
 </shape>

@@ -6,6 +6,7 @@
     <color name="invisible">#00000000</color>
     <color name="power">#FF00FF00</color>
     <color name="damaged">#FFFF0000</color>
+    <color name="base_light_bright">#FFC0C0C0</color>
     <color name="base_light">#FF707070</color>
     <color name="base_dark">#FF303030</color>
     <color name="energy_light">#FF0077FF</color>

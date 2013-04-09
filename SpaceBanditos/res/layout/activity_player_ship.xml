@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".PlayerShipActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:padding="20dip" >
     
     <include layout="@layout/activity_any_ship" />
     
@@ -15,16 +16,20 @@
         android:orientation="vertical"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/hull_and_shields"
+	    android:layout_marginLeft="@dimen/line_small_half_thickness"
+	    android:layout_marginTop="@dimen/line_small_half_thickness"
+	    android:layout_marginRight="@dimen/line_small_half_thickness"
+	    android:layout_marginBottom="@dimen/line_small_half_thickness"
         android:background="@drawable/base_background_small" >
         <TextView 
             android:id="@+id/atmosphere"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-	        android:layout_marginLeft="@dimen/ship_system_view_line_half_thickness"
-	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
-	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
-	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
-	        android:textSize="@dimen/small_font_size"
+	        android:layout_marginLeft="@dimen/line_small_half_thickness"
+	        android:layout_marginTop="@dimen/line_small_half_thickness"
+	        android:layout_marginRight="@dimen/line_small_half_thickness"
+	        android:layout_marginBottom="@dimen/line_small_half_thickness"
+	        android:textSize="@dimen/font_size_small"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:textIsSelectable="false" />
@@ -32,11 +37,11 @@
             android:id="@+id/crew"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-	        android:layout_marginLeft="@dimen/ship_system_view_line_half_thickness"
-	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
-	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
-	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
-	        android:textSize="@dimen/small_font_size"
+	        android:layout_marginLeft="@dimen/line_small_half_thickness"
+	        android:layout_marginTop="@dimen/line_small_half_thickness"
+	        android:layout_marginRight="@dimen/line_small_half_thickness"
+	        android:layout_marginBottom="@dimen/line_small_half_thickness"
+	        android:textSize="@dimen/font_size_small"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:textIsSelectable="false" />
@@ -44,11 +49,11 @@
             android:id="@+id/evasion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-	        android:layout_marginLeft="@dimen/ship_system_view_line_half_thickness"
-	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
-	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
-	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
-	        android:textSize="@dimen/small_font_size"
+	        android:layout_marginLeft="@dimen/line_small_half_thickness"
+	        android:layout_marginTop="@dimen/line_small_half_thickness"
+	        android:layout_marginRight="@dimen/line_small_half_thickness"
+	        android:layout_marginBottom="@dimen/line_small_half_thickness"
+	        android:textSize="@dimen/font_size_small"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:textIsSelectable="false" />
@@ -61,30 +66,34 @@
         android:orientation="horizontal"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/stats"
+	    android:layout_marginLeft="@dimen/line_small_half_thickness"
+	    android:layout_marginTop="@dimen/line_small_half_thickness"
+	    android:layout_marginRight="@dimen/line_small_half_thickness"
+	    android:layout_marginBottom="@dimen/line_small_half_thickness"
         android:background="@drawable/base_background_small" >
     
 	    <com.chipotlebanditos.spacebanditos.views.LayeredSegmentFillBar
 	        android:id="@+id/reserve_power_bar"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_marginLeft="@dimen/ship_system_view_line_half_thickness"
-	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
-	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
-	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginLeft="@dimen/line_small_half_thickness"
+	        android:layout_marginTop="@dimen/line_small_half_thickness"
+	        android:layout_marginRight="@dimen/line_small_half_thickness"
+	        android:layout_marginBottom="@dimen/line_small_half_thickness"
 	        spacebanditos:segmentDrawable="@drawable/power_bar_segment_small"
 	        spacebanditos:baseDirection="top"
 	        spacebanditos:segmentWidth="18dip"
 	        spacebanditos:segmentHeight="12dip"
-	        spacebanditos:segmentSpacing="@dimen/ship_system_view_line_thickness" />
+	        spacebanditos:segmentSpacing="@dimen/line_small_thickness" />
 	    <TextView
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_marginLeft="@dimen/ship_system_view_line_half_thickness"
-	        android:layout_marginTop="@dimen/ship_system_view_line_half_thickness"
-	        android:layout_marginRight="@dimen/ship_system_view_line_half_thickness"
-	        android:layout_marginBottom="@dimen/ship_system_view_line_half_thickness"
+	        android:layout_marginLeft="@dimen/line_small_half_thickness"
+	        android:layout_marginTop="@dimen/line_small_half_thickness"
+	        android:layout_marginRight="@dimen/line_small_half_thickness"
+	        android:layout_marginBottom="@dimen/line_small_half_thickness"
 	        android:text="P\nO\nW\nE\nR"
-		    android:textSize="@dimen/small_font_size"
+		    android:textSize="@dimen/font_size_small"
 		    android:textColor="@android:color/black" />
     </LinearLayout>
     
@@ -94,9 +103,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:background="@drawable/button_background_small"
         android:visibility="gone"
         android:text="E\nN\nE\nM\nY"
-	    android:textSize="@dimen/large_font_size"
+	    android:textSize="@dimen/font_size_large"
 	    android:textColor="@android:color/black"
 	    android:onClick="onEnemyShipScreenButtonClick" />
 </merge>

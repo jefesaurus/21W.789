@@ -20,6 +20,7 @@ public class Ship implements Serializable {
     
     public static final float ATMOSPHERE_LOSS_PER_MILLI = .001f;
     public static final float ATMOSPHERE_REQUIRED_PER_CREW = 1f;
+    // private static final float ATMOSPHERE_BUFFER_VALUE = 0.0001f;
     
     public final ShipLayout layout;
     
@@ -194,6 +195,8 @@ public class Ship implements Serializable {
     }
     
     public void update(int delta, GameEvent event) {
+        // atmosphere -= ATMOSPHERE_BUFFER_VALUE;
+        
         atmosphere -= ATMOSPHERE_LOSS_PER_MILLI;
         for (ShipSystem system : systems) {
             system.update(delta, this, event);
@@ -201,5 +204,7 @@ public class Ship implements Serializable {
         atmosphere = Math.max(atmosphere, 0f);
         crew = Math.min(crew,
                 (int) Math.floor(atmosphere * ATMOSPHERE_REQUIRED_PER_CREW));
+        
+        // atmosphere += ATMOSPHERE_BUFFER_VALUE;
     }
 }

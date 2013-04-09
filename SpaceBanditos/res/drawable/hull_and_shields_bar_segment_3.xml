@@ -6,6 +6,6 @@
    <solid 
        android:color="@color/power" />
    <stroke
-       android:width="@dimen/ship_system_view_line_thickness"
+       android:width="@dimen/line_small_thickness"
        android:color="@color/black" />
 </shape>

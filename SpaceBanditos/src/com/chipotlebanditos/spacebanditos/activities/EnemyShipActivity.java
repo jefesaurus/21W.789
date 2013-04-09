@@ -42,6 +42,7 @@ public class EnemyShipActivity extends ShipActivity {
                 for (int i = 0; i < systemsView.getChildCount(); i++) {
                     ShipSystemView view = (ShipSystemView) systemsView
                             .getChildAt(i);
+                    view.setEnabled(true);
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

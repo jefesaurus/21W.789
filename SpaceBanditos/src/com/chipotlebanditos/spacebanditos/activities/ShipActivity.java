@@ -26,7 +26,15 @@ public abstract class ShipActivity extends Activity {
         
         public ShipView(Context context) {
             super(context);
-            
+            setPadding(
+                    getResources().getDimensionPixelSize(
+                            R.dimen.activity_vertical_margin),
+                    getResources().getDimensionPixelSize(
+                            R.dimen.activity_horizontal_margin),
+                    getResources().getDimensionPixelSize(
+                            R.dimen.activity_vertical_margin),
+                    getResources().getDimensionPixelSize(
+                            R.dimen.activity_horizontal_margin));
         }
         
         public void setShip(Ship ship) {
@@ -40,6 +48,14 @@ public abstract class ShipActivity extends Activity {
         
         private LayeredSegmentFillBar getHullAndShieldsBar() {
             return (LayeredSegmentFillBar) findViewById(R.id.hull_and_shields_bar);
+        }
+        
+        private Button getUpgradesButton() {
+            return (Button) findViewById(R.id.upgrades_button);
+        }
+        
+        private Button getEquipmentButton() {
+            return (Button) findViewById(R.id.equipment_button);
         }
         
         private Button getPauseButton() {
@@ -68,6 +84,10 @@ public abstract class ShipActivity extends Activity {
             getHullAndShieldsBar().setLayerValue(3, ship.hull);
             
             Game game = ((SpaceBanditosApplication) getApplication()).game;
+            
+            getUpgradesButton().setEnabled(!game.currentEvent.isDangerous());
+            getEquipmentButton().setEnabled(!game.currentEvent.isDangerous());
+            
             getPauseButton().setText(game.paused ? "UNPAUSE" : "PAUSE");
             getJumpButton().setEnabled(game.playerShip.isReadyForJump());
             getPausedMessage().setVisibility(game.paused ? VISIBLE : GONE);
@@ -85,7 +105,7 @@ public abstract class ShipActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.action_main_menu:
+        case R.id.action_save_and_quit:
             Intent intent = new Intent(this, MainMenuActivity.class);
             startActivity(intent);
             return true;

@@ -1,9 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/action_main_menu"
+        android:id="@+id/action_save_and_quit"
         android:showAsAction="never"
-        android:title="Main Menu"/>
+        android:title="Save+Quit"/>
     
     <item
         android:id="@+id/action_settings"

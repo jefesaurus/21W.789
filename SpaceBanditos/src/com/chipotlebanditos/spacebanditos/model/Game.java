@@ -33,15 +33,16 @@ public class Game implements Serializable {
     }
     
     public static Game generateNewGame() {
-        Ship playerShip = new Ship(ShipLayout.PLAYER, 12, 20, 100, 100, 10,
+        Ship playerShip = new Ship(ShipLayout.PLAYER, 20, 20, 100, 100, 10,
                 new Equipment[] {}, new LifeSupportSystem(2, 1, 0),
                 new WeaponSystem(4, 2, 0, Weapon.LIGHT_BLASTER),
                 new WeaponSystem(1, 0, 0, null), new ShieldsSystem(2, 1, 0),
                 new EngineSystem(5, 5, 0));
         GameEvent[] events = new GameEvent[] { new GameEvent(new ShipWithAI(
-                true, ShipLayout.ENEMY, 4, 10, 100, 100, 6, new Equipment[] {},
-                new LifeSupportSystem(2, 1, 0), new WeaponSystem(2, 2, 0,
-                        Weapon.LIGHT_BLASTER), new EngineSystem(2, 1, 0)) {
+                true, ShipLayout.ENEMY, 10, 10, 100, 100, 6,
+                new Equipment[] {}, new LifeSupportSystem(2, 1, 0),
+                new WeaponSystem(2, 2, 0, Weapon.LIGHT_BLASTER),
+                new EngineSystem(2, 1, 0)) {
             private static final long serialVersionUID = -6222368591517806993L;
             
             @Override
