@@ -3,6 +3,7 @@ package com.chipotlebanditos.spacebanditos.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -122,6 +123,10 @@ public class PlayerShipActivity extends ShipActivity {
     }
     
     public void onEnemyShipScreenButtonClick(View v) {
+        moveToEnemyShipScreen();
+    }
+    
+    public void moveToEnemyShipScreen() {
         if (((SpaceBanditosApplication) getApplication()).game.currentEvent.enemyShip == null) {
             return;
         }
@@ -161,6 +166,17 @@ public class PlayerShipActivity extends ShipActivity {
                 }
             }
         }
+    }
+    
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+            float velocityY) {
+        // right to left swipe
+        if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
+                && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+            moveToEnemyShipScreen();
+        }
+        return false;
     }
     
 }
