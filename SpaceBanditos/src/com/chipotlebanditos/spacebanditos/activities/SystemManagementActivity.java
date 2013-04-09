@@ -55,8 +55,8 @@ public class SystemManagementActivity extends Activity {
             return (ToggleButton) findViewById(R.id.repair_button);
         }
         
-        protected Button getTargetButton() {
-            return (Button) findViewById(R.id.target_button);
+        protected ToggleButton getTargetButton() {
+            return (ToggleButton) findViewById(R.id.target_button);
         }
         
         protected Button getAddPowerButton() {
@@ -71,11 +71,19 @@ public class SystemManagementActivity extends Activity {
         protected void onDraw(Canvas canvas) {
             getRepairButton().setChecked(system.beingRepaired);
             getRepairButton().setEnabled(system.damageLevel > 0);
-            getTargetButton().setVisibility(
-                    system instanceof WeaponSystem ? VISIBLE : GONE);
-            ShipWithAI enemyShip = ((SpaceBanditosApplication) getApplication()).game.currentEvent.enemyShip;
-            getTargetButton().setEnabled(
-                    enemyShip != null && enemyShip.isHostile);
+            if (system instanceof WeaponSystem) {
+                getTargetButton().setVisibility(VISIBLE);
+                Ship enemyShip = ((SpaceBanditosApplication) getApplication()).game.currentEvent
+                        .getOpposingShip(ship);
+                getTargetButton()
+                        .setEnabled(
+                                enemyShip != null
+                                        && (!(enemyShip instanceof ShipWithAI) || ((ShipWithAI) enemyShip).isHostile));
+                getTargetButton().setChecked(
+                        ((WeaponSystem) system).target != null);
+            } else {
+                getTargetButton().setVisibility(GONE);
+            }
             
             getAddPowerButton().setEnabled(
                     view.ship.power.powerLevel > 0

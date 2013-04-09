@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@drawable/base_background_small">
+    android:background="@drawable/button_background_small">
     <com.chipotlebanditos.spacebanditos.views.LayeredSegmentFillBar
         android:id="@+id/power_bar"
         android:layout_width="wrap_content"
