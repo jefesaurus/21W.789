@@ -65,5 +65,5 @@
     	android:layout_centerHorizontal="true"
     	android:scaleType="fitCenter"
     	android:src="@drawable/splash2" 
-    	android:layout_above="@id/main_menu_button_stack"/>
+    	android:layout_above="@id/main_menu_button_stack" />
 </RelativeLayout>

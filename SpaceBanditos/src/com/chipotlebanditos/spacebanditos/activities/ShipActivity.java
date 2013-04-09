@@ -4,11 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.GestureDetector;
-import android.view.GestureDetector.OnGestureListener;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -22,17 +19,14 @@ import com.chipotlebanditos.spacebanditos.model.Ship;
 import com.chipotlebanditos.spacebanditos.views.LayeredSegmentFillBar;
 import com.chipotlebanditos.spacebanditos.views.SystemsView;
 
-public abstract class ShipActivity extends Activity implements
-        OnGestureListener {
+public abstract class ShipActivity extends Activity {
     
     protected static final int SWIPE_MIN_DISTANCE = 100;
     protected static final int SWIPE_THRESHOLD_VELOCITY = 150;
-    protected GestureDetector myGesture;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myGesture = new GestureDetector(this, this);
     }
     
     protected abstract class ShipView extends RelativeLayout {
@@ -157,41 +151,5 @@ public abstract class ShipActivity extends Activity implements
     }
     
     public abstract void onShipDestroyed();
-    
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return myGesture.onTouchEvent(event);
-    }
-    
-    @Override
-    public boolean onDown(MotionEvent arg0) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-    
-    @Override
-    public void onLongPress(MotionEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
-    
-    @Override
-    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
-            float distanceY) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-    
-    @Override
-    public void onShowPress(MotionEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
-    
-    @Override
-    public boolean onSingleTapUp(MotionEvent e) {
-        // TODO Auto-generated method stub
-        return false;
-    }
     
 }

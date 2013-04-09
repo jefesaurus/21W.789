@@ -3,6 +3,8 @@ package com.chipotlebanditos.spacebanditos.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -23,11 +25,27 @@ public class PlayerShipActivity extends ShipActivity {
     
     private boolean destroyed = false;
     
+    private GestureDetector gestureDetector;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
         setContentView(new PlayerShipView(this));
+        
+        gestureDetector = new GestureDetector(this,
+                new SimpleOnGestureListener() {
+                    @Override
+                    public boolean onFling(MotionEvent e1, MotionEvent e2,
+                            float velocityX, float velocityY) {
+                        // right to left swipe
+                        if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
+                                && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                            moveToEnemyShipScreen();
+                        }
+                        return false;
+                    }
+                });
         
         new RunGameThread().start();
     }
@@ -143,6 +161,11 @@ public class PlayerShipActivity extends ShipActivity {
         startActivity(intent);
     }
     
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return gestureDetector.onTouchEvent(event);
+    }
+    
     private class RunGameThread extends Thread {
         
         private long previousTimeMillis = System.currentTimeMillis();
@@ -166,17 +189,6 @@ public class PlayerShipActivity extends ShipActivity {
                 }
             }
         }
-    }
-    
-    @Override
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-            float velocityY) {
-        // right to left swipe
-        if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
-                && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-            moveToEnemyShipScreen();
-        }
-        return false;
     }
     
 }

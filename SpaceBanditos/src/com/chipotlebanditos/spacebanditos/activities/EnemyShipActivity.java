@@ -3,6 +3,8 @@ package com.chipotlebanditos.spacebanditos.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -15,11 +17,27 @@ import com.chipotlebanditos.spacebanditos.views.SystemsView;
 
 public class EnemyShipActivity extends ShipActivity {
     
+    private GestureDetector gestureDetector;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
         setContentView(new EnemyShipView(this));
+        
+        gestureDetector = new GestureDetector(this,
+                new SimpleOnGestureListener() {
+                    @Override
+                    public boolean onFling(MotionEvent e1, MotionEvent e2,
+                            float velocityX, float velocityY) {
+                        // left to right swipe
+                        if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
+                                && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                            moveToPlayerShipScreen();
+                        }
+                        return false;
+                    }
+                });
     }
     
     private class EnemyShipView extends ShipActivity.ShipView {
@@ -99,14 +117,8 @@ public class EnemyShipActivity extends ShipActivity {
     }
     
     @Override
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-            float velocityY) {
-        // left to right swipe
-        if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
-                && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-            moveToPlayerShipScreen();
-        }
-        return false;
+    public boolean onTouchEvent(MotionEvent event) {
+        return gestureDetector.onTouchEvent(event);
     }
     
 }
