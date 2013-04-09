@@ -3,7 +3,9 @@ package com.chipotlebanditos.spacebanditos.model;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import android.graphics.PointF;
 
@@ -35,6 +37,8 @@ public class Ship implements Serializable {
     public final ShipSystem power;
     
     public final List<Equipment> inventory;
+    
+    public Queue<Integer> soundsQueue = new LinkedList<Integer>();
     
     public Ship(ShipLayout layout, int hull, int maxHull, int crew,
             float atmosphere, int totalPower, Equipment[] inventory,
@@ -118,6 +122,7 @@ public class Ship implements Serializable {
         if (damage == 0) {
             return;
         }
+        soundsQueue.add(SoundPlayer.TAKING_DAMAGE_SOUND);
         if (getSystem(ShieldsSystem.class) != null) {
             damage = getSystem(ShieldsSystem.class).takeShieldDamage(damage);
             if (damage == 0) {
@@ -166,6 +171,7 @@ public class Ship implements Serializable {
     public void attack(int damage, int shots, Ship ship, ShipSystem system,
             GameEvent event) {
         for (int i = 0; i < shots; i++) {
+            soundsQueue.add(SoundPlayer.SHOOTING_LASER_SOUND);
             if (Math.random() >= ship.getEvasion()) {
                 ship.takeDamage(damage, system, event);
             }

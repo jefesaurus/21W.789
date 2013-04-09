@@ -16,6 +16,7 @@ import com.chipotlebanditos.spacebanditos.R;
 import com.chipotlebanditos.spacebanditos.SpaceBanditosApplication;
 import com.chipotlebanditos.spacebanditos.model.Game;
 import com.chipotlebanditos.spacebanditos.model.Ship;
+import com.chipotlebanditos.spacebanditos.model.SoundPlayer;
 import com.chipotlebanditos.spacebanditos.views.LayeredSegmentFillBar;
 import com.chipotlebanditos.spacebanditos.views.SystemsView;
 
@@ -32,9 +33,11 @@ public abstract class ShipActivity extends Activity {
     protected abstract class ShipView extends RelativeLayout {
         
         private Ship ship = null;
+        private SoundPlayer soundPlayer;
         
         public ShipView(Context context) {
             super(context);
+            soundPlayer = new SoundPlayer(getContext());
             setPadding(
                     getResources().getDimensionPixelSize(
                             R.dimen.activity_vertical_margin),
@@ -81,7 +84,7 @@ public abstract class ShipActivity extends Activity {
         
         @Override
         protected void onLayout(boolean changed, int l, int t, int r, int b) {
-            if (ship.hasBeenDestroyed() && getContext() instanceof ShipActivity) {
+            if (ship.hasBeenDestroyed()) {
                 ((ShipActivity) getContext()).onShipDestroyed();
             }
             getHullAndShieldsBar().setLayerValue(0,
@@ -100,6 +103,15 @@ public abstract class ShipActivity extends Activity {
             getPauseButton().setText(game.paused ? "UNPAUSE" : "PAUSE");
             getJumpButton().setEnabled(game.playerShip.isReadyForJump());
             getPausedMessage().setVisibility(game.paused ? VISIBLE : GONE);
+            
+            while (!ship.soundsQueue.isEmpty()) {
+                soundPlayer.playSound(ship.soundsQueue.poll());
+            }
+            
+            Ship opponent = game.currentEvent.getOpposingShip(ship);
+            if (opponent != null) {
+                opponent.soundsQueue.clear();
+            }
             
             super.onLayout(changed, l, t, r, b);
         }

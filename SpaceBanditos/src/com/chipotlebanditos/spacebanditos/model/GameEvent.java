@@ -30,7 +30,7 @@ public class GameEvent implements Serializable {
         } else if (ship == enemyShip) {
             return playerShip;
         } else {
-            throw new IllegalArgumentException();
+            return null;
         }
     }
     
