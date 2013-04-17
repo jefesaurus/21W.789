@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".PlayerShipActivity" >
+    tools:context=".MainMenuActivity" >
     
 	<LinearLayout
 	    android:id="@+id/main_menu_button_stack"
@@ -24,7 +24,7 @@
 	        android:layout_marginRight="@dimen/line_large_half_thickness"
 	        android:layout_marginBottom="@dimen/line_large_half_thickness"
             android:background="@drawable/button_background_large"
-		    android:text="New Game"
+		    android:text="NEW GAME"
 	        android:textSize="@dimen/font_size_large"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
@@ -38,7 +38,7 @@
 	        android:layout_marginRight="@dimen/line_large_half_thickness"
 	        android:layout_marginBottom="@dimen/line_large_half_thickness"
             android:background="@drawable/button_background_large"
-		    android:text="Continue Game"
+		    android:text="CONTINUE GAME"
 	        android:textSize="@dimen/font_size_large"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
@@ -52,7 +52,7 @@
 	        android:layout_marginRight="@dimen/line_large_half_thickness"
 	        android:layout_marginBottom="@dimen/line_large_half_thickness"
             android:background="@drawable/button_background_large"
-		    android:text="Settings"
+		    android:text="SETTINGS"
 	        android:textSize="@dimen/font_size_large"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"

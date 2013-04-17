@@ -55,7 +55,7 @@ public abstract class AbsShipSystemView extends FrameLayout {
             getWeaponChargeBar().setLayerValue(
                     1,
                     (int) Math.floor(getWeaponChargeBar().getSizeInSegments()
-                            * ((WeaponSystem) system).getChargeFraction()));
+                            * ((WeaponSystem) system).chargeMillisFraction));
         } else {
             getWeaponChargeBar().setVisibility(GONE);
         }

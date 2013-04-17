@@ -56,7 +56,6 @@ public class PlayerShipActivity extends ShipActivity {
             super(context);
             
             View.inflate(context, R.layout.activity_player_ship, this);
-            // this.setPadding(20, 20, 20, 20);
             
             final Ship ship = ((SpaceBanditosApplication) getApplication()).game.playerShip;
             

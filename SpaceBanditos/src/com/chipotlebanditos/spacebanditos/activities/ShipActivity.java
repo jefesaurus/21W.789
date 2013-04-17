@@ -158,9 +158,8 @@ public abstract class ShipActivity extends Activity {
     }
     
     public void onJumpButtonClick(View v) {
-        Toast.makeText(this, "Not yet implemented, coming soon!",
-                Toast.LENGTH_SHORT).show();
-        // TODO: go to jump
+        Intent intent = new Intent(this, JumpActivity.class);
+        startActivity(intent);
     }
     
     public abstract void onShipDestroyed();
