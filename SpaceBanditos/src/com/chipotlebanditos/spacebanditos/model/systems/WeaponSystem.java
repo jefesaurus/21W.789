@@ -13,7 +13,7 @@ public class WeaponSystem extends ShipSystem {
     
     public ShipSystem target = null;
     
-    public long chargeMillis = 0;
+    public float chargeMillisFraction = 0f;
     
     public WeaponSystem(int upgradeLevel, int powerLevel, int damageLevel,
             Weapon weapon) {
@@ -36,7 +36,7 @@ public class WeaponSystem extends ShipSystem {
     }
     
     public boolean isCharged() {
-        return equipped != null && chargeMillis == getTotalChargeMillis();
+        return equipped != null && chargeMillisFraction == 1f;
     }
     
     public long getTotalChargeMillis() {
@@ -47,14 +47,6 @@ public class WeaponSystem extends ShipSystem {
                 / (1f + .05 * (powerLevel - 1)));
     }
     
-    public float getChargeFraction() {
-        if (equipped == null || powerLevel == 0) {
-            return 0;
-        } else {
-            return chargeMillis / (float) getTotalChargeMillis();
-        }
-    }
-    
     @Override
     public void update(int delta, Ship ship, GameEvent event) {
         super.update(delta, ship, event);
@@ -62,15 +54,15 @@ public class WeaponSystem extends ShipSystem {
             target = null;
         }
         if (powerLevel == 0 || equipped == null) {
-            chargeMillis = 0;
+            chargeMillisFraction = 0f;
         } else {
-            chargeMillis += delta;
-            while (target != null && chargeMillis >= getTotalChargeMillis()) {
-                chargeMillis -= getTotalChargeMillis();
+            chargeMillisFraction += (float) delta / getTotalChargeMillis();
+            while (target != null && chargeMillisFraction >= 1f) {
+                chargeMillisFraction -= 1f;
                 ship.attack(equipped.shotDamage, equipped.numShots,
                         event.getOpposingShip(ship), target, event);
             }
-            chargeMillis = Math.min(chargeMillis, getTotalChargeMillis());
+            chargeMillisFraction = Math.min(chargeMillisFraction, 1f);
         }
     }
 }

@@ -2,13 +2,13 @@ package com.chipotlebanditos.spacebanditos.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Set;
+import java.util.List;
 
 import com.chipotlebanditos.spacebanditos.model.systems.EngineSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.LifeSupportSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.ShieldsSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.WeaponSystem;
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableList;
 
 public class Game implements Serializable {
     
@@ -16,7 +16,7 @@ public class Game implements Serializable {
     
     public final Ship playerShip;
     
-    public final Set<GameEvent> events;
+    public final List<GameEvent> events; // TODO: should eventually be a set
     
     public GameEvent currentEvent;
     
@@ -24,38 +24,32 @@ public class Game implements Serializable {
     
     public Game(Ship playerShip, GameEvent... events) {
         this.playerShip = playerShip;
-        this.events = new ImmutableSet.Builder<GameEvent>().addAll(
+        this.events = new ImmutableList.Builder<GameEvent>().addAll(
                 Arrays.asList(events)).build();
         for (GameEvent event : this.events) {
             event.playerShip = this.playerShip;
         }
-        this.currentEvent = events[0];
+        this.currentEvent = events[0]; // TODO: choose more intelligently
     }
     
     public static Game generateNewGame() {
-        Ship playerShip = new Ship(ShipLayout.PLAYER, 20, 20, 100, 100, 10,
+        return new Game(generateNewGamePlayerShip(), generateNewGameEvents(3));
+    }
+    
+    private static Ship generateNewGamePlayerShip() {
+        return new Ship(ShipLayout.PLAYER, 20, 20, 100, 100, 10,
                 new Equipment[] {}, new LifeSupportSystem(2, 1, 0),
                 new WeaponSystem(4, 2, 0, Weapon.LIGHT_BLASTER),
                 new WeaponSystem(1, 0, 0, null), new ShieldsSystem(2, 1, 0),
                 new EngineSystem(5, 5, 0));
-        GameEvent[] events = new GameEvent[] { new GameEvent(new ShipWithAI(
-                true, ShipLayout.ENEMY, 10, 10, 100, 100, 6,
-                new Equipment[] {}, new LifeSupportSystem(2, 1, 0),
-                new WeaponSystem(2, 2, 0, Weapon.LIGHT_BLASTER),
-                new EngineSystem(2, 1, 0)) {
-            private static final long serialVersionUID = -6222368591517806993L;
-            
-            @Override
-            public void AI(GameEvent event) {
-                for (WeaponSystem system : getSystems(WeaponSystem.class)) {
-                    if (system.target == null
-                            && event.getOpposingShip(this) != null) {
-                        system.target = event.getOpposingShip(this).systems.get(0);
-                    }
-                }
-            }
-        }, null, null) };
-        
-        return new Game(playerShip, events);
+    }
+    
+    private static GameEvent[] generateNewGameEvents(int count) {
+        GameEvent[] events = new GameEvent[count];
+        events[0] = GameEvent.getStartGameEvent();
+        for (int i = 1; i < count; i++) {
+            events[i] = GameEvent.getRandomEvent();
+        }
+        return events;
     }
 }
