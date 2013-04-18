@@ -9,9 +9,9 @@ public class ShieldsSystem extends ShipSystem {
     private static final long serialVersionUID = 7180312143894720628L;
     
     public int shields = 0;
-    public long rechargeMillis = 0;
+    public float rechargeMillisFraction = 0f;
     
-    public static final long TOTAL_RECHARGE_MILLIS = 1000L;
+    public static final long BASE_TOTAL_RECHARGE_MILLIS = 1000L;
     
     public ShieldsSystem(int upgradeLevel, int powerLevel, int damageLevel) {
         super(upgradeLevel, powerLevel, damageLevel);
@@ -33,7 +33,7 @@ public class ShieldsSystem extends ShipSystem {
     
     public int takeShieldDamage(int damage) {
         if (shields > 0) {
-            rechargeMillis = 0;
+            rechargeMillisFraction = 0f;
             if (damage > shields) {
                 int excessDamage = damage - shields;
                 shields = 0;
@@ -47,22 +47,27 @@ public class ShieldsSystem extends ShipSystem {
         }
     }
     
+    public long getTotalRechargeMillis(Ship ship) {
+        return (long) Math.floor(BASE_TOTAL_RECHARGE_MILLIS
+                / (1f + (beingRepaired ? 0f : .0005f * ship.crew)));
+    }
+    
     @Override
     public void update(int delta, Ship ship, GameEvent event) {
         super.update(delta, ship, event);
         if (ship == event.playerShip && !event.isDangerous()) {
             shields = getMaxShields();
         } else {
-            rechargeMillis += delta;
-            while (shields < getMaxShields()
-                    && rechargeMillis >= TOTAL_RECHARGE_MILLIS) {
-                rechargeMillis -= TOTAL_RECHARGE_MILLIS;
+            rechargeMillisFraction += (float) delta
+                    / getTotalRechargeMillis(ship);
+            while (shields < getMaxShields() && rechargeMillisFraction >= 1f) {
+                rechargeMillisFraction -= 1f;
                 shields++;
             }
             shields = Math.min(shields, getMaxShields());
         }
         if (shields == getMaxShields()) {
-            rechargeMillis = 0;
+            rechargeMillisFraction = 0f;
         }
     }
 }

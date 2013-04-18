@@ -156,7 +156,7 @@ public class Ship implements Serializable {
         if (getSystem(EngineSystem.class) == null) {
             return 0f;
         } else {
-            return getSystem(EngineSystem.class).getEvasion();
+            return getSystem(EngineSystem.class).getEvasion(this);
         }
     }
     
@@ -183,7 +183,7 @@ public class Ship implements Serializable {
         if (system == null) {
             return 0f;
         } else {
-            return system.getMaxAtmosphere();
+            return system.getMaxAtmosphere(this);
         }
     }
     

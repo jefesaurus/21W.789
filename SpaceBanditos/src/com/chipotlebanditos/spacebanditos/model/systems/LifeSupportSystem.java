@@ -22,21 +22,31 @@ public class LifeSupportSystem extends ShipSystem {
         return R.drawable.life_support_icon;
     }
     
-    public float getAtmosphereProducedPerMilli() {
-        return powerLevel * 0.001f + powerLevel > 0 ? Ship.ATMOSPHERE_LOSS_PER_MILLI
-                : 0;
+    public float getAtmosphereProducedPerMilli(Ship ship) {
+        if (powerLevel == 0) {
+            return 0f;
+        } else {
+            return powerLevel * 0.001f
+                    + (beingRepaired ? 0f : .00001f * ship.crew)
+                    + Ship.ATMOSPHERE_LOSS_PER_MILLI;
+        }
     }
     
-    public float getMaxAtmosphere() {
-        return powerLevel * 100f;
+    public float getMaxAtmosphere(Ship ship) {
+        if (powerLevel == 0) {
+            return 0f;
+        } else {
+            return powerLevel * 50f + (beingRepaired ? 0 : .5f * ship.crew);
+        }
     }
     
     @Override
     public void update(int delta, Ship ship, GameEvent event) {
         super.update(delta, ship, event);
-        if (ship.atmosphere < getMaxAtmosphere()) {
+        if (ship.atmosphere < getMaxAtmosphere(ship)) {
             ship.atmosphere = Math.min(ship.atmosphere
-                    + getAtmosphereProducedPerMilli(), getMaxAtmosphere());
+                    + getAtmosphereProducedPerMilli(ship),
+                    getMaxAtmosphere(ship));
         }
     }
 }

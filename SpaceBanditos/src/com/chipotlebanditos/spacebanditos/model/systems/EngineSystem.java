@@ -26,20 +26,25 @@ public class EngineSystem extends ShipSystem {
         return R.drawable.engine_icon;
     }
     
-    public long getTotalJumpMillis() {
+    public long getTotalJumpMillis(Ship ship) {
         if (powerLevel == 0) {
             throw new IllegalStateException();
         }
         return (long) Math.floor(BASE_TOTAL_JUMP_MILLIS
-                / (1f + .05 * (powerLevel - 1)));
+                / (1f + .05f * (powerLevel - 1f) + (beingRepaired ? 0
+                        : .0005f * ship.crew)));
     }
     
     public boolean isReadyForJump() {
         return jumpMillisFraction == 1f && powerLevel > 0;
     }
     
-    public float getEvasion() {
-        return powerLevel * 0.05f;
+    public float getEvasion(Ship ship) {
+        if (powerLevel == 0) {
+            return 0;
+        } else {
+            return powerLevel * 0.1f + (beingRepaired ? 0f : .001f * ship.crew);
+        }
     }
     
     @Override
@@ -49,7 +54,7 @@ public class EngineSystem extends ShipSystem {
             if (ship == event.playerShip && !event.isDangerous()) {
                 jumpMillisFraction = 1f;
             } else {
-                jumpMillisFraction += (float) delta / getTotalJumpMillis();
+                jumpMillisFraction += (float) delta / getTotalJumpMillis(ship);
                 jumpMillisFraction = Math.min(jumpMillisFraction, 1f);
             }
         }

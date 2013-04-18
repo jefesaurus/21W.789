@@ -39,12 +39,13 @@ public class WeaponSystem extends ShipSystem {
         return equipped != null && chargeMillisFraction == 1f;
     }
     
-    public long getTotalChargeMillis() {
+    public long getTotalChargeMillis(Ship ship) {
         if (powerLevel == 0) {
             throw new IllegalStateException();
         }
         return (long) Math.floor(equipped.baseTotalChargeMillis
-                / (1f + .05 * (powerLevel - 1)));
+                / (1f + .05f * (powerLevel - 1) + (beingRepaired ? 0f
+                        : .0005f * ship.crew)));
     }
     
     @Override
@@ -56,7 +57,7 @@ public class WeaponSystem extends ShipSystem {
         if (powerLevel == 0 || equipped == null) {
             chargeMillisFraction = 0f;
         } else {
-            chargeMillisFraction += (float) delta / getTotalChargeMillis();
+            chargeMillisFraction += (float) delta / getTotalChargeMillis(ship);
             while (target != null && chargeMillisFraction >= 1f) {
                 chargeMillisFraction -= 1f;
                 ship.attack(equipped.shotDamage, equipped.numShots,
