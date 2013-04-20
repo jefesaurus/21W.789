@@ -6,6 +6,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.PointF;
+
 import com.chipotlebanditos.spacebanditos.model.systems.EngineSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.LifeSupportSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.WeaponSystem;
@@ -14,6 +16,10 @@ public class GameEvent implements Serializable {
     
     private static final long serialVersionUID = 7423264560778377426L;
     
+    public PointF location;
+    
+    public boolean isExit;
+    
     public Ship playerShip = null;
     public ShipWithAI enemyShip;
     public StoreInventory store;
@@ -21,8 +27,10 @@ public class GameEvent implements Serializable {
     
     // TODO: store any other event-constrained state, such as weapons fire, here
     
-    public GameEvent(ShipWithAI enemyShip, StoreInventory store,
-            DialogTree dialog) {
+    public GameEvent(PointF location, boolean isExit, ShipWithAI enemyShip,
+            StoreInventory store, DialogTree dialog) {
+        this.location = location;
+        this.isExit = isExit;
         this.enemyShip = enemyShip;
         this.store = store;
         this.dialog = dialog;
@@ -50,16 +58,22 @@ public class GameEvent implements Serializable {
         }
     }
     
-    public static GameEvent getStartGameEvent() {
-        return new GameEvent(null, null, null);
+    public static float getDistanceBetween(GameEvent event1, GameEvent event2) {
+        return PointF.length(event1.location.x - event2.location.x,
+                event2.location.y - event2.location.y);
     }
     
+    public static GameEvent getStartGameEvent(PointF location, boolean isExit) {
+        return new GameEvent(location, isExit, null, null, null);
+    }
+    
+    @SuppressWarnings("unused")
     private static class EventPool {
         
-        public static GameEvent exampleCombat() {
-            return new GameEvent(new ShipWithAI(true, ShipLayout.ENEMY, 10, 10,
-                    100, 100, 6, new Equipment[] {}, new LifeSupportSystem(2,
-                            1, 0), new WeaponSystem(2, 2, 0,
+        public static GameEvent exampleCombat(PointF location, boolean isExit) {
+            return new GameEvent(location, isExit, new ShipWithAI(true,
+                    ShipLayout.ENEMY, 10, 10, 100, 100, 6, new Equipment[] {},
+                    new LifeSupportSystem(2, 1, 0), new WeaponSystem(2, 2, 0,
                             Weapon.LIGHT_BLASTER), new EngineSystem(2, 1, 0)) {
                 private static final long serialVersionUID = -6222368591517806993L;
                 
@@ -86,11 +100,11 @@ public class GameEvent implements Serializable {
         }
     }
     
-    public static GameEvent getRandomEvent() {
+    public static GameEvent getRandomEvent(PointF location, boolean isExit) {
         try {
             return (GameEvent) EventPool.pool.get(
                     (int) Math.floor(Math.random() * EventPool.pool.size()))
-                    .invoke(null);
+                    .invoke(null, location, isExit);
         } catch (IllegalArgumentException e) {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {

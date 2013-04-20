@@ -41,11 +41,11 @@
 	        android:layout_marginTop="@dimen/line_small_half_thickness"
 	        android:layout_marginRight="@dimen/line_small_half_thickness"
 	        android:layout_marginBottom="@dimen/line_small_half_thickness"
-	        spacebanditos:segmentDrawable="@drawable/hull_and_shields_bar_segment"
+	        spacebanditos:elementDrawable="@drawable/hull_and_shields_bar_segment"
 	        spacebanditos:baseDirection="left"
-	        spacebanditos:segmentWidth="12dip"
-	        spacebanditos:segmentHeight="18dip"
-	        spacebanditos:segmentSpacing="@dimen/line_small_thickness" />
+	        spacebanditos:elementWidth="12dip"
+	        spacebanditos:elementHeight="18dip"
+	        spacebanditos:elementSpacing="@dimen/line_small_thickness" />
     </LinearLayout>
     
     <LinearLayout 

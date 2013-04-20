@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:spacebanditos="http://schemas.android.com/apk/res/com.chipotlebanditos.spacebanditos"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +13,7 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_centerHorizontal="true"
-	    android:layout_centerVertical="true"
+	    android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/line_large_half_thickness"
         android:layout_marginTop="@dimen/line_large_half_thickness"
         android:layout_marginRight="@dimen/line_large_half_thickness"
@@ -23,4 +24,10 @@
         android:textColor="@android:color/black"
         android:singleLine="true"
 	    android:onClick="onJumpButtonClick"/>
+    <com.chipotlebanditos.spacebanditos.views.EventsView
+        android:id="@+id/events_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/jump_button" />
 </RelativeLayout>

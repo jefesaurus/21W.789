@@ -80,11 +80,11 @@
 	        android:layout_marginTop="@dimen/line_small_half_thickness"
 	        android:layout_marginRight="@dimen/line_small_half_thickness"
 	        android:layout_marginBottom="@dimen/line_small_half_thickness"
-	        spacebanditos:segmentDrawable="@drawable/power_bar_segment_small"
+	        spacebanditos:elementDrawable="@drawable/power_bar_segment_small"
 	        spacebanditos:baseDirection="top"
-	        spacebanditos:segmentWidth="18dip"
-	        spacebanditos:segmentHeight="12dip"
-	        spacebanditos:segmentSpacing="@dimen/line_small_thickness" />
+	        spacebanditos:elementWidth="18dip"
+	        spacebanditos:elementHeight="12dip"
+	        spacebanditos:elementSpacing="@dimen/line_small_thickness" />
 	    <TextView
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"

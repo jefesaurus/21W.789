@@ -13,11 +13,11 @@
         android:layout_marginTop="@dimen/line_large_half_thickness"
         android:layout_marginRight="@dimen/line_large_half_thickness"
         android:layout_marginBottom="@dimen/line_large_half_thickness"
-        spacebanditos:segmentDrawable="@drawable/power_bar_segment_large"
+        spacebanditos:elementDrawable="@drawable/power_bar_segment_large"
         spacebanditos:baseDirection="bottom"
-        spacebanditos:segmentWidth="@dimen/system_management_power_bar_segment_width"
-        spacebanditos:segmentHeight="@dimen/system_management_power_bar_segment_height"
-        spacebanditos:segmentSpacing="@dimen/line_large_half_thickness"
+        spacebanditos:elementWidth="@dimen/system_management_power_bar_segment_width"
+        spacebanditos:elementHeight="@dimen/system_management_power_bar_segment_height"
+        spacebanditos:elementSpacing="@dimen/line_large_half_thickness"
         android:background="@drawable/base_background_large"/>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -145,11 +145,11 @@
 	        android:layout_marginTop="@dimen/line_large_half_thickness"
 	        android:layout_marginRight="@dimen/line_large_half_thickness"
 	        android:layout_marginBottom="@dimen/line_large_half_thickness"
-	        spacebanditos:segmentDrawable="@drawable/weapon_charge_bar_segment_large"
+	        spacebanditos:elementDrawable="@drawable/weapon_charge_bar_segment_large"
 	        spacebanditos:baseDirection="bottom"
-            spacebanditos:segmentWidth="@dimen/system_management_weapon_charge_bar_segment_width"
-            spacebanditos:segmentHeight="@dimen/system_management_weapon_charge_bar_segment_height"
-	        spacebanditos:segmentSpacing="@dimen/system_management_weapon_charge_bar_segment_spacing"
+            spacebanditos:elementWidth="@dimen/system_management_weapon_charge_bar_segment_width"
+            spacebanditos:elementHeight="@dimen/system_management_weapon_charge_bar_segment_height"
+	        spacebanditos:elementSpacing="@dimen/system_management_weapon_charge_bar_segment_spacing"
 	        android:background="@drawable/system_management_weapon_charge_bar_background"/>
 	    </RelativeLayout>
     </LinearLayout>

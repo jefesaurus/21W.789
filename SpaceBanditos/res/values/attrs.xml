@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="LayeredSegmentFillBar">
-        <attr name="segmentDrawable" format="integer" />
+        <attr name="elementDrawable" format="integer" />
         <attr name="baseDirection">
             <enum name="left" value="0"/>
             <enum name="top" value="1"/>
             <enum name="right" value="2"/>
             <enum name="bottom" value="3"/>
         </attr>
-        <attr name="segmentWidth" format="dimension"/>
-        <attr name="segmentHeight" format="dimension"/>
-        <attr name="segmentSpacing" format="dimension"/>s
+        <attr name="elementWidth" format="dimension"/>
+        <attr name="elementHeight" format="dimension"/>
+        <attr name="elementSpacing" format="dimension"/>s
     </declare-styleable>
 </resources>
