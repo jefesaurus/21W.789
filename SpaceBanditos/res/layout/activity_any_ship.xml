@@ -82,21 +82,56 @@
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:onClick="onEquipmentButtonClick" />
+        <TextView
+            android:id="@+id/cash"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+	        android:layout_marginLeft="@dimen/line_small_half_thickness"
+	        android:layout_marginTop="@dimen/line_small_half_thickness"
+	        android:layout_marginRight="@dimen/line_small_half_thickness"
+	        android:layout_marginBottom="@dimen/line_small_half_thickness"
+            android:background="@drawable/base_background_small"
+            android:text=""
+	        android:textSize="@dimen/font_size_small"
+	        android:textColor="@android:color/black"
+	        android:singleLine="true" />
     </LinearLayout>
-    
-    <Button 
-        android:id="@+id/jump_button"
+    <LinearLayout
+	    android:id="@+id/jump_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/button_background_small"
-        android:text="JUMP"
-	    android:textSize="@dimen/font_size_large"
-	    android:textColor="@android:color/black"
-	    android:singleLine="true"
-	    android:onClick="onJumpButtonClick"
-	    android:enabled="false" />
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+		android:onClick="onJumpButtonClick"
+		android:enabled="false"
+	    android:background="@drawable/button_background_small" >
+        <com.chipotlebanditos.spacebanditos.views.LayeredSegmentFillBar
+            android:id="@+id/jump_charge_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/line_small_half_thickness"
+            android:layout_marginTop="@dimen/line_small_half_thickness"
+            android:layout_marginRight="@dimen/line_small_half_thickness"
+            android:layout_marginBottom="@dimen/line_small_half_thickness"
+            spacebanditos:elementDrawable="@drawable/weapon_charge_bar_segment_small"
+            spacebanditos:baseDirection="left"
+            spacebanditos:elementWidth="@dimen/ship_system_view_weapon_charge_bar_segment_height"
+            spacebanditos:elementHeight="@dimen/ship_system_view_weapon_charge_bar_segment_width"
+            spacebanditos:elementSpacing="@dimen/ship_system_view_weapon_charge_bar_segment_spacing"
+            android:background="@drawable/ship_system_view_weapon_charge_bar_background" />
+        <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/line_small_half_thickness"
+            android:layout_marginTop="@dimen/line_small_half_thickness"
+            android:layout_marginRight="@dimen/line_small_half_thickness"
+            android:layout_marginBottom="@dimen/line_small_half_thickness"
+	        android:text="JUMP"
+		    android:textSize="@dimen/font_size_large"
+		    android:textColor="@android:color/black"
+		    android:singleLine="true" />
+    </LinearLayout>
     
     <TextView
         android:id="@+id/paused_message"

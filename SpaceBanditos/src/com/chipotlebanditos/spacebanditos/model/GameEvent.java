@@ -21,6 +21,7 @@ public class GameEvent implements Serializable {
     public boolean isExit;
     
     public Ship playerShip = null;
+    public Game game = null;
     public ShipWithAI enemyShip;
     public StoreInventory store;
     public DialogTree dialog;
@@ -60,7 +61,7 @@ public class GameEvent implements Serializable {
     
     public static float getDistanceBetween(GameEvent event1, GameEvent event2) {
         return PointF.length(event1.location.x - event2.location.x,
-                event2.location.y - event2.location.y);
+                event1.location.y - event2.location.y);
     }
     
     public static GameEvent getStartGameEvent(PointF location, boolean isExit) {
@@ -72,7 +73,7 @@ public class GameEvent implements Serializable {
         
         public static GameEvent exampleCombat(PointF location, boolean isExit) {
             return new GameEvent(location, isExit, new ShipWithAI(true,
-                    ShipLayout.ENEMY, 10, 10, 100, 100, 6, new Equipment[] {},
+                    ShipLayout.ENEMY, 10, 10, 10, 10f, 6, new Equipment[] {},
                     new LifeSupportSystem(2, 1, 0), new WeaponSystem(2, 2, 0,
                             Weapon.LIGHT_BLASTER), new EngineSystem(2, 1, 0)) {
                 private static final long serialVersionUID = -6222368591517806993L;
@@ -86,6 +87,11 @@ public class GameEvent implements Serializable {
                                     .get(0);
                         }
                     }
+                }
+                
+                @Override
+                public int getReward() {
+                    return 10;
                 }
             }, null, null);
         }

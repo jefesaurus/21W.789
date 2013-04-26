@@ -18,9 +18,20 @@ public abstract class ShipWithAI extends Ship {
     
     public abstract void AI(GameEvent event);
     
+    public abstract int getReward();
+    
     @Override
     public void update(int delta, GameEvent event) {
         super.update(delta, event);
         AI(event);
+    }
+    
+    @Override
+    public void takeDamage(int damage, ShipSystem system, GameEvent event) {
+        super.takeDamage(damage, system, event);
+        if (hasBeenDestroyed() && this == event.enemyShip) {
+            event.enemyShip = null;
+            event.game.playerCash += getReward();
+        }
     }
 }

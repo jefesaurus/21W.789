@@ -13,6 +13,7 @@ import com.chipotlebanditos.spacebanditos.SpaceBanditosApplication;
 import com.chipotlebanditos.spacebanditos.model.Game;
 import com.chipotlebanditos.spacebanditos.model.GameEvent;
 import com.chipotlebanditos.spacebanditos.model.systems.EngineSystem;
+import com.chipotlebanditos.spacebanditos.model.systems.WeaponSystem;
 import com.chipotlebanditos.spacebanditos.views.EventsView;
 
 public class JumpActivity extends Activity {
@@ -49,8 +50,16 @@ public class JumpActivity extends Activity {
     public void onJumpButtonClick(View v) {
         Game game = ((SpaceBanditosApplication) getApplication()).game;
         synchronized (game) {
-            game.currentEvent = getEventsView().getSelectedEvent();
             game.playerShip.getSystem(EngineSystem.class).jumpMillisFraction = 0f;
+            for (WeaponSystem system : game.playerShip
+                    .getSystems(WeaponSystem.class)) {
+                system.chargeMillisFraction = 0f;
+                system.target = null;
+            }
+            game.currentEvent = getEventsView().getSelectedEvent();
+            if (game.currentEvent.isDangerous()) {
+                game.paused = true;
+            }
         }
         Intent intent = new Intent(this, PlayerShipActivity.class);
         startActivity(intent);

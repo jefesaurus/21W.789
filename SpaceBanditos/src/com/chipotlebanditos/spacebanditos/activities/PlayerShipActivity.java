@@ -171,16 +171,19 @@ public class PlayerShipActivity extends ShipActivity {
         
         @Override
         public void run() {
-            ((SpaceBanditosApplication) getApplication()).game.paused = true;
+            Game game = ((SpaceBanditosApplication) getApplication()).game;
+            if (game.currentEvent.isDangerous()) {
+                game.paused = true;
+            }
             while (true) {
                 // TODO: all in-event UI code should be similarly synchronized
-                synchronized (((SpaceBanditosApplication) getApplication()).game) {
+                game = ((SpaceBanditosApplication) getApplication()).game;
+                synchronized (game) {
                     if (PlayerShipActivity.this.destroyed) {
                         break;
                     }
                     long currentTimeMillis = System.currentTimeMillis();
                     int delta = (int) (currentTimeMillis - previousTimeMillis);
-                    Game game = ((SpaceBanditosApplication) getApplication()).game;
                     if (!game.paused) {
                         game.currentEvent.update(delta, game);
                     }

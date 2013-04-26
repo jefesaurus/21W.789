@@ -17,6 +17,7 @@ import com.chipotlebanditos.spacebanditos.SpaceBanditosApplication;
 import com.chipotlebanditos.spacebanditos.model.Game;
 import com.chipotlebanditos.spacebanditos.model.Ship;
 import com.chipotlebanditos.spacebanditos.model.SoundPlayer;
+import com.chipotlebanditos.spacebanditos.model.systems.EngineSystem;
 import com.chipotlebanditos.spacebanditos.views.LayeredSegmentFillBar;
 import com.chipotlebanditos.spacebanditos.views.SystemsView;
 
@@ -70,12 +71,20 @@ public abstract class ShipActivity extends Activity {
             return (Button) findViewById(R.id.equipment_button);
         }
         
+        private TextView getCash() {
+            return (TextView) findViewById(R.id.cash);
+        }
+        
         private Button getPauseButton() {
             return (Button) findViewById(R.id.pause_button);
         }
         
-        private Button getJumpButton() {
-            return (Button) findViewById(R.id.jump_button);
+        private LayeredSegmentFillBar getJumpChargeBar() {
+            return (LayeredSegmentFillBar) findViewById(R.id.jump_charge_bar);
+        }
+        
+        private View getJumpButton() {
+            return (View) findViewById(R.id.jump_button);
         }
         
         private TextView getPausedMessage() {
@@ -99,8 +108,17 @@ public abstract class ShipActivity extends Activity {
             
             getUpgradesButton().setEnabled(!game.currentEvent.isDangerous());
             getEquipmentButton().setEnabled(!game.currentEvent.isDangerous());
+            getCash().setText("$" + game.playerCash);
             
             getPauseButton().setText(game.paused ? "UNPAUSE" : "PAUSE");
+            getJumpChargeBar().setLayerValue(0,
+                    getJumpChargeBar().getSizeInSegments());
+            getJumpChargeBar()
+                    .setLayerValue(
+                            1,
+                            (int) Math.floor(getJumpChargeBar()
+                                    .getSizeInSegments()
+                                    * ship.getSystem(EngineSystem.class).jumpMillisFraction));
             getJumpButton().setEnabled(game.playerShip.isReadyForJump());
             getPausedMessage().setVisibility(game.paused ? VISIBLE : GONE);
             
@@ -131,7 +149,10 @@ public abstract class ShipActivity extends Activity {
             startActivity(intent);
             return true;
         case R.id.action_settings:
-            ((SpaceBanditosApplication) getApplication()).game.paused = true;
+            Game game = ((SpaceBanditosApplication) getApplication()).game;
+            if (game.currentEvent.isDangerous()) {
+                game.paused = true;
+            }
             intent = new Intent(this, SettingsMenuActivity.class);
             startActivity(intent);
             return true;

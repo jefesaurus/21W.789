@@ -22,29 +22,32 @@ public class Game implements Serializable {
     
     public final Ship playerShip;
     
+    public int playerCash;
+    
     public static final float EVENTS_REGION_WIDTH = 6f,
             EVENTS_REGION_HEIGHT = 3f;
     public static final float PLAYER_JUMP_RADIUS = 1f;
-    // TODO: give region proportions to actually make circle
     
-    public final Set<GameEvent> events; // TODO: should eventually be a set
+    public final Set<GameEvent> events;
     
     public GameEvent currentEvent;
     
     public boolean paused = false;
     
-    public Game(Ship playerShip, GameEvent... events) {
+    public Game(Ship playerShip, int playerCash, GameEvent... events) {
         this.playerShip = playerShip;
+        this.playerCash = playerCash;
         this.events = new ImmutableSet.Builder<GameEvent>().addAll(
                 Arrays.asList(events)).build();
         for (GameEvent event : this.events) {
             event.playerShip = this.playerShip;
+            event.game = this;
         }
         this.currentEvent = events[0]; // TODO: choose more intelligently?
     }
     
     public static Game generateNewGame() {
-        return new Game(generateNewGamePlayerShip(),
+        return new Game(generateNewGamePlayerShip(), 0,
                 generateNewGameEvents((int) (EVENTS_REGION_WIDTH
                         * EVENTS_REGION_HEIGHT * .75f)));
     }
@@ -58,8 +61,9 @@ public class Game implements Serializable {
     }
     
     private static GameEvent[] generateNewGameEvents(int count) {
+        System.out.println("new game events");
         int zoneCols = (int) EVENTS_REGION_WIDTH, zoneRows = (int) EVENTS_REGION_HEIGHT;
-        float xMargin = .5f, yMargin = .5f;
+        float xMargin = .1f, yMargin = .1f;
         
         LinkedList<Point> zones = new LinkedList<Point>();
         for (int i = 0; i < zoneCols; i++) {
@@ -95,6 +99,7 @@ public class Game implements Serializable {
                 new HashSet<GameEvent>())) {
             return generateNewGameEvents(count);
         }
+        System.out.println("new game events done");
         return events;
     }
     
@@ -119,10 +124,16 @@ public class Game implements Serializable {
     
     private static PointF zoneToPoint(Point zone, int zoneCols, int zoneRows,
             float xMargin, float yMargin) {
-        float x = xMargin + (zone.x + (float) Math.random())
-                * (EVENTS_REGION_WIDTH - xMargin * 2) / zoneCols;
-        float y = yMargin + (zone.y + (float) Math.random())
-                * (EVENTS_REGION_HEIGHT - yMargin * 2) / zoneRows;
+        float x = (zone.x + xMargin + (1f - xMargin * 2)
+                * (float) Math.random())
+                * EVENTS_REGION_WIDTH / zoneCols;
+        float y = (zone.y + yMargin + (1f - yMargin * 2)
+                * (float) Math.random())
+                * EVENTS_REGION_HEIGHT / zoneRows;
+        // float x = xMargin + (zone.x + (float) Math.random())
+        // * (EVENTS_REGION_WIDTH - xMargin * 2) / zoneCols;
+        // float y = yMargin + (zone.y + (float) Math.random())
+        // * (EVENTS_REGION_HEIGHT - yMargin * 2) / zoneRows;
         return new PointF(x, y);
     }
 }

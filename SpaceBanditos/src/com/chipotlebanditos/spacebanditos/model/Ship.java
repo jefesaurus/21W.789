@@ -131,9 +131,6 @@ public class Ship implements Serializable {
         }
         system.takeDamage(damage, this);
         hull = Math.max(hull - damage, 0);
-        if (hasBeenDestroyed() && this == event.enemyShip) {
-            event.enemyShip = null;
-        }
     }
     
     public int getShields() {
@@ -197,7 +194,7 @@ public class Ship implements Serializable {
     }
     
     public boolean hasBeenDestroyed() {
-        return hull == 0;
+        return hull == 0 || crew == 0;
     }
     
     public void update(int delta, GameEvent event) {

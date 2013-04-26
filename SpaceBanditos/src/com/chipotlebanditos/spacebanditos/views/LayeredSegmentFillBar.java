@@ -174,25 +174,22 @@ public class LayeredSegmentFillBar extends View {
     }
     
     private int getFillSizeInWidthSegments(int width) {
-        if (width - getPaddingLeft() - getPaddingRight() < elementDrawable
-                .getIntrinsicWidth()) {
+        if (width - getPaddingLeft() - getPaddingRight() < elementWidth) {
             return 0;
         } else {
             return (int) Math.floor((width - getPaddingLeft()
-                    - getPaddingRight() - elementDrawable.getIntrinsicWidth())
+                    - getPaddingRight() - elementWidth)
                     / (float) (elementWidth + elementSpacing) + 1);
         }
     }
     
     private int getFillSizeInHeightSegments(int height) {
-        if (height - getPaddingTop() - getPaddingBottom() < elementDrawable
-                .getIntrinsicHeight()) {
+        if (height - getPaddingTop() - getPaddingBottom() < elementHeight) {
             return 0;
         } else {
-            return (int) Math
-                    .floor((height - getPaddingTop() - getPaddingBottom() - elementDrawable
-                            .getIntrinsicHeight())
-                            / (float) (elementHeight + elementSpacing) + 1);
+            return (int) Math.floor((height - getPaddingTop()
+                    - getPaddingBottom() - elementHeight)
+                    / (float) (elementHeight + elementSpacing) + 1);
         }
     }
     
