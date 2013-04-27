@@ -9,7 +9,17 @@ public class LifeSupportSystem extends ShipSystem {
     private static final long serialVersionUID = 109496607657578658L;
     
     public LifeSupportSystem(int upgradeLevel, int powerLevel, int damageLevel) {
-        super(upgradeLevel, powerLevel, damageLevel);
+        super(upgradeLevel, powerLevel, damageLevel, new SystemUpgradeSequence(
+                0, 20, 30, 50, 70) {
+            
+            @Override
+            public String getUpgradeDescription(int level) {
+                return String.format(
+                        "%s atmosphere per second, %s atmosphere max", level,
+                        level * 50);
+            }
+            
+        });
     }
     
     @Override

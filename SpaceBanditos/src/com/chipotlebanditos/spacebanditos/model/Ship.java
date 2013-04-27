@@ -9,10 +9,12 @@ import java.util.Queue;
 
 import android.graphics.PointF;
 
+import com.chipotlebanditos.spacebanditos.R;
 import com.chipotlebanditos.spacebanditos.model.systems.EngineSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.LifeSupportSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.ShieldsSystem;
 import com.chipotlebanditos.spacebanditos.model.systems.ShipSystem;
+import com.chipotlebanditos.spacebanditos.model.systems.SystemUpgradeSequence;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
@@ -52,18 +54,27 @@ public class Ship implements Serializable {
         for (ShipSystem system : systems) {
             reservePower -= system.powerLevel;
         }
-        this.power = new ShipSystem(totalPower, reservePower, 0) {
+        this.power = new ShipSystem(totalPower, reservePower, 0,
+                new SystemUpgradeSequence(0, 0, 0, 0, 0, 20, 20, 20, 20, 20,
+                        30, 30, 30, 30, 30) {
+                    
+                    @Override
+                    public String getUpgradeDescription(int level) {
+                        return String.format("%s power available", level);
+                    }
+                    
+                }) {
             
             private static final long serialVersionUID = -5264026005696896366L;
             
             @Override
             public String getName() {
-                throw new UnsupportedOperationException();
+                return "POWER";
             }
             
             @Override
             public int getIconResource() {
-                throw new UnsupportedOperationException();
+                return R.drawable.power_bar_segment_large_3;
             }
             
         };

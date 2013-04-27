@@ -14,7 +14,15 @@ public class ShieldsSystem extends ShipSystem {
     public static final long BASE_TOTAL_RECHARGE_MILLIS = 1000L;
     
     public ShieldsSystem(int upgradeLevel, int powerLevel, int damageLevel) {
-        super(upgradeLevel, powerLevel, damageLevel);
+        super(upgradeLevel, powerLevel, damageLevel, new SystemUpgradeSequence(
+                0, 50, 10, 160, 240) {
+            
+            @Override
+            public String getUpgradeDescription(int level) {
+                return String.format("%s layers of shield", level);
+            }
+            
+        });
     }
     
     @Override

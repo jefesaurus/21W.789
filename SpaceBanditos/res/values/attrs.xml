@@ -10,6 +10,7 @@
         </attr>
         <attr name="elementWidth" format="dimension"/>
         <attr name="elementHeight" format="dimension"/>
-        <attr name="elementSpacing" format="dimension"/>s
+        <attr name="elementSpacing" format="dimension"/>
+        <attr name="maxSizeInElements" format="integer"/>
     </declare-styleable>
 </resources>

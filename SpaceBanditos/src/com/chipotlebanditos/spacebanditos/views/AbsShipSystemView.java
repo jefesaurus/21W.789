@@ -13,14 +13,11 @@ import com.chipotlebanditos.spacebanditos.model.systems.WeaponSystem;
 public abstract class AbsShipSystemView extends FrameLayout {
     
     public final ShipSystem system;
-    public final int maxPowerBarSegments;
     
     public AbsShipSystemView(ShipSystem system, Context context) {
         super(context);
         this.system = system;
         this.setWillNotDraw(false);
-        maxPowerBarSegments = getResources().getInteger(
-                R.integer.max_ship_system_upgrade_level);
     }
     
     protected TextView getSystemNameView() {
@@ -43,21 +40,27 @@ public abstract class AbsShipSystemView extends FrameLayout {
     protected void onDraw(Canvas canvas) {
         getSystemNameView().setText(system.getName());
         getSystemIconView().setImageResource(system.getIconResource());
-        getPowerBar().setLayerValue(0, maxPowerBarSegments);
+        getPowerBar()
+                .setLayerValue(0, system.upgrades.getMaxUpgradeLevel() - 1);
         getPowerBar().setLayerValue(1, system.upgradeLevel);
         getPowerBar()
                 .setLayerValue(2, system.upgradeLevel - system.damageLevel);
         getPowerBar().setLayerValue(3, system.powerLevel);
-        if (system instanceof WeaponSystem) {
-            getWeaponChargeBar().setVisibility(VISIBLE);
-            getWeaponChargeBar().setLayerValue(0,
-                    getWeaponChargeBar().getSizeInSegments());
-            getWeaponChargeBar().setLayerValue(
-                    1,
-                    (int) Math.floor(getWeaponChargeBar().getSizeInSegments()
-                            * ((WeaponSystem) system).chargeMillisFraction));
-        } else {
-            getWeaponChargeBar().setVisibility(GONE);
+        if (getWeaponChargeBar() != null) {
+            if (system instanceof WeaponSystem) {
+                getWeaponChargeBar().setVisibility(VISIBLE);
+                getWeaponChargeBar().setLayerValue(0,
+                        getWeaponChargeBar().getSizeInSegments());
+                getWeaponChargeBar()
+                        .setLayerValue(
+                                1,
+                                (int) Math
+                                        .floor(getWeaponChargeBar()
+                                                .getSizeInSegments()
+                                                * ((WeaponSystem) system).chargeMillisFraction));
+            } else {
+                getWeaponChargeBar().setVisibility(GONE);
+            }
         }
         super.onDraw(canvas);
     }

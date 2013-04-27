@@ -13,20 +13,19 @@ public abstract class ShipSystem implements Serializable {
     public int powerLevel;
     public int damageLevel;
     
+    public final SystemUpgradeSequence upgrades;
+    
     public boolean beingRepaired = false;
     public long repairMillis = 0;
     
     public static final long TOTAL_REPAIR_MILLIS = 5000L;
     
-    // public double x;
-    // public double y;
-    
-    public ShipSystem(int upgradeLevel, int powerLevel, int damageLevel) {
+    public ShipSystem(int upgradeLevel, int powerLevel, int damageLevel,
+            SystemUpgradeSequence upgrades) {
         this.upgradeLevel = upgradeLevel;
         this.powerLevel = powerLevel;
         this.damageLevel = damageLevel;
-        // this.x = x;
-        // this.y = y;
+        this.upgrades = upgrades;
     }
     
     public abstract String getName();

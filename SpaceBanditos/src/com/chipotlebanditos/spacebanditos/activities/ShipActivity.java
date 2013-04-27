@@ -162,9 +162,8 @@ public abstract class ShipActivity extends Activity {
     }
     
     public void onUpgradesButtonClick(View v) {
-        Toast.makeText(this, "Not yet implemented, coming soon!",
-                Toast.LENGTH_SHORT).show();
-        // TODO: go to upgrades
+        Intent intent = new Intent(this, UpgradeActivity.class);
+        startActivity(intent);
     }
     
     public void onEquipmentButtonClick(View v) {

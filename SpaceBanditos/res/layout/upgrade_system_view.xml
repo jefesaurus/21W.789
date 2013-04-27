@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:spacebanditos="http://schemas.android.com/apk/res/com.chipotlebanditos.spacebanditos"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/button_background_small" >
+    <com.chipotlebanditos.spacebanditos.views.LayeredSegmentFillBar
+        android:id="@+id/power_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/line_small_half_thickness"
+        android:layout_marginTop="@dimen/line_small_half_thickness"
+        android:layout_marginRight="@dimen/line_small_half_thickness"
+        android:layout_marginBottom="@dimen/line_small_half_thickness"
+        spacebanditos:elementDrawable="@drawable/power_bar_segment_small"
+        spacebanditos:baseDirection="bottom"
+        spacebanditos:elementWidth="@dimen/ship_system_view_power_bar_segment_width"
+        spacebanditos:elementHeight="@dimen/ship_system_view_power_bar_segment_height"
+        spacebanditos:elementSpacing="@dimen/line_small_half_thickness"
+        spacebanditos:maxSizeInElements="@integer/max_ship_system_upgrade_level"
+        android:background="@drawable/base_background_small" />
+    <TextView
+        android:id="@+id/system_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/line_small_half_thickness"
+        android:layout_marginTop="@dimen/line_small_half_thickness"
+        android:layout_marginRight="@dimen/line_small_half_thickness"
+        android:layout_marginBottom="@dimen/line_small_half_thickness"
+        android:textSize="@dimen/font_size_small"
+        android:textColor="@android:color/black"
+        android:singleLine="true"
+        android:textIsSelectable="false" />
+    <ImageView
+        android:id="@+id/system_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/line_small_half_thickness"
+        android:layout_marginTop="@dimen/line_small_half_thickness"
+        android:layout_marginRight="@dimen/line_small_half_thickness"
+        android:layout_marginBottom="@dimen/line_small_half_thickness" />
+</LinearLayout>

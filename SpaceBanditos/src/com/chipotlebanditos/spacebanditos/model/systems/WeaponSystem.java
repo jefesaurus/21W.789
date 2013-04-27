@@ -17,7 +17,15 @@ public class WeaponSystem extends ShipSystem {
     
     public WeaponSystem(int upgradeLevel, int powerLevel, int damageLevel,
             Weapon weapon) {
-        super(upgradeLevel, powerLevel, damageLevel);
+        super(upgradeLevel, powerLevel, damageLevel, new SystemUpgradeSequence(
+                0, 20, 30, 50, 80) {
+            
+            @Override
+            public String getUpgradeDescription(int level) {
+                return String.format("%s faster charge", 5 * (level - 1));
+            }
+            
+        });
         this.equipped = weapon;
     }
     

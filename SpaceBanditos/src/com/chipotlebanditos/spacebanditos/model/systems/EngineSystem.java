@@ -13,7 +13,17 @@ public class EngineSystem extends ShipSystem {
     public static final long BASE_TOTAL_JUMP_MILLIS = 20000L;
     
     public EngineSystem(int upgradeLevel, int powerLevel, int damageLevel) {
-        super(upgradeLevel, powerLevel, damageLevel);
+        super(upgradeLevel, powerLevel, damageLevel, new SystemUpgradeSequence(
+                0, 30, 40, 60, 100) {
+            
+            @Override
+            public String getUpgradeDescription(int level) {
+                return String.format(
+                        "%s\\% chance of evasion, %s\\% faster jump charge",
+                        level * 10, 5 * (level - 1));
+            }
+            
+        });
     }
     
     @Override

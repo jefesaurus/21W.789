@@ -26,7 +26,7 @@ public class Game implements Serializable {
     
     public static final float EVENTS_REGION_WIDTH = 6f,
             EVENTS_REGION_HEIGHT = 3f;
-    public static final float PLAYER_JUMP_RADIUS = 1f;
+    public static final float PLAYER_JUMP_RADIUS = 2f;
     
     public final Set<GameEvent> events;
     

@@ -25,6 +25,8 @@ public class LayeredSegmentFillBar extends View {
     
     private int elementSpacing;
     
+    private int maxSizeInElements;
+    
     private Map<Integer, Integer> layerValues = new HashMap<Integer, Integer>();
     
     public LayeredSegmentFillBar(Context context) {
@@ -65,6 +67,10 @@ public class LayeredSegmentFillBar extends View {
         
         elementSpacing = a.getDimensionPixelSize(
                 R.styleable.LayeredSegmentFillBar_elementSpacing, 0);
+        
+        maxSizeInElements = a.getInteger(
+                R.styleable.LayeredSegmentFillBar_maxSizeInElements,
+                Integer.MAX_VALUE);
         
         a.recycle();
     }
@@ -126,12 +132,12 @@ public class LayeredSegmentFillBar extends View {
         return level;
     }
     
-    private int getDrawSizeInSegments() {
-        int size = 0;
+    private int getDrawCountInSegments() {
+        int count = 0;
         for (int v : layerValues.values()) {
-            size = Math.max(size, v);
+            count = Math.max(count, v);
         }
-        return size;
+        return count;
     }
     
     private int getSizeInSegments(int width, int height) {
@@ -200,10 +206,12 @@ public class LayeredSegmentFillBar extends View {
                 return getFillWidthOfSegments(getFillSizeInWidthSegments(MeasureSpec
                         .getSize(widthMeasureSpec)));
             } else {
-                return getFillWidthOfSegments(getDrawSizeInSegments());
+                return getFillWidthOfSegments(Math.min(
+                        getDrawCountInSegments(), maxSizeInElements));
             }
         } else {
-            return elementWidth + getPaddingLeft() + getPaddingRight();
+            return getFillWidthOfSegments((int) (Math
+                    .ceil(getDrawCountInSegments() / (float) maxSizeInElements)));
         }
     }
     
@@ -214,10 +222,12 @@ public class LayeredSegmentFillBar extends View {
                 return getFillHeightOfSegments(getFillSizeInHeightSegments(MeasureSpec
                         .getSize(heightMeasureSpec)));
             } else {
-                return getFillHeightOfSegments(getDrawSizeInSegments());
+                return getFillHeightOfSegments(Math.min(
+                        getDrawCountInSegments(), maxSizeInElements));
             }
         } else {
-            return elementHeight + getPaddingTop() + getPaddingBottom();
+            return getFillHeightOfSegments((int) (Math
+                    .ceil(getDrawCountInSegments() / (float) maxSizeInElements)));
         }
     }
     
@@ -233,28 +243,46 @@ public class LayeredSegmentFillBar extends View {
         int x = (baseDirection == RIGHT ? getWidth() - getPaddingRight()
                 : getPaddingLeft()), y = (baseDirection == BOTTOM ? getHeight()
                 - getPaddingBottom() : getPaddingTop());
-        for (int i = 0; i < getDrawSizeInSegments(); i++) {
+        for (int i = 0; i < getDrawCountInSegments(); i++) {
             elementDrawable.setLevel(getSegmentLevel(i));
             switch (baseDirection) {
             case LEFT:
                 elementDrawable.setBounds(x, y, x += elementWidth, y
                         + elementHeight);
-                x += elementSpacing;
+                if ((i + 1) % maxSizeInElements == 0) {
+                    x = getPaddingLeft();
+                    y += elementHeight + elementSpacing;
+                } else {
+                    x += elementSpacing;
+                }
                 break;
             case TOP:
                 elementDrawable.setBounds(x, y, x + elementWidth,
                         y += elementHeight);
-                y += elementSpacing;
+                if ((i + 1) % maxSizeInElements == 0) {
+                    x -= elementWidth + elementSpacing;
+                    y = getPaddingTop();
+                } else {
+                    y += elementSpacing;
+                }
                 break;
             case RIGHT:
                 elementDrawable.setBounds(x -= elementWidth
-                        + (i > 0 ? elementSpacing : 0), y, x + elementWidth, y
-                        + elementHeight);
+                        + (i % maxSizeInElements == 0 ? 0 : elementSpacing), y,
+                        x + elementWidth, y + elementHeight);
+                if ((i + 1) % maxSizeInElements == 0) {
+                    x = getWidth() - getPaddingRight();
+                    y -= elementHeight + elementSpacing;
+                }
                 break;
             case BOTTOM:
                 elementDrawable.setBounds(x, y -= elementHeight
-                        + (i > 0 ? elementSpacing : 0), x + elementWidth, y
-                        + elementHeight);
+                        + (i % maxSizeInElements == 0 ? 0 : elementSpacing), x
+                        + elementWidth, y + elementHeight);
+                if ((i + 1) % maxSizeInElements == 0) {
+                    x += elementWidth + elementSpacing;
+                    y = getHeight() - getPaddingBottom();
+                }
                 break;
             }
             elementDrawable.draw(canvas);
