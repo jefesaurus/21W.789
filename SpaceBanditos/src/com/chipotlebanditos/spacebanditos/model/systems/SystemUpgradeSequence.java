@@ -9,7 +9,7 @@ public abstract class SystemUpgradeSequence {
     }
     
     public int getMaxUpgradeLevel() {
-        return upgradeCosts.length + 1;
+        return upgradeCosts.length;
     }
     
     public int getUpgradeCost(int level) {

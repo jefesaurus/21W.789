@@ -19,7 +19,7 @@ public class EngineSystem extends ShipSystem {
             @Override
             public String getUpgradeDescription(int level) {
                 return String.format(
-                        "%s\\% chance of evasion, %s\\% faster jump charge",
+                        "%s%% chance of evasion, %s%% faster jump charge",
                         level * 10, 5 * (level - 1));
             }
             

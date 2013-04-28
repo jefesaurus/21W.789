@@ -74,7 +74,13 @@ public class Ship implements Serializable {
             
             @Override
             public int getIconResource() {
-                return R.drawable.power_bar_segment_large_3;
+                return R.drawable.life_support_icon; // TODO: switch
+            }
+            
+            @Override
+            public void upgrade() {
+                super.upgrade();
+                powerLevel++;
             }
             
         };

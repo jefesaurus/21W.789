@@ -36,7 +36,10 @@ public abstract class ShipSystem implements Serializable {
         return upgradeLevel - damageLevel;
     }
     
-    // TODO: max upgrade level?
+    public void upgrade() {
+        assert upgradeLevel < upgrades.getMaxUpgradeLevel();
+        upgradeLevel++;
+    }
     
     public void takeDamage(int damage, Ship ship) {
         damageLevel = Math.min(damageLevel + damage, upgradeLevel);

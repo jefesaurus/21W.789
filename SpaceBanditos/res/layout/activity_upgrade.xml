@@ -11,7 +11,37 @@
     <LinearLayout 
         android:id="@+id/upgrade_systems_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true" />
+    <TextView
+        android:id="@+id/next_upgrade_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/line_small_half_thickness"
+        android:layout_marginTop="@dimen/line_small_half_thickness"
+        android:layout_marginRight="@dimen/line_small_half_thickness"
+        android:layout_marginBottom="@dimen/line_small_half_thickness"
+        android:textSize="@dimen/font_size_small"
+        android:textColor="@android:color/black"
+        android:singleLine="true"
+        android:textIsSelectable="false"
+        android:background="@drawable/base_background_small" />
+    <TextView
+        android:id="@+id/current_upgrade_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@id/next_upgrade_description"
+        android:layout_marginLeft="@dimen/line_small_half_thickness"
+        android:layout_marginTop="@dimen/line_small_half_thickness"
+        android:layout_marginRight="@dimen/line_small_half_thickness"
+        android:layout_marginBottom="@dimen/line_small_half_thickness"
+        android:textSize="@dimen/font_size_small"
+        android:textColor="@android:color/black"
+        android:singleLine="true"
+        android:textIsSelectable="false"
+        android:background="@drawable/base_background_small" />"
 </RelativeLayout>
