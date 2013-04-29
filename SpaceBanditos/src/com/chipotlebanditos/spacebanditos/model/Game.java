@@ -47,7 +47,7 @@ public class Game implements Serializable {
     }
     
     public static Game generateNewGame() {
-        return new Game(generateNewGamePlayerShip(), 0,
+        return new Game(generateNewGamePlayerShip(), 1000,
                 generateNewGameEvents((int) (EVENTS_REGION_WIDTH
                         * EVENTS_REGION_HEIGHT * .75f)));
     }
@@ -130,10 +130,6 @@ public class Game implements Serializable {
         float y = (zone.y + yMargin + (1f - yMargin * 2)
                 * (float) Math.random())
                 * EVENTS_REGION_HEIGHT / zoneRows;
-        // float x = xMargin + (zone.x + (float) Math.random())
-        // * (EVENTS_REGION_WIDTH - xMargin * 2) / zoneCols;
-        // float y = yMargin + (zone.y + (float) Math.random())
-        // * (EVENTS_REGION_HEIGHT - yMargin * 2) / zoneRows;
         return new PointF(x, y);
     }
 }

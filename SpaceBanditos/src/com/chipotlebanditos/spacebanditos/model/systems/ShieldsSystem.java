@@ -15,7 +15,7 @@ public class ShieldsSystem extends ShipSystem {
     
     public ShieldsSystem(int upgradeLevel, int powerLevel, int damageLevel) {
         super(upgradeLevel, powerLevel, damageLevel, new SystemUpgradeSequence(
-                0, 50, 10, 160, 240) {
+                0, 50, 100, 160, 240) {
             
             @Override
             public String getUpgradeDescription(int level) {

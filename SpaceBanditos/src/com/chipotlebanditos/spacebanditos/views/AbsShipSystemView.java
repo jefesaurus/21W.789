@@ -36,7 +36,7 @@ public abstract class AbsShipSystemView extends FrameLayout {
         return (LayeredSegmentFillBar) findViewById(R.id.weapon_charge_bar);
     }
     
-    protected void onDrawPowerBar(Canvas canvas) {
+    protected void onDrawPowerBar() {
         getPowerBar().setLayerValue(0, system.upgrades.getMaxUpgradeLevel());
         getPowerBar().setLayerValue(1, system.upgradeLevel);
         getPowerBar()
@@ -48,7 +48,7 @@ public abstract class AbsShipSystemView extends FrameLayout {
     protected void onDraw(Canvas canvas) {
         getSystemNameView().setText(system.getName());
         getSystemIconView().setImageResource(system.getIconResource());
-        onDrawPowerBar(canvas);
+        onDrawPowerBar();
         if (getWeaponChargeBar() != null) {
             if (system instanceof WeaponSystem) {
                 getWeaponChargeBar().setVisibility(VISIBLE);
@@ -66,5 +66,6 @@ public abstract class AbsShipSystemView extends FrameLayout {
             }
         }
         super.onDraw(canvas);
+        invalidate();
     }
 }

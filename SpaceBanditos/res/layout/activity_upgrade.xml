@@ -8,40 +8,161 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".UpgradeActivity" >
+    
+    <LinearLayout
+        android:id="@+id/hull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+	    android:layout_marginLeft="@dimen/line_small_half_thickness"
+	    android:layout_marginTop="@dimen/line_small_half_thickness"
+	    android:layout_marginRight="@dimen/line_small_half_thickness"
+	    android:layout_marginBottom="@dimen/line_small_half_thickness"
+        android:orientation="horizontal" >
+	<LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+	    android:layout_marginLeft="@dimen/line_small_half_thickness"
+	    android:layout_marginTop="@dimen/line_small_half_thickness"
+	    android:layout_marginRight="@dimen/line_small_half_thickness"
+	    android:layout_marginBottom="@dimen/line_small_half_thickness"
+	    android:background="@drawable/base_background_small" >
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:layout_marginLeft="@dimen/line_small_half_thickness"
+	        android:layout_marginTop="@dimen/line_small_half_thickness"
+	        android:layout_marginRight="@dimen/line_small_half_thickness"
+	        android:layout_marginBottom="@dimen/line_small_half_thickness"
+	        android:text="HULL"
+		    android:textSize="@dimen/font_size_small"
+		    android:textColor="@android:color/black"
+	        android:singleLine="true" />
+	    <com.chipotlebanditos.spacebanditos.views.LayeredSegmentFillBar
+	        android:id="@+id/hull_bar"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:layout_marginLeft="@dimen/line_small_half_thickness"
+	        android:layout_marginTop="@dimen/line_small_half_thickness"
+	        android:layout_marginRight="@dimen/line_small_half_thickness"
+	        android:layout_marginBottom="@dimen/line_small_half_thickness"
+	        spacebanditos:elementDrawable="@drawable/hull_and_shields_bar_segment"
+	        spacebanditos:baseDirection="left"
+	        spacebanditos:elementWidth="12dip"
+	        spacebanditos:elementHeight="18dip"
+	        spacebanditos:elementSpacing="@dimen/line_small_thickness" />
+	</LinearLayout>
+	    <Button
+	        android:id="@+id/repair_hull_button"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:layout_marginLeft="@dimen/line_small_half_thickness"
+	        android:layout_marginTop="@dimen/line_small_half_thickness"
+	        android:layout_marginRight="@dimen/line_small_half_thickness"
+	        android:layout_marginBottom="@dimen/line_small_half_thickness"
+	        android:textSize="@dimen/font_size_small"
+	        android:textColor="@android:color/black"
+	        android:text="REPAIR"
+	        android:singleLine="true"
+	        android:textIsSelectable="false"
+	        android:background="@drawable/button_background_small"
+	        android:onClick="onRepairHullButtonClick" />
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/cash"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+	        android:layout_marginLeft="@dimen/line_small_half_thickness"
+	        android:layout_marginTop="@dimen/line_small_half_thickness"
+	        android:layout_marginRight="@dimen/line_small_half_thickness"
+	        android:layout_marginBottom="@dimen/line_small_half_thickness"
+            android:background="@drawable/base_background_small"
+            android:text=""
+	        android:textSize="@dimen/font_size_small"
+	        android:textColor="@android:color/black"
+	        android:singleLine="true" />
+	    <Button
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:layout_marginLeft="@dimen/line_small_half_thickness"
+	        android:layout_marginTop="@dimen/line_small_half_thickness"
+	        android:layout_marginRight="@dimen/line_small_half_thickness"
+	        android:layout_marginBottom="@dimen/line_small_half_thickness"
+	        android:textSize="@dimen/font_size_small"
+	        android:textColor="@android:color/black"
+	        android:text="BACK"
+	        android:singleLine="true"
+	        android:textIsSelectable="false"
+	        android:background="@drawable/button_background_small"
+	        android:onClick="onBackButtonClick" />
+    </LinearLayout>
     <LinearLayout 
         android:id="@+id/upgrade_systems_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true" />
-    <TextView
-        android:id="@+id/next_upgrade_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="@dimen/line_small_half_thickness"
-        android:layout_marginTop="@dimen/line_small_half_thickness"
-        android:layout_marginRight="@dimen/line_small_half_thickness"
-        android:layout_marginBottom="@dimen/line_small_half_thickness"
-        android:textSize="@dimen/font_size_small"
-        android:textColor="@android:color/black"
-        android:singleLine="true"
-        android:textIsSelectable="false"
-        android:background="@drawable/base_background_small" />
-    <TextView
-        android:id="@+id/current_upgrade_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_above="@id/next_upgrade_description"
-        android:layout_marginLeft="@dimen/line_small_half_thickness"
-        android:layout_marginTop="@dimen/line_small_half_thickness"
-        android:layout_marginRight="@dimen/line_small_half_thickness"
-        android:layout_marginBottom="@dimen/line_small_half_thickness"
-        android:textSize="@dimen/font_size_small"
-        android:textColor="@android:color/black"
-        android:singleLine="true"
-        android:textIsSelectable="false"
-        android:background="@drawable/base_background_small" />"
+        android:layout_centerVertical="true" />
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentBottom="true"
+	    android:orientation="horizontal" >
+	    <LinearLayout
+	        android:id="@+id/upgrade_descriptions"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:orientation="vertical" >
+		    <TextView
+		        android:id="@+id/current_upgrade_description"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="@dimen/line_small_half_thickness"
+		        android:layout_marginTop="@dimen/line_small_half_thickness"
+		        android:layout_marginRight="@dimen/line_small_half_thickness"
+		        android:layout_marginBottom="@dimen/line_small_half_thickness"
+		        android:textSize="@dimen/font_size_small"
+		        android:textColor="@android:color/black"
+		        android:singleLine="true"
+		        android:textIsSelectable="false"
+		        android:background="@drawable/base_background_small" />
+		    <TextView
+		        android:id="@+id/next_upgrade_description"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="@dimen/line_small_half_thickness"
+		        android:layout_marginTop="@dimen/line_small_half_thickness"
+		        android:layout_marginRight="@dimen/line_small_half_thickness"
+		        android:layout_marginBottom="@dimen/line_small_half_thickness"
+		        android:textSize="@dimen/font_size_small"
+		        android:textColor="@android:color/black"
+		        android:singleLine="true"
+		        android:textIsSelectable="false"
+		        android:background="@drawable/base_background_small" />
+	    </LinearLayout>
+	    <Button
+	        android:id="@+id/upgrade_button"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:layout_marginLeft="@dimen/line_small_half_thickness"
+	        android:layout_marginTop="@dimen/line_small_half_thickness"
+	        android:layout_marginRight="@dimen/line_small_half_thickness"
+	        android:layout_marginBottom="@dimen/line_small_half_thickness"
+	        android:textSize="@dimen/font_size_small"
+	        android:textColor="@android:color/black"
+	        android:text="UPGRADE"
+	        android:singleLine="true"
+	        android:textIsSelectable="false"
+	        android:background="@drawable/button_background_small"
+	        android:onClick="onUpgradeButtonClick" />
+    </LinearLayout>
 </RelativeLayout>

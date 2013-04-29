@@ -54,6 +54,19 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:orientation="horizontal">
+        <TextView
+            android:id="@+id/cash"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+	        android:layout_marginLeft="@dimen/line_small_half_thickness"
+	        android:layout_marginTop="@dimen/line_small_half_thickness"
+	        android:layout_marginRight="@dimen/line_small_half_thickness"
+	        android:layout_marginBottom="@dimen/line_small_half_thickness"
+            android:background="@drawable/base_background_small"
+            android:text=""
+	        android:textSize="@dimen/font_size_small"
+	        android:textColor="@android:color/black"
+	        android:singleLine="true" />
         <Button
             android:id="@+id/upgrades_button"
             android:layout_width="wrap_content"
@@ -82,19 +95,6 @@
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:onClick="onEquipmentButtonClick" />
-        <TextView
-            android:id="@+id/cash"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-	        android:layout_marginLeft="@dimen/line_small_half_thickness"
-	        android:layout_marginTop="@dimen/line_small_half_thickness"
-	        android:layout_marginRight="@dimen/line_small_half_thickness"
-	        android:layout_marginBottom="@dimen/line_small_half_thickness"
-            android:background="@drawable/base_background_small"
-            android:text=""
-	        android:textSize="@dimen/font_size_small"
-	        android:textColor="@android:color/black"
-	        android:singleLine="true" />
     </LinearLayout>
     <LinearLayout
 	    android:id="@+id/jump_button"

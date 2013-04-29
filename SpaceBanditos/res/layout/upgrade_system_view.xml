@@ -3,6 +3,10 @@
     xmlns:spacebanditos="http://schemas.android.com/apk/res/com.chipotlebanditos.spacebanditos"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/line_small_half_thickness"
+    android:layout_marginTop="@dimen/line_small_half_thickness"
+    android:layout_marginRight="@dimen/line_small_half_thickness"
+    android:layout_marginBottom="@dimen/line_small_half_thickness"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:background="@drawable/button_background_small" >
