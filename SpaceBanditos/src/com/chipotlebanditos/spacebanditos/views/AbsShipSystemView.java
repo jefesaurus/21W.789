@@ -66,6 +66,5 @@ public abstract class AbsShipSystemView extends FrameLayout {
             }
         }
         super.onDraw(canvas);
-        invalidate();
     }
 }

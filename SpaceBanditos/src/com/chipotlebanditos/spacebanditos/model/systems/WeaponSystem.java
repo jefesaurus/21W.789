@@ -21,7 +21,7 @@ public class WeaponSystem extends ShipSystem {
                 0, 20, 30, 50, 80) {
             
             @Override
-            public String getUpgradeDescription(int level) {
+            public String calculateUpgradeDescription(int level) {
                 return String.format("%s%% faster charge", 5 * (level - 1));
             }
             

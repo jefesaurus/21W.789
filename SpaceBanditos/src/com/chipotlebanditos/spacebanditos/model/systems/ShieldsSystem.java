@@ -18,7 +18,7 @@ public class ShieldsSystem extends ShipSystem {
                 0, 50, 100, 160, 240) {
             
             @Override
-            public String getUpgradeDescription(int level) {
+            public String calculateUpgradeDescription(int level) {
                 return String.format("%s layers of shield", level);
             }
             

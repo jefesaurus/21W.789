@@ -69,6 +69,10 @@ public class SystemsView extends AbsoluteLayout {
             }
             view.setX(xF * getWidth() - view.getWidth() / 2);
             view.setY(yF * getHeight() - view.getHeight() / 2);
+            // view.setLayoutParams(new AbsoluteLayout.LayoutParams(view
+            // .getWidth(), view.getHeight(), (int) Math.round(xF
+            // * getWidth() - view.getWidth() / 2), (int) Math.round(yF
+            // * getHeight() - view.getHeight() / 2)));
         }
     }
     

@@ -90,12 +90,21 @@ public class UpgradeActivity extends Activity {
             getHullBar().setLayerValue(3, game.playerShip.hull);
             getRepairHullButton().setEnabled(isReadyToRepairHull());
             getCash().setText("$" + game.playerCash);
-            getCurrentUpgradeDescription().setText(
-                    selected == null ? "" : selected.upgrades
-                            .getUpgradeDescription(selected.upgradeLevel));
-            getNextUpgradeDescription().setText(
-                    selected == null ? "" : selected.upgrades
-                            .getUpgradeDescription(selected.upgradeLevel + 1));
+            getCurrentUpgradeDescription()
+                    .setText(
+                            selected == null ? ""
+                                    : "CURRENT: "
+                                            + selected.upgrades
+                                                    .getUpgradeDescription(selected.upgradeLevel));
+            getNextUpgradeDescription()
+                    .setText(
+                            selected == null ? ""
+                                    : "NEXT ($"
+                                            + selected.upgrades
+                                                    .getUpgradeCost(selected.upgradeLevel + 1)
+                                            + "): "
+                                            + selected.upgrades
+                                                    .getUpgradeDescription(selected.upgradeLevel + 1));
             getUpgradeButton().setEnabled(isReadyToUpgrade());
             super.onDraw(canvas);
         }

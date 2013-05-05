@@ -12,13 +12,14 @@
 	    android:id="@+id/main_menu_button_stack"
     	android:layout_width="match_parent"
     	android:layout_height="wrap_content"
-    	android:orientation="vertical" 
+    	android:orientation="horizontal" 
     	android:layout_alignParentBottom="true" >
     	
 	    <Button
 	        android:id="@+id/new_game_button"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent"
+		    android:layout_weight="1"
 	        android:layout_marginLeft="@dimen/line_large_half_thickness"
 	        android:layout_marginTop="@dimen/line_large_half_thickness"
 	        android:layout_marginRight="@dimen/line_large_half_thickness"
@@ -31,22 +32,24 @@
 		    android:onClick="onNewGameButtonClick"/>
 	    <Button
 	        android:id="@+id/continue_button"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent"
+		    android:layout_weight="1"
 	        android:layout_marginLeft="@dimen/line_large_half_thickness"
 	        android:layout_marginTop="@dimen/line_large_half_thickness"
 	        android:layout_marginRight="@dimen/line_large_half_thickness"
 	        android:layout_marginBottom="@dimen/line_large_half_thickness"
             android:background="@drawable/button_background_large"
-		    android:text="CONTINUE GAME"
+		    android:text="CONTINUE"
 	        android:textSize="@dimen/font_size_large"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 		    android:onClick="onContinueGameButtonClick"/>
 	    <Button
 	        android:id="@+id/settings_button"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent"
+		    android:layout_weight="1"
 	        android:layout_marginLeft="@dimen/line_large_half_thickness"
 	        android:layout_marginTop="@dimen/line_large_half_thickness"
 	        android:layout_marginRight="@dimen/line_large_half_thickness"

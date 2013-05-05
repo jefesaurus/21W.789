@@ -59,7 +59,7 @@ public class Ship implements Serializable {
                         30, 30, 30, 30, 30) {
                     
                     @Override
-                    public String getUpgradeDescription(int level) {
+                    public String calculateUpgradeDescription(int level) {
                         return String.format("%s power available", level);
                     }
                     
@@ -74,7 +74,7 @@ public class Ship implements Serializable {
             
             @Override
             public int getIconResource() {
-                return R.drawable.life_support_icon; // TODO: switch
+                return R.drawable.power_icon;
             }
             
             @Override

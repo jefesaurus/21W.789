@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chipotlebanditos.spacebanditos.R;
 import com.chipotlebanditos.spacebanditos.SpaceBanditosApplication;
@@ -67,9 +66,9 @@ public abstract class ShipActivity extends Activity {
             return (Button) findViewById(R.id.upgrades_button);
         }
         
-        private Button getEquipmentButton() {
-            return (Button) findViewById(R.id.equipment_button);
-        }
+        // private Button getEquipmentButton() {
+        // return (Button) findViewById(R.id.equipment_button);
+        // }
         
         private TextView getCash() {
             return (TextView) findViewById(R.id.cash);
@@ -107,7 +106,7 @@ public abstract class ShipActivity extends Activity {
             Game game = ((SpaceBanditosApplication) getApplication()).game;
             
             getUpgradesButton().setEnabled(!game.currentEvent.isDangerous());
-            getEquipmentButton().setEnabled(!game.currentEvent.isDangerous());
+            // getEquipmentButton().setEnabled(!game.currentEvent.isDangerous());
             getCash().setText("$" + game.playerCash);
             
             getPauseButton().setText(game.paused ? "UNPAUSE" : "PAUSE");
@@ -166,11 +165,11 @@ public abstract class ShipActivity extends Activity {
         startActivity(intent);
     }
     
-    public void onEquipmentButtonClick(View v) {
-        Toast.makeText(this, "Not yet implemented, coming soon!",
-                Toast.LENGTH_SHORT).show();
-        // TODO: go to equipment
-    }
+    // public void onEquipmentButtonClick(View v) {
+    // Toast.makeText(this, "Not yet implemented, coming soon!",
+    // Toast.LENGTH_SHORT).show();
+    // // TODO: go to equipment
+    // }
     
     public void onPauseButtonClick(View v) {
         Game game = ((SpaceBanditosApplication) getApplication()).game;

@@ -16,5 +16,13 @@ public abstract class SystemUpgradeSequence {
         return upgradeCosts[level - 1];
     }
     
-    public abstract String getUpgradeDescription(int level);
+    protected abstract String calculateUpgradeDescription(int level);
+    
+    public String getUpgradeDescription(int level) {
+        if (level < 1 || level > getMaxUpgradeLevel()) {
+            return "";
+        } else {
+            return calculateUpgradeDescription(level);
+        }
+    }
 }

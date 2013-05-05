@@ -13,7 +13,7 @@ public class LifeSupportSystem extends ShipSystem {
                 0, 20, 30, 50, 70) {
             
             @Override
-            public String getUpgradeDescription(int level) {
+            public String calculateUpgradeDescription(int level) {
                 return String.format(
                         "%s atmosphere per second, %s atmosphere max", level,
                         level * 50);

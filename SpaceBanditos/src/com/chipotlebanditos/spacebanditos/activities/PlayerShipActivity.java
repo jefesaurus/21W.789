@@ -2,6 +2,7 @@ package com.chipotlebanditos.spacebanditos.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -24,6 +25,7 @@ import com.chipotlebanditos.spacebanditos.views.SystemsView;
 public class PlayerShipActivity extends ShipActivity {
     
     private boolean destroyed = false;
+    private boolean drawn = false;
     
     private GestureDetector gestureDetector;
     
@@ -131,6 +133,12 @@ public class PlayerShipActivity extends ShipActivity {
             }
             super.onLayout(changed, l, t, r, b);
         }
+        
+        @Override
+        public void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+            // drawn = true;
+        }
     }
     
     @Override
@@ -175,9 +183,12 @@ public class PlayerShipActivity extends ShipActivity {
             if (game.currentEvent.isDangerous()) {
                 game.paused = true;
             }
+            // while (!drawn) {
+            // }
             while (true) {
-                // TODO: all in-event UI code should be similarly synchronized
+                // System.out.println("loop");
                 game = ((SpaceBanditosApplication) getApplication()).game;
+                // TODO: all in-event UI code should be similarly synchronized
                 synchronized (game) {
                     if (PlayerShipActivity.this.destroyed) {
                         break;

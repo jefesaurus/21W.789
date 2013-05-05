@@ -16,18 +16,14 @@ public class MainMenuActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        refreshActivity();
-    }
-    
-    private void refreshActivity() {
-        Game game = ((SpaceBanditosApplication) getApplication()).game;
-        ((Button) findViewById(R.id.continue_button)).setEnabled(game != null
-                && !game.playerShip.hasBeenDestroyed());
     }
     
     @Override
-    protected void onNewIntent(Intent intent) {
-        refreshActivity();
+    protected void onResume() {
+        super.onResume();
+        Game game = ((SpaceBanditosApplication) getApplication()).game;
+        ((Button) findViewById(R.id.continue_button)).setEnabled(game != null
+                && !game.playerShip.hasBeenDestroyed());
     }
     
     public void onNewGameButtonClick(View view) {

@@ -81,7 +81,7 @@
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
 	        android:onClick="onUpgradesButtonClick" />
-        <Button
+        <!-- <Button
             android:id="@+id/equipment_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -94,7 +94,7 @@
 	        android:textSize="@dimen/font_size_small"
 	        android:textColor="@android:color/black"
 	        android:singleLine="true"
-	        android:onClick="onEquipmentButtonClick" />
+	        android:onClick="onEquipmentButtonClick" /> -->
     </LinearLayout>
     <LinearLayout
 	    android:id="@+id/jump_button"
