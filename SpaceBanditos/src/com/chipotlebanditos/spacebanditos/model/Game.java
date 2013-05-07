@@ -53,11 +53,11 @@ public class Game implements Serializable {
     }
     
     private static Ship generateNewGamePlayerShip() {
-        return new Ship(ShipLayout.PLAYER, 20, 20, 20, 60, 4,
+        return new Ship(ShipLayout.PLAYER, 20, 20, 20, 60, 5,
                 new Equipment[] {}, new LifeSupportSystem(1, 1, 0),
                 new WeaponSystem(1, 1, 0, Weapon.LIGHT_BLASTER),
-                new WeaponSystem(1, 0, 0, null), new ShieldsSystem(1, 1, 0),
-                new EngineSystem(1, 1, 0));
+                new WeaponSystem(1, 0, 0, Weapon.LIGHT_BLASTER),
+                new ShieldsSystem(1, 1, 0), new EngineSystem(1, 1, 0));
     }
     
     private static GameEvent[] generateNewGameEvents(int count) {
