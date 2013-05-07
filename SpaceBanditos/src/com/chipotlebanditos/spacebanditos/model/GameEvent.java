@@ -83,8 +83,8 @@ public class GameEvent implements Serializable {
                     for (WeaponSystem system : getSystems(WeaponSystem.class)) {
                         if (system.target == null
                                 && event.getOpposingShip(this) != null) {
-                            system.target = event.getOpposingShip(this).systems
-                                    .get(0);
+                            system.target = event.getOpposingShip(this)
+                                    .getSystem(EngineSystem.class);
                         }
                     }
                 }
